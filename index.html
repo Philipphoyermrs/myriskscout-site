@@ -185,7 +185,8 @@
       margin-bottom: 1.7rem;
     }
 
-    /* Neue Store-Badges */
+    /* Store badges */
+
     .store-buttons {
       display: flex;
       flex-wrap: wrap;
@@ -206,7 +207,8 @@
       }
     }
 
-    /* Buttons nur noch für nav-cta o.Ä. */
+    /* Generic buttons (für nav-cta etc.) */
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -262,10 +264,14 @@
       font-weight: 500;
     }
 
+    /* Hero mockups */
+
     .hero-mockup-wrap {
       position: relative;
       display: flex;
       justify-content: center;
+      align-items: flex-start;
+      gap: 1.6rem;
     }
 
     .hero-glow {
@@ -280,12 +286,13 @@
 
     .hero-mockup {
       position: relative;
-      width: min(280px, 70vw);
+      width: min(260px, 70vw);
       border-radius: 38px;
       padding: 0.75rem;
       background: radial-gradient(circle at top, #020617, #020617);
       box-shadow: var(--shadow-soft);
       border: 1px solid rgba(148, 163, 184, 0.4);
+      z-index: 1;
     }
 
     .hero-mockup-screen {
@@ -297,9 +304,16 @@
 
     .hero-mockup-screen-inner {
       aspect-ratio: 9 / 19.5;
-      background-image: url("assets/app-map-screenshot.jpg");
       background-size: cover;
       background-position: top center;
+    }
+
+    .hero-mockup-screen-map {
+      background-image: url("assets/app-map-screenshot.jpg");
+    }
+
+    .hero-mockup-screen-detail {
+      background-image: url("assets/risk-detail-screenshot.jpg");
     }
 
     .hero-mockup-badge {
@@ -316,6 +330,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      white-space: nowrap;
     }
 
     .hero-mockup-badge-dot {
@@ -549,12 +564,13 @@
       }
 
       .hero-mockup-wrap {
-        order: -1;
-        margin-bottom: 1rem;
+        flex-direction: column;
+        gap: 1.5rem;
       }
 
-      .hero-mockup-badge {
-        bottom: -18px;
+      .hero-mockup {
+        width: min(280px, 80vw);
+        margin: 0 auto;
       }
 
       .grid-3 {
@@ -671,13 +687,26 @@
 
           <div class="hero-mockup-wrap" aria-hidden="true">
             <div class="hero-glow"></div>
+
+            <!-- Map mockup -->
             <div class="hero-mockup">
               <div class="hero-mockup-screen">
-                <div class="hero-mockup-screen-inner"></div>
+                <div class="hero-mockup-screen-inner hero-mockup-screen-map"></div>
               </div>
               <div class="hero-mockup-badge">
                 <span class="hero-mockup-badge-dot"></span>
                 High-risk area alert • Live
+              </div>
+            </div>
+
+            <!-- Risk detail mockup -->
+            <div class="hero-mockup">
+              <div class="hero-mockup-screen">
+                <div class="hero-mockup-screen-inner hero-mockup-screen-detail"></div>
+              </div>
+              <div class="hero-mockup-badge">
+                <span class="hero-mockup-badge-dot"></span>
+                Risk detail • Example
               </div>
             </div>
           </div>
@@ -853,7 +882,6 @@
             </p>
           </div>
 
-          <!-- Store-Badges auch im unteren CTA -->
           <div class="store-buttons" style="justify-content:center;">
             <a href="YOUR_IOS_LINK" target="_blank" rel="noopener">
               <img
