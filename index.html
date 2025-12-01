@@ -138,7 +138,7 @@
 
     .hero-inner {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
       gap: 2.5rem;
       align-items: center;
     }
@@ -185,8 +185,6 @@
       margin-bottom: 1.7rem;
     }
 
-    /* Store badges */
-
     .store-buttons {
       display: flex;
       flex-wrap: wrap;
@@ -207,7 +205,90 @@
       }
     }
 
-    /* Generic buttons (für nav-cta etc.) */
+    .hero-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .hero-note strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .hero-mockup-wrap {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+      justify-content: center;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 0, rgba(129, 230, 217, 0.4), transparent 55%),
+        radial-gradient(circle at 90% 40%, rgba(251, 191, 36, 0.45), transparent 65%);
+      filter: blur(12px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .phone-frame {
+      position: relative;
+      width: min(260px, 38vw);
+      border-radius: 38px;
+      padding: 0.75rem;
+      background: radial-gradient(circle at top, #020617, #020617);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .phone-screen {
+      border-radius: 30px;
+      overflow: hidden;
+      background: #0b1120;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .phone-screen-inner {
+      aspect-ratio: 9 / 19.5;
+      background-size: cover;
+      background-position: top center;
+    }
+
+    .phone-screen-inner.map {
+      background-image: url("assets/app-map-screenshot.jpg");
+    }
+
+    .phone-screen-inner.detail {
+      background-image: url("assets/risk-detail-screenshot.jpg");
+    }
+
+    .hero-mockup-badge {
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .hero-mockup-badge-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+    }
+
+    /* Generic buttons (for nav & contact) */
 
     .btn {
       display: inline-flex;
@@ -234,110 +315,6 @@
     .btn-primary:hover {
       transform: translateY(-1px);
       box-shadow: 0 18px 40px rgba(34, 197, 94, 0.45);
-    }
-
-    .btn-ghost {
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-main);
-      border-color: rgba(148, 163, 184, 0.5);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(15, 23, 42, 1);
-      border-color: rgba(248, 250, 252, 0.7);
-      transform: translateY(-1px);
-    }
-
-    .btn span.sub {
-      font-size: 0.72rem;
-      font-weight: 400;
-      opacity: 0.85;
-    }
-
-    .hero-note {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .hero-note strong {
-      color: #e5e7eb;
-      font-weight: 500;
-    }
-
-    /* Hero mockups */
-
-    .hero-mockup-wrap {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 1.6rem;
-    }
-
-    .hero-glow {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 20% 0, rgba(129, 230, 217, 0.4), transparent 55%),
-        radial-gradient(circle at 90% 40%, rgba(251, 191, 36, 0.45), transparent 65%);
-      filter: blur(12px);
-      opacity: 0.7;
-      pointer-events: none;
-    }
-
-    .hero-mockup {
-      position: relative;
-      width: min(260px, 70vw);
-      border-radius: 38px;
-      padding: 0.75rem;
-      background: radial-gradient(circle at top, #020617, #020617);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      z-index: 1;
-    }
-
-    .hero-mockup-screen {
-      border-radius: 30px;
-      overflow: hidden;
-      background: #0b1120;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-    }
-
-    .hero-mockup-screen-inner {
-      aspect-ratio: 9 / 19.5;
-      background-size: cover;
-      background-position: top center;
-    }
-
-    .hero-mockup-screen-map {
-      background-image: url("assets/app-map-screenshot.jpg");
-    }
-
-    .hero-mockup-screen-detail {
-      background-image: url("assets/risk-detail-screenshot.jpg");
-    }
-
-    .hero-mockup-badge {
-      position: absolute;
-      bottom: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      white-space: nowrap;
-    }
-
-    .hero-mockup-badge-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent-gradient);
     }
 
     /* Sections */
@@ -368,7 +345,8 @@
     .section-subtitle {
       font-size: 0.9rem;
       color: var(--text-muted);
-      max-width: 30rem;
+      max-width: 36rem;
+      line-height: 1.6;
     }
 
     /* How it works */
@@ -417,39 +395,6 @@
       color: #4b5563;
     }
 
-    .card-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      padding: 0.1rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 0.7rem;
-      margin-bottom: 0.45rem;
-    }
-
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      padding: 0.2rem 0.7rem;
-      font-size: 0.7rem;
-      background: rgba(15, 23, 42, 0.96);
-      color: var(--text-muted);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      gap: 0.35rem;
-    }
-
-    .badge-pill-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent-gradient);
-    }
-
-    /* Why people use */
-
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -486,7 +431,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
       gap: 1.1rem;
-      align-items: center;
+      align-items: flex-start;
     }
 
     .chip-gradient {
@@ -508,11 +453,34 @@
       box-shadow: 0 0 18px rgba(251, 191, 36, 0.7);
     }
 
-    /* CTA strip */
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.7rem;
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      gap: 0.35rem;
+    }
+
+    .badge-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+    }
+
+    /* CTA strip & contact */
 
     .section-cta {
       text-align: center;
       padding: 2.1rem 0 3rem;
+    }
+
+    .section-cta .store-buttons {
+      justify-content: center;
     }
 
     .section-cta-note {
@@ -564,13 +532,18 @@
       }
 
       .hero-mockup-wrap {
-        flex-direction: column;
-        gap: 1.5rem;
+        order: -1;
+        margin-bottom: 2.5rem;
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: center;
       }
 
-      .hero-mockup {
-        width: min(280px, 80vw);
-        margin: 0 auto;
+      .phone-frame {
+        width: min(280px, 70vw);
+      }
+
+      .hero-mockup-badge {
+        bottom: -18px;
       }
 
       .grid-3 {
@@ -591,10 +564,6 @@
 
       .nav-cta {
         display: inline-flex;
-      }
-
-      .section-cta .store-buttons {
-        justify-content: center;
       }
     }
   </style>
@@ -636,6 +605,7 @@
           <a href="#who">Who it's for</a>
           <a href="#data">AI &amp; data</a>
           <a href="#download">Download</a>
+          <a href="#contact">Contact</a>
         </nav>
         <a href="#download" class="btn btn-primary nav-cta">
           Download
@@ -661,16 +631,24 @@
               elevated risk early and adjust your route, timing, or behaviour.
             </p>
 
-            <!-- OFFIZIELLE STORE-BADGES -->
+            <!-- Store badges -->
             <div class="store-buttons">
-              <a href="YOUR_IOS_LINK" target="_blank" rel="noopener">
+              <a
+                href="https://apps.apple.com/nl/app/myriskscout/id6745505077"
+                target="_blank"
+                rel="noopener"
+              >
                 <img
                   src="assets/app-store-badge.png"
                   alt="Download on the App Store"
                   class="store-badge"
                 />
               </a>
-              <a href="YOUR_ANDROID_LINK" target="_blank" rel="noopener">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.myriskscout"
+                target="_blank"
+                rel="noopener"
+              >
                 <img
                   src="assets/google-play-badge.png"
                   alt="Get it on Google Play"
@@ -688,10 +666,9 @@
           <div class="hero-mockup-wrap" aria-hidden="true">
             <div class="hero-glow"></div>
 
-            <!-- Map mockup -->
-            <div class="hero-mockup">
-              <div class="hero-mockup-screen">
-                <div class="hero-mockup-screen-inner hero-mockup-screen-map"></div>
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <div class="phone-screen-inner map"></div>
               </div>
               <div class="hero-mockup-badge">
                 <span class="hero-mockup-badge-dot"></span>
@@ -699,14 +676,13 @@
               </div>
             </div>
 
-            <!-- Risk detail mockup -->
-            <div class="hero-mockup">
-              <div class="hero-mockup-screen">
-                <div class="hero-mockup-screen-inner hero-mockup-screen-detail"></div>
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <div class="phone-screen-inner detail"></div>
               </div>
               <div class="hero-mockup-badge">
                 <span class="hero-mockup-badge-dot"></span>
-                Risk detail • Example
+                Risk details & key drivers
               </div>
             </div>
           </div>
@@ -788,7 +764,7 @@
               </p>
               <ul class="list">
                 <li>Check risk levels before exploring new places.</li>
-                <li>See where pickpocketing or theft risk is higher.</li>
+                <li>See where theft or pickpocketing risk is higher.</li>
                 <li>Stay aware late at night or on the way home.</li>
               </ul>
             </article>
@@ -796,7 +772,7 @@
         </div>
       </section>
 
-      <!-- AI & Data -->
+      <!-- AI & Data / Risk model -->
       <section id="data">
         <div class="container">
           <div class="section-band">
@@ -806,32 +782,58 @@
                 <span>Powered by AI &amp; real data</span>
               </div>
               <h2 class="section-title" style="margin-top: 0.7rem;">
-                Smart models – transparent insights
+                How we calculate risk scores
               </h2>
               <p class="section-subtitle">
-                Behind every colour on the map is a machine-learning model
-                trained on official police statistics and neighbourhood data.
-                Instead of a black box, MyRiskScout shows you the main drivers
-                behind elevated risk in plain language.
+                MyRiskScout uses advanced machine-learning models to estimate how
+                crime risk differs across neighbourhoods. The model learns from
+                millions of historic crime cases and hundreds of environmental
+                features – such as housing types, distance to main roads,
+                population density, income levels and mobility patterns.
+                <br /><br />
+                Each neighbourhood receives a score between
+                <strong>1 and 100</strong> (higher = higher relative risk).
+                We translate these scores into clear colours so you can see the
+                difference at a glance:
+                <br />
+                ✔️ <strong>Green = Low</strong> risk<br />
+                ✔️ <strong>Yellow = Medium</strong> risk<br />
+                ✔️ <strong>Red = High</strong> risk
+                <br /><br />
+                Behind every score, the model also identifies the
+                <strong>two main drivers</strong> that most strongly contribute
+                to elevated risk in that area – for example:
+              </p>
+              <ul class="list">
+                <li>Many vehicles per household → more attractive targets</li>
+                <li>Many single-family houses → lower natural surveillance</li>
+              </ul>
+              <p class="section-subtitle">
+                This means the score is not a black box: you see both the level
+                of risk and <strong>why</strong> it is higher in a particular
+                place.
               </p>
             </div>
+
             <div>
               <div class="badge-pill" style="margin-bottom: 0.6rem;">
                 <span class="badge-pill-dot"></span>
-                Built for awareness – not fear
+                Transparent &amp; explainable AI
               </div>
               <ul class="list">
-                <li>Risk scores from 0–100 for each neighbourhood.</li>
+                <li>Trained on official police statistics and neighbourhood data.</li>
                 <li>Models tuned to highlight relative differences – not to
                   predict individual incidents.</li>
-                <li>Regular updates as new data becomes available.</li>
+                <li>Scores updated regularly as new data becomes available.</li>
+                <li>Model accuracy above <strong>R² = 0.7</strong> for key
+                  crime types.</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Privacy -->
+      <!-- Privacy & control -->
       <section id="privacy">
         <div class="container">
           <div class="section-header">
@@ -839,7 +841,8 @@
             <h2 class="section-title">Your data stays your data</h2>
             <p class="section-subtitle">
               MyRiskScout is built to raise awareness while respecting your
-              privacy.
+              privacy. We focus on neighbourhood-level risk – not on tracking
+              individuals.
             </p>
           </div>
           <div class="grid-3">
@@ -847,23 +850,29 @@
               <h3 class="card-title">Optional background location</h3>
               <p class="card-text">
                 Alerts only work if you enable background location – and you can
-                turn this off at any time in the app settings.
+                turn this off at any time in the app settings. Without your
+                consent, we do not track your movements in the background.
               </p>
             </article>
             <article class="card">
               <h3 class="card-title">Minimal personal data</h3>
               <p class="card-text">
-                We focus on area-level risk, not on tracking individuals.
-                Location is used to trigger alerts, not to build personal
-                profiles.
+                We use your location only to determine which risk area you are
+                currently in and whether an alert is relevant. We do not build
+                personal movement profiles or share identifiable data with third
+                parties for marketing.
               </p>
             </article>
             <article class="card">
               <h3 class="card-title">Clear, honest communication</h3>
               <p class="card-text">
-                Risk scores help you compare areas – they never mean that a
-                specific incident will occur. MyRiskScout supports your judgment
-                instead of replacing it.
+                A higher risk score never means that a specific incident will
+                occur – it simply signals that the relative risk is higher than
+                elsewhere. MyRiskScout supports your judgment instead of
+                replacing it.
+                <br /><br />
+                For more details, please see our
+                <a href="/privacy.html">full privacy policy</a>.
               </p>
             </article>
           </div>
@@ -882,15 +891,23 @@
             </p>
           </div>
 
-          <div class="store-buttons" style="justify-content:center;">
-            <a href="YOUR_IOS_LINK" target="_blank" rel="noopener">
+          <div class="store-buttons">
+            <a
+              href="https://apps.apple.com/nl/app/myriskscout/id6745505077"
+              target="_blank"
+              rel="noopener"
+            >
               <img
                 src="assets/app-store-badge.png"
                 alt="Download on the App Store"
                 class="store-badge"
               />
             </a>
-            <a href="YOUR_ANDROID_LINK" target="_blank" rel="noopener">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.myriskscout"
+              target="_blank"
+              rel="noopener"
+            >
               <img
                 src="assets/google-play-badge.png"
                 alt="Get it on Google Play"
@@ -898,11 +915,33 @@
               />
             </a>
           </div>
-
           <p class="section-cta-note">
             Questions or interested in a partnership? Contact us at
             <a href="mailto:info@myriskscout.com">info@myriskscout.com</a>.
           </p>
+        </div>
+      </section>
+
+      <!-- Contact / Reach out -->
+      <section id="contact" class="section-cta">
+        <div class="container">
+          <div class="section-header" style="text-align:center; margin-bottom:1.8rem;">
+            <div class="section-kicker">Questions?</div>
+            <h2 class="section-title">Reach out to us</h2>
+            <p class="section-subtitle" style="margin:0 auto;">
+              Have a question, suggestion, or partnership idea?  
+              Send us a message – we usually respond quickly.
+            </p>
+          </div>
+
+          <a
+            class="btn btn-primary"
+            href="https://forms.gle/tVz2CnNmTxK9cDi48"
+            target="_blank"
+            rel="noopener"
+          >
+            Open contact form
+          </a>
         </div>
       </section>
     </main>
