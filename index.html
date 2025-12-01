@@ -92,22 +92,16 @@
       gap: 0.6rem;
     }
 
-    .brand-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 14px;
-      background-image: url("assets/logo-icon.png"); /* deine Icon-Variante 3 */
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
-    }
+    .brand-logo-img {
+  height: 32px;
+  display: block;
+}
 
-    .brand-name {
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      font-size: 0.95rem;
-    }
-
+.brand-name {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+}
     .nav-links {
       display: flex;
       gap: 1.5rem;
@@ -603,10 +597,13 @@
     <!-- Header -->
     <header class="site-header">
       <div class="container site-header-inner">
-        <div class="brand">
-          <div class="brand-logo" aria-hidden="true"></div>
-          <div class="brand-name">MyRiskScout</div>
-        </div>
+       <div class="brand">
+  <img
+    src="assets/logo-vertical.png"
+    alt="MyRiskScout – Powered by AI"
+    class="brand-logo-img"
+  />
+</div>
         <nav class="nav-links" aria-label="Primary navigation">
           <a href="#how-it-works">How it works</a>
           <a href="#who">Who it's for</a>
@@ -895,3 +892,4 @@
 </body>
 
 </html>
+
