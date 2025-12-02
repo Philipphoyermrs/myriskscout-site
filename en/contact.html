@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact – MyRiskScout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg-dark: #040b2a;
+      --bg-darker: #020618;
+      --card-bg: #0b1120;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent-gradient: linear-gradient(135deg, #00c853, #ffca28, #ff5252);
+      --radius-xl: 24px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+      --max-width: 720px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #10172f, #020617);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .page {
+      width: 100%;
+      max-width: var(--max-width);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .brand-logo {
+      height: 40px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #111827, #020617);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 1.75rem 1.5rem 1.75rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    @media (min-width: 640px) {
+      .card {
+        padding: 2rem 2rem 2.2rem;
+      }
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    p.lead {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.4rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+      color: #e5e7eb;
+    }
+
+    input, textarea {
+      width: 100%;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      padding: 0.7rem 0.85rem;
+      font-size: 0.95rem;
+      margin-bottom: 0.9rem;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.6);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.75rem 1.6rem;
+      border: none;
+      cursor: pointer;
+      background: var(--accent-gradient);
+      color: #020617;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(34, 197, 94, 0.5);
+    }
+
+    .footnote {
+      margin-top: 0.9rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footnote a {
+      color: #38bdf8;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .back-link {
+      margin-top: 1.1rem;
+      font-size: 0.85rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .back-link a {
+      color: #e5e7eb;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <a href="/">
+        <img src="assets/logo-full.png" alt="MyRiskScout" class="brand-logo" />
+      </a>
+    </div>
+
+    <div class="card">
+      <h1>Contact us</h1>
+      <p class="lead">
+        Have a question, suggestion, or partnership idea?
+        Send us a message – we usually respond quickly.
+      </p>
+
+      <form action="https://formsubmit.co/info@myriskscout.com" method="POST">
+        <!-- FormSubmit settings -->
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="New MyRiskScout contact request" />
+        <!-- Optional: Redirect to homepage after submit -->
+        <!-- <input type="hidden" name="_next" value="https://www.myriskscout.com/thank-you.html" /> -->
+
+        <label for="name">Your name</label>
+        <input id="name" type="text" name="name" required />
+
+        <label for="email">Your email</label>
+        <input id="email" type="email" name="email" required />
+
+        <label for="message">Your message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <button type="submit" class="btn-primary">
+          Send message
+        </button>
+      </form>
+
+      <p class="footnote">
+        By sending this form, you agree that we use your information solely to respond
+        to your request. For more details, see our
+        <a href="/privacy.html">privacy policy</a>.
+      </p>
+    </div>
+
+    <div class="back-link">
+      <span>← Back to </span><a href="/">MyRiskScout homepage</a>
+    </div>
+  </div>
+</body>
+</html>
