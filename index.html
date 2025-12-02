@@ -23,7 +23,147 @@
   <meta name="twitter:title" content="MyRiskScout – Crime risk map & alerts for Amsterdam" />
   <meta name="twitter:description" content="See burglary and bicycle theft risk levels per neighbourhood and get alerts in high-risk areas." />
   <meta name="twitter:image" content="https://www.myriskscout.com/assets/app-map-screenshot.jpg" />
+/* LISTS – leichte Optimierung */
+    .list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.6rem;
+      display: grid;
+      gap: 0.35rem;
+    }
 
+    .list li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .list li::before {
+      content: "•";
+      color: #a7f3d0;
+      margin-right: 0.3rem;
+    }
+
+    /* SECTION CTA & BAND (für konsistentes Layout) */
+    .section-cta {
+      text-align: center;
+      padding: 2.1rem 0 3rem;
+    }
+
+    .section-cta-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.6rem;
+    }
+
+    .section-band {
+      border-radius: 26px;
+      padding: 1.5rem 1.4rem;
+      background: radial-gradient(circle at top right, #1f2937, #020617);
+      border: 1px solid rgba(148,163,184,0.5);
+      display: grid;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+      gap: 1.1rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 880px) {
+      .section-band {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.7rem;
+      background: rgba(15,23,42,0.96);
+      color: var(--text-muted);
+      border: 1px solid rgba(148,163,184,0.4);
+      gap: 0.35rem;
+    }
+
+    .badge-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+    }
+
+    .chip-gradient {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.16rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 0.72rem;
+    }
+
+    .chip-gradient-swatch {
+      width: 42px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+      box-shadow: 0 0 18px rgba(251,191,36,0.7);
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid rgba(148,163,184,0.25);
+      background: var(--bg-darker);
+      padding: 1.5rem 0 2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links a {
+      color: #e5e7eb; /* jetzt gut sichtbar */
+      text-decoration: underline;
+      text-decoration-color: rgba(209,213,219,0.85);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+      text-decoration-color: #ffffff;
+    }
+
+    /* Schönere Inline-Links im Text (z.B. Privacy-Link im Card-Text) */
+    .card-text a,
+    .section-subtitle a {
+      color: #e5e7eb;
+      text-decoration: underline;
+      text-decoration-color: rgba(209,213,219,0.85);
+      text-underline-offset: 3px;
+    }
+
+    .card-text a:hover,
+    .section-subtitle a:hover {
+      color: #ffffff;
+      text-decoration-color: #ffffff;
+    }
   <style>
     :root {
       --bg-dark: #040b2a;
@@ -637,4 +777,5 @@
   </div> <!-- end page -->
 </body>
 </html>
+
 
