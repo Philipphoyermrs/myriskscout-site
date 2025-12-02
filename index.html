@@ -2,25 +2,13 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>MyRiskScout – Inbraak- & fietsdiefstalrisico in Amsterdam</title>
+  <title>MyRiskScout – Misdaadrisico’s & alerts in Amsterdam</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta
     name="description"
-    content="MyRiskScout laat het inbraak- en fietsdiefstalrisico in Amsterdam zien. Elke buurt krijgt een absolute risicoscore van 0–100 en je krijgt een melding zodra je een hoog-risicogebied binnenkomt."
+    content="MyRiskScout toont in één oogopslag waar het risico op inbraak en fietsdiefstal in Amsterdam hoger ligt. Zie risicoscores per buurt en ontvang een alert zodra je een hoog-risicogebied binnenkomt."
   />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="MyRiskScout – Zie je risico voordat het jou vindt" />
-  <meta property="og:description" content="Inbraak- en fietsdiefstalrisico per buurt in Amsterdam. Zie de risicoscore (0–100) op de kaart en ontvang meldingen in hoog-risicogebieden." />
-  <meta property="og:image" content="https://www.myriskscout.com/assets/app-map-screenshot.jpg" />
-  <meta property="og:url" content="https://www.myriskscout.com/" />
-  <meta property="og:type" content="website" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="MyRiskScout – Inbraak- & fietsdiefstalrisico in Amsterdam" />
-  <meta name="twitter:description" content="Zie per buurt een absolute risicoscore van 0–100 en ontvang meldingen zodra je een hoog-risicogebied binnenkomt." />
-  <meta name="twitter:image" content="https://www.myriskscout.com/assets/app-map-screenshot.jpg" />
 
   <style>
     :root {
@@ -36,20 +24,22 @@
       --max-width: 1080px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-        "SF Pro Text", "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #10172f, #020617);
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #0e1630, #050a19);
       color: var(--text-main);
-      -webkit-font-smoothing: antialiased;
     }
 
-    img { max-width: 100%; display: block; }
-    a { color: inherit; text-decoration: none; }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-    .page { min-height: 100vh; display: flex; flex-direction: column; }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
     .container {
       width: 100%;
@@ -59,800 +49,367 @@
     }
 
     /* HEADER */
-
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 40;
-      backdrop-filter: blur(18px);
-      background: rgba(3,7,18,0.9);
-      border-bottom: 1px solid rgba(148,163,184,0.12);
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(5,10,25,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
     .site-header-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: .75rem 0;
+      padding: 0.75rem 0;
     }
 
-    .brand-logo-full { height: 38px; }
+    .brand-logo-full { height: 40px; }
 
     .nav-links {
       display: flex;
       gap: 1.5rem;
       color: var(--text-muted);
-      font-size: .9rem;
-    }
-
-    .nav-links a {
-      position: relative;
-      padding-bottom: .25rem;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0; bottom: 0;
-      width: 0; height: 2px;
-      border-radius: 999px;
-      background: var(--accent-gradient);
-      transition: width .2s ease;
-    }
-
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav-cta {
-      display: none;
-      background: var(--accent-gradient);
-      padding: .55rem 1.25rem;
-      border-radius: 999px;
-      font-size: .85rem;
-      color: #020617;
-      font-weight: 500;
-      box-shadow: 0 12px 30px rgba(34,197,94,.4);
-    }
-
-    @media(max-width:880px){
-      .nav-links { display:none; }
-      .nav-cta { display:inline-flex; }
+      font-size: 0.9rem;
     }
 
     /* HERO */
-
-    .hero { padding: 3.5rem 0 3rem; }
+    .hero { padding: 4rem 0 3rem; }
 
     .hero-inner {
-      display:grid;
-      grid-template-columns: 1.2fr 1.1fr;
-      gap:2.5rem;
-      align-items:center;
-    }
-
-    @media(max-width:880px){
-      .hero-inner{ grid-template-columns:1fr; }
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 2.5rem;
+      align-items: center;
     }
 
     .hero-kicker {
-      display:inline-flex;
-      align-items:center;
-      gap:.4rem;
-      padding:.2rem .9rem;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,.5);
-      background:rgba(15,23,42,.9);
-      font-size:.75rem;
-      color:var(--text-muted);
-      margin-bottom:1rem;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      width: fit-content;
+      margin-bottom: 1rem;
     }
 
-    .hero-kicker-dot{
-      width:8px;height:8px;border-radius:999px;
-      background:var(--accent-gradient);
-      box-shadow:0 0 10px rgba(251,191,36,.9);
+    .hero-kicker-dot {
+      background: var(--accent-gradient);
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      display: inline-block;
+      margin-right: 6px;
     }
 
     .hero-title {
-      font-size: clamp(2.2rem,3.4vw,2.9rem);
-      font-weight:700;
-      line-height:1.05;
-      margin-bottom:1rem;
+      font-size: clamp(2.3rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.08;
+      margin-bottom: 1rem;
     }
 
     .hero-title span {
       background: var(--accent-gradient);
-      -webkit-background-clip:text;
-      color:transparent;
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     .hero-subtitle {
-      max-width:32rem;
-      color:var(--text-muted);
-      margin-bottom:1.7rem;
-      line-height:1.6;
-      font-size:.98rem;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 1.6rem;
+      max-width: 34rem;
     }
 
     .store-buttons {
-      display:flex;
-      gap:.9rem;
-      margin-bottom:1.2rem;
-      align-items:center;
-      flex-wrap:wrap;
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
     }
 
-    .store-badge {
-      height:48px;
-      border-radius: 0.75rem;
-      box-shadow:0 10px 25px rgba(0,0,0,.55);
-    }
-
-    @media(max-width:600px){
-      .store-badge{ height:44px; }
-    }
+    .store-badge { height: 50px; }
 
     .hero-note {
-      font-size:.8rem;
-      color:var(--text-muted);
-      line-height:1.4;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-muted);
     }
 
     /* PHONE MOCKUPS */
-
-    .hero-mockup-wrap{
-      position:relative;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:1.25rem;
-      justify-items:center;
+    .phones-wrap {
+      position: relative;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
     }
 
-    @media(max-width:880px){
-      .hero-mockup-wrap{ grid-template-columns:1fr; }
+    .phone-frame {
+      background: #000;
+      border-radius: 38px;
+      padding: 0.75rem;
+      border: 1px solid rgba(148,163,184,0.3);
+      width: 280px;
+      box-shadow:
+        0 0 50px rgba(0,200,80,0.15),
+        0 0 60px rgba(255,200,40,0.15),
+        0 0 70px rgba(255,80,80,0.15);
     }
 
-    .hero-glow{
-      position:absolute;
-      inset:-12%;
-      background:
-        radial-gradient(circle at 20% 0, rgba(56,189,248,.45), transparent 55%),
-        radial-gradient(circle at 80% 60%, rgba(251,191,36,.5), transparent 65%);
-      filter: blur(22px);
-      opacity:.85;
-      pointer-events:none;
-      z-index:-1;
+    .phone-screen {
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.15);
     }
 
-    .phone-frame{
-      background:#020617;
-      border-radius:38px;
-      padding:.75rem;
-      border:1px solid rgba(148,163,184,.4);
-      box-shadow:var(--shadow-soft);
-      position:relative;
-      overflow:visible;
+    .phone-screen-inner {
+      aspect-ratio: 9/19.5;
+      background-size: cover;
+      background-position: center;
     }
 
-    /* farbiger Schatten in Risikofarben */
-    .phone-frame::before{
-      content:"";
-      position:absolute;
-      inset:12px -24px -28px;
-      z-index:-1;
-      background:var(--accent-gradient);
-      filter: blur(36px);
-      opacity:.45;
+    .map { background-image: url("assets/app-map-screenshot.jpg"); }
+    .detail { background-image: url("assets/risk-detail-screenshot.jpg"); }
+
+    /* HEATMAP BADGE */
+    .phone-caption {
+      text-align: center;
+      font-size: 0.8rem;
+      margin-top: 0.8rem;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid rgba(255,255,255,0.12);
     }
 
-    .phone-screen{
-      overflow:hidden;
-      border-radius:30px;
-      border:1px solid rgba(148,163,184,.5);
+    /* SECTION */
+    section { padding: 3rem 0; }
+
+    .section-header { margin-bottom: 1.8rem; }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
     }
 
-    .phone-screen-inner{
-      aspect-ratio:9/19.5;
-      background-size:cover;
-      background-position:top center;
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
     }
 
-    .map { background-image:url("assets/app-map-screenshot.jpg"); }
-    .detail { background-image:url("assets/risk-detail-screenshot.jpg"); }
-
-    .hero-mockup-badge{
-      position:absolute;
-      bottom:-18px;
-      left:50%;
-      transform:translateX(-50%);
-      background:rgba(15,23,42,.96);
-      padding:.45rem 1.1rem;
-      border-radius:999px;
-      font-size:.72rem;
-      color:var(--text-muted);
-      display:flex;
-      gap:.5rem;
-      border:1px solid rgba(148,163,184,.55);
-      white-space:nowrap;
-    }
-
-    .hero-mockup-badge-dot{
-      width:10px;height:10px;border-radius:999px;
-      background:var(--accent-gradient);
-    }
-
-    .hero-mockup-badge--map {
-      bottom:-18px;
-    }
-    .hero-mockup-badge--detail {
-      bottom:-18px;
-    }
-
-    /* SECTION GENERIC */
-
-    main section { padding:2.5rem 0; }
-
-    .section-header{ margin-bottom:1.5rem; }
-    .section-kicker{
-      font-size:.8rem;
-      text-transform:uppercase;
-      color:var(--text-muted);
-      margin-bottom:.3rem;
-      letter-spacing:.1em;
-    }
-    .section-title{
-      font-size:1.4rem;
-      font-weight:600;
-      margin-bottom:.35rem;
-    }
-    .section-subtitle{
-      color:var(--text-muted);
-      max-width:38rem;
-      line-height:1.6;
-      font-size:.92rem;
+    .section-subtitle {
+      color: var(--text-muted);
+      max-width: 36rem;
+      line-height: 1.6;
     }
 
     /* GRID */
-
-    .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
-    .grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem; }
-
-    @media(max-width:880px){
-      .grid-3, .grid-2{ grid-template-columns:1fr; }
-    }
-
-    .card{
-      background:radial-gradient(circle at top left,#111827,#020617);
-      padding:1.25rem;
-      border-radius:var(--radius-xl);
-      border:1px solid rgba(148,163,184,.35);
-      color:#e5e7eb;
-    }
-    .card-light{
-      background:#f5f5f7;
-      color:#020617;
-      border:none;
-    }
-    .card-title{ font-size:1.05rem; font-weight:600; margin-bottom:.4rem; }
-    .card-text{ color:var(--text-muted); line-height:1.6; font-size:.9rem; }
-    .card-text-dark{ color:#4b5563; }
-
-    .list{
-      list-style:none;
-      padding-left:0;
-      margin-top:.7rem;
-      display:grid;
-      gap:.4rem;
-    }
-
-    .list li{
-      display:flex;
-      gap:.35rem;
-      font-size:.9rem;
-      color:var(--text-muted);
-    }
-
-    .list li::before{
-      content:"•";
-      color:#a7f3d0;
-      margin-top:-1px;
-    }
-
-    /* AI & DATA SECTION */
-
-    .section-band {
-      border-radius: 26px;
-      padding: 1.7rem 1.5rem;
-      background: radial-gradient(circle at top right, #1f2937, #020617);
-      border: 1px solid rgba(148, 163, 184, 0.5);
+    .grid-3 {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 1.2rem;
-      align-items: flex-start;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1.5rem;
     }
 
-    @media(max-width:880px){
-      .section-band{ grid-template-columns:1fr; }
-    }
-
-    .chip-gradient {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.18rem 0.8rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    .chip-gradient-swatch {
-      width: 46px;
-      height: 12px;
-      border-radius: 999px;
-      background: var(--accent-gradient);
-      box-shadow: 0 0 18px rgba(251, 191, 36, 0.7);
+    .card {
+      background: radial-gradient(circle at top left, #111827, #050a19);
+      border-radius: var(--radius-xl);
+      padding: 1.3rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #e5e7eb;
     }
 
     .badge-pill {
-      display:inline-flex;
-      align-items:center;
-      gap:.35rem;
-      padding:.18rem .8rem;
-      border-radius:999px;
-      background:rgba(15,23,42,.96);
-      border:1px solid rgba(148,163,184,.6);
-      font-size:.72rem;
-      color:var(--text-muted);
-    }
-
-    .badge-pill-dot{
-      width:8px;height:8px;border-radius:999px;
-      background:var(--accent-gradient);
-    }
-
-    /* CTA SECTIONS */
-
-    .section-cta {
-      text-align: center;
-      padding: 2.2rem 0 3rem;
-    }
-
-    .section-cta .store-buttons{
-      justify-content:center;
-    }
-
-    .section-cta-note{
-      font-size:.8rem;
-      color:var(--text-muted);
-      margin-top:.6rem;
-    }
-
-    /* CONTACT BUTTON */
-
-    #contact .btn-primary{
-      background:rgba(15,23,42,.96);
-      color:var(--text-main);
-      border-radius:999px;
-      padding:.7rem 1.4rem;
-      border:1px solid rgba(148,163,184,.7);
-      font-size:.9rem;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:.4rem;
-      margin-top:.4rem;
+      background: rgba(255,255,255,0.1);
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      margin-bottom: 0.7rem;
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.15);
     }
 
     /* FOOTER */
-
     footer {
-      border-top: 1px solid rgba(148, 163, 184, 0.25);
-      background: var(--bg-darker);
-      padding: 1.5rem 0 2rem;
-      font-size: 0.78rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem 0;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      margin-top:auto;
     }
 
     .footer-inner {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
       justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1rem;
       flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .footer-links a {
+      margin-left: 1rem;
       text-decoration: underline;
-      text-decoration-color: rgba(148, 163, 184, 0.6);
-      text-decoration-thickness: 1px;
       text-underline-offset: 3px;
     }
-  </style>
 
-  <script>
-    // smooth scroll voor interne links
-    document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-        link.addEventListener("click", function (e) {
-          const targetId = this.getAttribute("href").substring(1);
-          const target = document.getElementById(targetId);
-          if (target) {
-            e.preventDefault();
-            window.scrollTo({
-              top: target.offsetTop - 72,
-              behavior: "smooth",
-            });
-          }
-        });
-      });
-    });
-  </script>
+  </style>
 </head>
 
 <body>
-  <div class="page">
 
-    <!-- HEADER -->
-    <header class="site-header">
-      <div class="container site-header-inner">
-        <div class="brand">
-          <img
-            src="assets/logo-full.png"
-            alt="MyRiskScout – Powered by AI"
-            class="brand-logo-full"
-          />
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <img src="assets/logo-full.png" class="brand-logo-full" />
+      <nav class="nav-links">
+        <a href="#how">Hoe het werkt</a>
+        <a href="#who">Voor wie</a>
+        <a href="#data">AI & data</a>
+        <a href="#download">Download</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+
+      <div>
+        <div class="hero-kicker">
+          <span class="hero-kicker-dot"></span>
+          Nu live in Amsterdam — stap voor stap uitrol naar de rest van Nederland
         </div>
 
-        <nav class="nav-links">
-          <a href="#how-it-works">Hoe het werkt</a>
-          <a href="#who">Voor wie</a>
-          <a href="#data">AI & data</a>
-          <a href="#download">Download</a>
-          <a href="/contact.html">Contact</a>
-        </nav>
+        <h1 class="hero-title">
+          Zie je <span>risico</span> voordat het jou vindt.
+        </h1>
 
-        <a href="#download" class="nav-cta">Download</a>
+        <p class="hero-subtitle">
+          MyRiskScout is een mobiele app die laat zien waar het risico op inbraak en
+          fietsdiefstal in Amsterdam hoger ligt. Elke buurt krijgt een risicoscore van
+          0–100 en je krijgt direct een melding zodra je een hoog-risicogebied binnenkomt.
+        </p>
+
+        <div class="store-buttons">
+          <a href="#"><img src="assets/app-store-badge-nl.png" class="store-badge"></a>
+          <a href="#"><img src="assets/google-play-badge.png" class="store-badge"></a>
+        </div>
+
+        <p class="hero-note">
+          <strong>Gratis download.</strong> Beschikbaar op iOS en Android.<br>
+          <strong>Ideaal voor:</strong> pendelaars, fietsers, studenten, ouders, expats –
+          iedereen die onderweg beter geïnformeerd wil zijn.
+        </p>
       </div>
-    </header>
 
-    <!-- HERO -->
-    <main>
-      <section class="hero" id="top">
-        <div class="container hero-inner">
-
-          <div>
-            <div class="hero-kicker">
-              <span class="hero-kicker-dot"></span>
-              Nu live in Amsterdam – stap voor stap uitrol naar de rest van Nederland
-            </div>
-
-            <h1 class="hero-title">
-              Zie je <span>risico</span><br />voordat het jou vindt.
-            </h1>
-
-            <p class="hero-subtitle">
-              MyRiskScout is een mobiele app die laat zien waar het risico op
-              inbraak en fietsdiefstal in Amsterdam hoger ligt. Elke buurt krijgt
-              een <strong>absolute risicoscore van 0–100</strong> en je krijgt
-              direct een melding zodra je een hoog-risicogebied binnenkomt.
-            </p>
-
-            <div class="store-buttons">
-              <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077" target="_blank" rel="noopener">
-                <img src="assets/app-store-badge-nl.png" class="store-badge" alt="Download in de App Store" />
-              </a>
-              <a href="https://play.google.com/store/apps/details?id=com.myriskscout" target="_blank" rel="noopener">
-                <img src="assets/google-play-badge.png" class="store-badge" alt="Download via Google Play" />
-              </a>
-            </div>
-
-            <p class="hero-note">
-              <strong>Gratis download.</strong> Beschikbaar op iOS en Android.<br />
-              <strong>Ideaal voor:</strong> forenzen, fietsers, studenten, ouders,
-              expats – iedereen die onderweg beter geïnformeerd wil zijn.
-            </p>
-          </div>
-
-          <div class="hero-mockup-wrap" aria-hidden="true">
-            <div class="hero-glow"></div>
-
-            <div class="phone-frame">
-              <div class="phone-screen">
-                <div class="phone-screen-inner map"></div>
-              </div>
-              <div class="hero-mockup-badge hero-mockup-badge--map">
-                <span class="hero-mockup-badge-dot"></span>
-                Heatmap & live alerts
-              </div>
-            </div>
-
-            <div class="phone-frame">
-              <div class="phone-screen">
-                <div class="phone-screen-inner detail"></div>
-              </div>
-              <div class="hero-mockup-badge hero-mockup-badge--detail">
-                <span class="hero-mockup-badge-dot"></span>
-                Risicodetails & belangrijkste drijfveren
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- HOE HET WERKT -->
-      <section id="how-it-works">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">Hoe het werkt</div>
-            <h2 class="section-title">Van kaart naar actiegerichte inzichten</h2>
-            <p class="section-subtitle">
-              MyRiskScout combineert politiegegevens met omgevingskenmerken
-              om je kaart te veranderen in een veiligheidssensor voor de stad.
-            </p>
-          </div>
-
-          <div class="grid-3">
-            <article class="card">
-              <h3 class="card-title">🔎 Zie waar het risico hoger ligt</h3>
-              <p class="card-text">
-                Kleuren op de kaart laten in één oogopslag zien welke buurten een
-                hogere absolute risicoscore hebben voor inbraak en fietsdiefstal.
-              </p>
-            </article>
-
-            <article class="card">
-              <h3 class="card-title">📊 Begrijp wat het risico drijft</h3>
-              <p class="card-text">
-                Tik op een buurt om de belangrijkste factoren achter een verhoogde
-                score te zien, zoals veel voertuigen per huishouden of veel
-                eengezinswoningen met minder sociale controle.
-              </p>
-            </article>
-
-            <article class="card">
-              <h3 class="card-title">🔔 Krijg meldingen in hoog-risicogebieden</h3>
-              <p class="card-text">
-                Schakel optionele achtergrondlocatie in. Zodra je een
-                hoog-risicogebied binnenkomt of daar langer blijft, stuurt
-                MyRiskScout een melding – zodat je alert blijft en simpele
-                voorzorgsmaatregelen kunt nemen.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- VOOR WIE -->
-      <section id="who">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">Voor wie</div>
-            <h2 class="section-title">Ontworpen voor dagelijks gebruik</h2>
-          </div>
-
-          <div class="grid-3">
-
-            <article class="card card-light">
-              <h3 class="card-title">Bewoners & forenzen</h3>
-              <p class="card-text card-text-dark">
-                Begrijp hoe het risico verschilt tussen de buurten waar je
-                dagelijks doorheen loopt of fietst.
-              </p>
-              <ul class="list">
-                <li>Kies veiligere routes voor lopen of fietsen.</li>
-                <li>Bepaal waar je je fiets of auto het liefst parkeert.</li>
-                <li>Vergelijk de risicoscore rond je woning.</li>
-              </ul>
-            </article>
-
-            <article class="card card-light">
-              <h3 class="card-title">Bezoekers, expats & studenten</h3>
-              <p class="card-text card-text-dark">
-                Krijg snel een veiligheidsindruk in wijken die je nog niet goed
-                kent.
-              </p>
-              <ul class="list">
-                <li>Check de risicoscore voordat je een nieuwe buurt verkent.</li>
-                <li>Zie waar pickpocketing of diefstalrisico hoger ligt.</li>
-                <li>Blijf extra alert laat op de avond of op weg naar huis.</li>
-              </ul>
-            </article>
-
-            <article class="card card-light">
-              <h3 class="card-title">Mensen die verzekering overwegen</h3>
-              <p class="card-text card-text-dark">
-                Gebruik de risicoscore om beter geïnformeerd een
-                verzekeringskeuze te maken.
-              </p>
-              <ul class="list">
-                <li>Zie het inbraak- en fietsdiefstalniveau rond jouw adres.</li>
-                <li>Begrijp of jouw buurt boven of onder het stedelijk gemiddelde ligt.</li>
-                <li>Gebruik deze informatie in gesprekken met je verzekeraar.</li>
-              </ul>
-            </article>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- AI & DATA / RISICOMODEL -->
-      <section id="data">
-        <div class="container">
-          <div class="section-band">
-            <div>
-              <div class="chip-gradient">
-                <span class="chip-gradient-swatch"></span>
-                <span>Aangedreven door AI & echte data</span>
-              </div>
-              <h2 class="section-title" style="margin-top:0.7rem;">
-                Hoe we de risicoscore berekenen
-              </h2>
-              <p class="section-subtitle">
-                MyRiskScout gebruikt machine-learningmodellen om voor elke buurt
-                een <strong>absolute risicoscore op een schaal van 0 tot 100</strong>
-                te berekenen. De modellen zijn getraind op miljoenen historische
-                misdrijfcases en honderden omgevingsindicatoren, zoals type
-                bebouwing, nabijheid van hoofdwegen, bevolkingsdichtheid,
-                inkomensniveaus en mobiliteit.
-              </p>
-              <p class="section-subtitle">
-                Elke buurt krijgt één waarde:
-              </p>
-              <ul class="list">
-                <li><strong>0–33 (groen):</strong> lager risiconiveau</li>
-                <li><strong>34–66 (geel):</strong> gemiddeld risiconiveau</li>
-                <li><strong>67–100 (rood):</strong> hoger risiconiveau</li>
-              </ul>
-              <p class="section-subtitle">
-                De score geeft dus een <strongabsolute>absoluut risiconiveau</strong>
-                op een vaste schaal weer, zodat je buurten onderling kunt
-                vergelijken en veranderingen door de tijd kunt volgen.
-              </p>
-            </div>
-
-            <div>
-              <div class="badge-pill" style="margin-bottom:0.6rem;">
-                <span class="badge-pill-dot"></span>
-                Transparante & uitlegbare AI
-              </div>
-              <ul class="list">
-                <li>Gebaseerd op officiële Nederlandse politie- en buurtdata.</li>
-                <li>Modellen benadrukken het risiconiveau per gebied – niet het
-                  voorspellen van individuele incidenten.</li>
-                <li>Scores worden periodiek geüpdatet zodra nieuwe data
-                  beschikbaar komt.</li>
-                <li>Modelprestatie boven <strong>R² = 0,7</strong> voor
-                  belangrijke delictcategorieën.</li>
-              </ul>
-              <p class="section-subtitle">
-                In de app tonen we daarnaast per buurt de
-                <strong>twee belangrijkste risicodrijvers</strong>, bijvoorbeeld:
-              </p>
-              <ul class="list">
-                <li>Veel voertuigen per huishouden → meer aantrekkelijke doelen.</li>
-                <li>Veel eengezinswoningen → minder natuurlijke sociale controle.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PRIVACY -->
-      <section id="privacy">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">Privacy & controle</div>
-            <h2 class="section-title">Jouw gegevens blijven van jou</h2>
-            <p class="section-subtitle">
-              MyRiskScout is ontworpen om bewustzijn te vergroten zonder onnodige
-              persoonsgegevens te verzamelen. De focus ligt op
-              <strong>buurtniveau</strong>, niet op het volgen van individuen.
-            </p>
-          </div>
-
-          <div class="grid-3">
-            <article class="card">
-              <h3 class="card-title">Optionele achtergrondlocatie</h3>
-              <p class="card-text">
-                Meldingen werken alleen als je achtergrondlocatie inschakelt –
-                en je kunt dit op elk moment weer uitzetten in de appinstellingen.
-                Zonder jouw toestemming volgen we je locatie niet continu.
-              </p>
-            </article>
-
-            <article class="card">
-              <h3 class="card-title">Zo min mogelijk persoonsdata</h3>
-              <p class="card-text">
-                Locatie wordt alleen gebruikt om te bepalen in welk risico­gebied
-                je je bevindt en of een melding relevant is. We slaan geen
-                herleidbare bewegingspatronen op.
-              </p>
-            </article>
-
-            <article class="card">
-              <h3 class="card-title">Helder en eerlijk</h3>
-              <p class="card-text">
-                Een risicoscore betekent nooit dat er op een bepaald moment iets
-                zál gebeuren. Het helpt je beter geïnformeerd besluiten te nemen.
-                <br /><br />
-                Lees alle details in ons
-                <a href="/privacy.html">privacybeleid</a>.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- DOWNLOAD CTA -->
-      <section id="download" class="section-cta">
-        <div class="container">
-          <div class="section-header" style="text-align:center; margin-bottom:1.8rem;">
-            <div class="section-kicker">Download</div>
-            <h2 class="section-title">Begin vandaag met verkennen</h2>
-            <p class="section-subtitle" style="margin:0 auto;">
-              MyRiskScout is momenteel beschikbaar voor Amsterdam. Andere
-              Nederlandse steden en regio’s volgen stap voor stap.
-            </p>
-          </div>
-
-          <div class="store-buttons">
-            <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077" target="_blank" rel="noopener">
-              <img src="assets/app-store-badge-nl.png" class="store-badge" alt="Download in de App Store" />
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.myriskscout" target="_blank" rel="noopener">
-              <img src="assets/google-play-badge.png" class="store-badge" alt="Download via Google Play" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT CTA -->
-      <section id="contact" class="section-cta">
-        <div class="container">
-          <div class="section-header" style="text-align:center; margin-bottom:1.8rem;">
-            <div class="section-kicker">Vragen of ideeën?</div>
-            <h2 class="section-title">Neem gerust contact op</h2>
-            <p class="section-subtitle" style="margin:0 auto;">
-              Heb je een vraag, suggestie of ben je geïnteresseerd in een
-              partnership? Laat een bericht achter via het formulier.
-            </p>
-          </div>
-
-          <a class="btn-primary" href="/contact.html">
-            Open het contactformulier
-          </a>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="container footer-inner">
+      <div class="phones-wrap">
         <div>
-          © <span id="year"></span> MyRiskScout B.V. · Amsterdam, Nederland
+          <div class="phone-frame">
+            <div class="phone-screen"><div class="phone-screen-inner map"></div></div>
+          </div>
+          <div class="phone-caption">Heatmap & live alerts</div>
         </div>
-        <div class="footer-links">
-          <a href="/privacy.html">Privacybeleid</a>
-          <a href="/terms.html">Gebruiksvoorwaarden</a>
+
+        <div>
+          <div class="phone-frame">
+            <div class="phone-screen"><div class="phone-screen-inner detail"></div></div>
+          </div>
+          <div class="phone-caption">Risicodetails & belangrijkste drijfveren</div>
         </div>
       </div>
 
-      <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-      </script>
-    </footer>
+    </div>
+  </section>
 
-  </div>
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-kicker">Hoe het werkt</div>
+        <h2 class="section-title">Van kaart naar duidelijke inzichten</h2>
+        <p class="section-subtitle">
+          MyRiskScout combineert politiedata met omgevingskenmerken en toont dit als een duidelijke heatmap.
+          Buurten met hogere risicoscores kleuren warmer, zodat je in één oogopslag ziet waar het veiliger of onveiliger is.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>📍 Zie het risiconiveau om je heen</h3>
+          <p>De kaart toont risicoscores per buurt op een schaal van 0–100. Warmere kleuren = hoger risico.</p>
+        </div>
+
+        <div class="card">
+          <h3>📊 Begrijp wat het risico verhoogt</h3>
+          <p>Klik op een buurt voor informatie over de belangrijkste drijfveren die bijdragen aan een hogere score.</p>
+        </div>
+
+        <div class="card">
+          <h3>🔔 Alerts zodra je een zone binnenkomt</h3>
+          <p>Zet achtergrondlocatie aan om een melding te ontvangen zodra je een hoog-risicogebied binnenkomt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI & DATA -->
+  <section id="data">
+    <div class="container">
+      <div class="section-kicker">AI & data</div>
+      <h2 class="section-title">Hoe we risicoscores berekenen</h2>
+
+      <div class="card" style="margin-top:1rem;">
+        <span class="badge-pill">Powered by AI & echte data</span>
+
+        <p class="section-subtitle">
+          MyRiskScout gebruikt machine-learning modellen die zijn getraind op historische
+          misdaadcijfers en omgevingsdata zoals woningtypen, verkeersstromen, bevolkingsdichtheid
+          en afstand tot hoofdwegen. Elke buurt krijgt een risicoscore tussen
+          <strong>0 en 100</strong>.
+        </p>
+
+        <p class="section-subtitle">
+          De app toont ook de <strong>belangrijkste drijfveren</strong> achter een hogere score,
+          zodat je begrijpt waarom bepaalde buurten risicovoller zijn.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section id="download">
+    <div class="container" style="text-align:center;">
+      <div class="section-kicker">Download</div>
+      <h2 class="section-title">Start vandaag met verkennen</h2>
+
+      <div class="store-buttons" style="justify-content:center;margin-top:1rem;">
+        <a href="#"><img src="assets/app-store-badge-nl.png" class="store-badge"></a>
+        <a href="#"><img src="assets/google-play-badge.png" class="store-badge"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> MyRiskScout B.V. – Amsterdam</div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Voorwaarden</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </footer>
+
 </body>
 </html>
