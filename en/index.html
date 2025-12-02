@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MyRiskScout – See your risk before it finds you</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="MyRiskScout is a crime risk map and alert app for Amsterdam. See burglary and bicycle theft risk per neighbourhood, get alerts in high-risk areas, and understand which factors drive elevated risk."
+  />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MyRiskScout – See your risk before it finds you" />
+  <meta property="og:description" content="Crime risk map & alerts for Amsterdam. Burglary and bicycle theft risk per neighbourhood – powered by AI and real data." />
+  <meta property="og:image" content="https://www.myriskscout.com/assets/app-map-screenshot.jpg" />
+  <meta property="og:url" content="https://www.myriskscout.com/en/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MyRiskScout – Crime risk map & alerts for Amsterdam" />
+  <meta name="twitter:description" content="See burglary and bicycle theft risk levels per neighbourhood and get alerts in high-risk areas." />
+  <meta name="twitter:image" content="https://www.myriskscout.com/assets/app-map-screenshot.jpg" />
+
+  <style>
+    /* ---- The CSS is 100% identical to the NL version for consistency ---- */
+
+    :root {
+      --bg-dark: #040b2a;
+      --bg-darker: #020618;
+      --card-bg: #101527;
+      --card-light: #f5f5f7;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent-gradient: linear-gradient(135deg, #00c853, #ffca28, #ff5252);
+      --radius-xl: 24px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.45);
+      --max-width: 1080px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #10172f, #020617);
+      color: var(--text-main);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .page { min-height: 100vh; display: flex; flex-direction: column; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* HEADER */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: rgba(3, 7, 18, 0.9);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .site-header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      gap: 1rem;
+    }
+
+    .brand-logo-full { height: 38px; }
+
+    .nav-group { display: flex; align-items: center; gap: 1.75rem; }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .nav-links a { position: relative; padding-bottom: 0.2rem; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+      transition: width 0.22s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .lang-switch span { opacity: 0.6; }
+    .lang-switch .active { font-weight: 600; opacity: 1; color: #e5e7eb; }
+
+    .nav-cta {
+      display: none;
+      background: var(--accent-gradient);
+      padding: 0.55rem 1.25rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: #020617;
+      font-weight: 500;
+    }
+
+    /* HERO */
+    .hero { padding: 3.2rem 0 3rem; }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 2.6rem;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.22rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .hero-kicker-dot {
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 3.5vw, 2.9rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      max-width: 30rem;
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      margin-bottom: 1.7rem;
+      line-height: 1.6;
+    }
+
+    .store-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .store-badge { height: 48px; }
+
+    .hero-note { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* PHONE MOCKUPS */
+    .hero-mockup-wrap {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .phone-frame {
+      background: #020617;
+      border-radius: 38px;
+      padding: 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .phone-screen {
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .phone-screen-inner {
+      aspect-ratio: 9 / 19.5;
+      background-size: cover;
+      background-position: top center;
+    }
+
+    .map { background-image: url("/assets/app-map-screenshot.jpg"); }
+    .detail { background-image: url("/assets/risk-detail-screenshot.jpg"); }
+
+    /* GENERIC SECTIONS */
+    section { padding: 2.5rem 0; }
+
+    .section-header { margin-bottom: 1.6rem; }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .section-title { font-size: 1.45rem; font-weight: 600; }
+
+    .section-subtitle {
+      font-size: 0.93rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 36rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #111827, #020617);
+      padding: 1.25rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .card-light {
+      background: #f5f5f7;
+      color: #020617;
+      border: none;
+    }
+
+    .card-title { font-size: 1.05rem; font-weight: 600; }
+
+    .card-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .card-text-dark { color: #4b5563; }
+
+    .list { list-style: none; display: grid; gap: 0.45rem; margin-top: 0.6rem; }
+    .list li { display: flex; gap: 0.4rem; color: var(--text-muted); }
+    .list li::before { content: "•"; color: #a7f3d0; }
+
+    /* RISK MODEL BAND */
+    .section-band {
+      border-radius: 26px;
+      padding: 1.6rem 1.5rem 1.3rem;
+      background: radial-gradient(circle at top left, #111827, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.4rem;
+    }
+
+    .chip-gradient,
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.16rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .chip-gradient-swatch {
+      width: 42px; height: 12px;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+      box-shadow: 0 0 18px rgba(251, 191, 36, 0.7);
+    }
+
+    .badge-pill-dot {
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+    }
+
+    /* CTA */
+    .section-cta { text-align: center; padding: 2.2rem 0 3rem; }
+
+    .btn-primary {
+      display: inline-flex;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+      color: #020617;
+      font-weight: 500;
+    }
+
+    #contact .btn-primary {
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text-main);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
+      background: var(--bg-darker);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      padding: 1.5rem 0 2rem;
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links { display: flex; gap: 1rem; }
+    .footer-links a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Responsive */
+    @media (max-width:880px) {
+      .nav-links { display:none; }
+      .nav-cta { display:inline-flex; }
+      .hero-inner { grid-template-columns:1fr; }
+      .section-band { grid-template-columns:1fr; }
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener("click", e => {
+          const id = link.getAttribute("href").substring(1);
+          const target = document.getElementById(id);
+          if (target) {
+            e.preventDefault();
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: "smooth"
+            });
+          }
+        });
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="container site-header-inner">
+
+        <img src="/assets/logo-full.png" class="brand-logo-full" alt="MyRiskScout Logo">
+
+        <div class="nav-group">
+          <nav class="nav-links">
+            <a href="#how-it-works">How it works</a>
+            <a href="#who">Who it's for</a>
+            <a href="#data">AI & data</a>
+            <a href="#download">Download</a>
+            <a href="/contact.html">Contact</a>
+          </nav>
+
+          <div class="lang-switch">
+            <a href="/"><span>NL</span></a>
+            <span>|</span>
+            <span class="active">EN</span>
+          </div>
+
+          <a href="#download" class="nav-cta">Download</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero" id="top">
+        <div class="container hero-inner">
+
+          <div>
+            <div class="hero-kicker">
+              <span class="hero-kicker-dot"></span>
+              Now live in Amsterdam – rolling out across the Netherlands
+            </div>
+
+            <h1 class="hero-title">
+              See your <span>risk</span><br />before it finds you.
+            </h1>
+
+            <p class="hero-subtitle">
+              MyRiskScout shows where burglary and bicycle theft risk is
+              relatively higher across Amsterdam. You can see differences between
+              neighbourhoods at a glance and receive a gentle alert if you stay
+              in a high-risk area for a while.
+            </p>
+
+            <div class="store-buttons">
+              <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077" target="_blank">
+                <img src="/assets/app-store-badge.png" class="store-badge" />
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.myriskscout" target="_blank">
+                <img src="/assets/google-play-badge.png" class="store-badge" />
+              </a>
+            </div>
+
+            <p class="hero-note">
+              <strong>Free download.</strong> Available on iOS and Android.
+            </p>
+          </div>
+
+          <div class="hero-mockup-wrap">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <div class="phone-screen-inner map"></div>
+              </div>
+              <div class="hero-mockup-badge">
+                <span class="hero-mockup-badge-dot"></span>
+                High-risk area • Live alert
+              </div>
+            </div>
+
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <div class="phone-screen-inner detail"></div>
+              </div>
+              <div class="hero-mockup-badge">
+                <span class="hero-mockup-badge-dot"></span>
+                Risk details & key drivers
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section id="how-it-works">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-kicker">How it works</div>
+            <h2 class="section-title">From map to meaningful insights</h2>
+            <p class="section-subtitle">
+              MyRiskScout combines real police statistics with neighbourhood and
+              environmental features. The result is a live “safety radar” that
+              helps you understand relative differences between areas across the city.
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card">
+              <h3 class="card-title">🔎 Detect risk around you</h3>
+              <p class="card-text">
+                Explore a colour-coded map showing relative burglary and bicycle
+                theft risk per neighbourhood. Green = lower, red = higher.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">📊 Understand what drives it</h3>
+              <p class="card-text">
+                Tap a neighbourhood to see which factors most strongly explain
+                elevated risk – for example: many vehicles per household, or many
+                single-family homes with lower natural surveillance.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">🔔 Stay informed on the go</h3>
+              <p class="card-text">
+                Enable optional background location. If you remain in a higher-risk
+                area for a while, MyRiskScout sends a gentle alert to help you
+                stay aware.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHO IT'S FOR -->
+      <section id="who">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-kicker">Who it’s for</div>
+            <h2 class="section-title">Designed for everyday life</h2>
+          </div>
+
+          <div class="grid-3">
+
+            <article class="card card-light">
+              <h3 class="card-title">Residents & commuters</h3>
+              <p class="card-text card-text-dark">
+                For anyone who cycles or walks the same routes every day but wants
+                to understand how risk varies along the way.
+              </p>
+              <ul class="list">
+                <li>Choose safer walking or cycling routes.</li>
+                <li>Decide where to park your bike or car more confidently.</li>
+                <li>Compare risk around your home with other neighbourhoods.</li>
+              </ul>
+            </article>
+
+            <article class="card card-light">
+              <h3 class="card-title">Visitors, expats & students</h3>
+              <p class="card-text card-text-dark">
+                Helpful when you don’t yet know which areas of the city feel
+                safer or riskier.
+              </p>
+              <ul class="list">
+                <li>Get a quick impression of safety in unfamiliar areas.</li>
+                <li>See where theft or pickpocketing risk is relatively higher.</li>
+                <li>Stay a bit more aware when returning home late.</li>
+              </ul>
+            </article>
+
+            <article class="card card-light">
+              <h3 class="card-title">Insurance shoppers</h3>
+              <p class="card-text card-text-dark">
+                Considering household or bicycle insurance? Understand your
+                neighbourhood risk first.
+              </p>
+              <ul class="list">
+                <li>See burglary & bicycle theft risk around your home.</li>
+                <li>Understand whether your area has higher-than-average claims.</li>
+                <li>Make more informed insurance decisions.</li>
+              </ul>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- AI & DATA / RISK MODEL -->
+      <section id="data">
+        <div class="container">
+          <div class="section-band">
+            <div>
+              <div class="chip-gradient">
+                <span class="chip-gradient-swatch"></span>
+                <span>Powered by AI & real data</span>
+              </div>
+
+              <h2 class="section-title" style="margin-top:0.7rem;">How we calculate risk scores</h2>
+
+              <p class="section-subtitle">
+                Our machine-learning models analyse millions of historic crime
+                cases and hundreds of environmental indicators. Each neighbourhood
+                receives a score between <strong>1 and 100</strong> (higher =
+                higher relative risk), which we translate into clear map colours:
+              </p>
+
+              <ul class="list">
+                <li><strong>Green:</strong> lower relative risk</li>
+                <li><strong>Yellow:</strong> medium risk</li>
+                <li><strong>Red:</strong> higher relative risk</li>
+              </ul>
+
+              <p class="section-subtitle">
+                Behind every score, the model highlights the
+                <strong>two strongest drivers</strong> of elevated risk – for example:
+              </p>
+
+              <ul class="list">
+                <li>Many vehicles per household → more attractive targets</li>
+                <li>Many single-family homes → lower natural surveillance</li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="badge-pill" style="margin-bottom:0.7rem;">
+                <span class="badge-pill-dot"></span>
+                Transparent & explainable AI
+              </div>
+
+              <ul class="list">
+                <li>Trained on official Dutch police data and neighbourhood indicators.</li>
+                <li>Models highlight differences between areas – not individual predictions.</li>
+                <li>Scores updated regularly as new data becomes available.</li>
+                <li>Model accuracy above <strong>R² = 0.7</strong> for key crime types.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRIVACY -->
+      <section id="privacy">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-kicker">Privacy</div>
+            <h2 class="section-title">Your data stays yours</h2>
+            <p class="section-subtitle">
+              MyRiskScout is built to increase awareness, not to track people. We
+              focus on neighbourhood-level patterns, never individual behaviour.
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card">
+              <h3 class="card-title">Optional background location</h3>
+              <p class="card-text">
+                Alerts work only if you explicitly enable background location.
+                You can switch this off anytime in the app settings.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">Minimal personal data</h3>
+              <p class="card-text">
+                Your location is used only to determine your current area and
+                whether an alert is relevant. We do not store identifiable
+                movement trails.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">Clear communication</h3>
+              <p class="card-text">
+                A risk score reflects neighbourhood-level statistics — it does
+                not mean something will happen to you personally.
+                <br /><br />
+                Read more in our <a href="/privacy.html">privacy policy</a>.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- DOWNLOAD -->
+      <section id="download" class="section-cta">
+        <div class="container">
+          <div class="section-header" style="text-align:center; margin-bottom:1.8rem;">
+            <div class="section-kicker">Download</div>
+            <h2 class="section-title">Start exploring today</h2>
+            <p class="section-subtitle" style="margin:0 auto;">
+              MyRiskScout is currently available for Amsterdam. More cities will
+              follow step by step.
+            </p>
+          </div>
+
+          <div class="store-buttons" style="justify-content:center;">
+            <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077" target="_blank">
+              <img src="/assets/app-store-badge.png" class="store-badge" />
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.myriskscout" target="_blank">
+              <img src="/assets/google-play-badge.png" class="store-badge" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="section-cta">
+        <div class="container">
+          <div class="section-header" style="text-align:center; margin-bottom:1.8rem;">
+            <div class="section-kicker">Questions?</div>
+            <h2 class="section-title">Get in touch</h2>
+            <p class="section-subtitle" style="margin:0 auto;">
+              Have a question, suggestion, or partnership idea?
+              Send us a message — we usually respond quickly.
+            </p>
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:0.9rem; flex-wrap:wrap;">
+            <a class="btn-primary" href="/contact.html">
+              Open contact form
+            </a>
+            <a class="btn-primary" href="mailto:info@myriskscout.com">
+              Send an email
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container footer-inner">
+        <div>
+          © <span id="year"></span> MyRiskScout B.V. · Amsterdam, Netherlands
+        </div>
+        <div class="footer-links">
+          <a href="/privacy.html">Privacy policy</a>
+          <a href="/terms.html">Terms</a>
+        </div>
+      </div>
+
+      <script>
+        document.getElementById("year").textContent =
+          new Date().getFullYear();
+      </script>
+    </footer>
+
+  </div>
+</body>
+</html>
