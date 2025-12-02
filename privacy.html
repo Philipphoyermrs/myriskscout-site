@@ -2,122 +2,272 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Privacyverklaring – MyRiskScout</title>
+  <title>MyRiskScout – Privacybeleid</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Privacybeleid van MyRiskScout. Lees hoe wij met locatiegegevens, risicoscores (0–100) en andere persoonsgegevens omgaan."
+  />
   <style>
+    :root {
+      --bg-dark: #040b2a;
+      --bg-darker: #020618;
+      --card-bg: #101527;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent-gradient: linear-gradient(135deg, #00c853, #ffca28, #ff5252);
+      --radius-xl: 24px;
+      --max-width: 860px;
+    }
+
+    * { box-sizing:border-box; margin:0; padding:0; }
+
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background: #020617;
-      color: #f9fafb;
-      padding: 2rem;
-      line-height: 1.6;
-      max-width: 900px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #10172f, #020617);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page { min-height:100vh; display:flex; flex-direction:column; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
       margin: 0 auto;
+      padding: 0 1.5rem;
     }
-    a {
-      color: #38bdf8;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+
+    /* Header (in lijn met de rest van de site) */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: rgba(3,7,18,0.9);
+      border-bottom: 1px solid rgba(148,163,184,0.12);
     }
-    h1, h2, h3 { color: #f1f5f9; }
-    ul { margin-left: 1.2rem; margin-bottom: 1rem; }
-    p { margin-bottom: 0.9rem; }
+
+    .site-header-inner {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:.75rem 0;
+    }
+
+    .brand-logo-full { height:32px; }
+
+    .nav-links {
+      display:flex;
+      gap:1.2rem;
+      font-size:.85rem;
+      color:var(--text-muted);
+    }
+
+    .nav-cta { display:none; }
+
+    @media(max-width:820px){
+      .nav-links{ display:none; }
+    }
+
+    main { padding:2.5rem 0 3rem; }
+
+    h1 {
+      font-size:1.9rem;
+      margin-bottom:0.4rem;
+    }
+
+    .subtitle{
+      color:var(--text-muted);
+      font-size:.9rem;
+      margin-bottom:1.8rem;
+    }
+
+    .updated{
+      font-size:.82rem;
+      color:var(--text-muted);
+      margin-bottom:1.5rem;
+    }
+
+    h2 {
+      font-size:1.2rem;
+      margin:2rem 0 0.6rem;
+    }
+
+    h3 {
+      font-size:1rem;
+      margin:1.2rem 0 0.4rem;
+    }
+
+    p {
+      margin-bottom:0.8rem;
+      line-height:1.6;
+      font-size:.95rem;
+      color:var(--text-main);
+    }
+
+    ul {
+      margin:0.2rem 0 1rem 1.1rem;
+      padding-left:0.4rem;
+      color:var(--text-main);
+    }
+
+    li {
+      margin-bottom:0.35rem;
+      line-height:1.6;
+      font-size:.95rem;
+    }
+
+    strong { font-weight:600; }
+
+    footer {
+      border-top:1px solid rgba(148,163,184,.25);
+      background:var(--bg-darker);
+      padding:1.5rem 0 2rem;
+      font-size:.78rem;
+      color:var(--text-muted);
+      margin-top:auto;
+    }
+
+    .footer-inner{
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .footer-links a{
+      text-decoration:underline;
+      text-decoration-color:rgba(148,163,184,.6);
+      text-decoration-thickness:1px;
+      text-underline-offset:3px;
+    }
   </style>
 </head>
 <body>
+  <div class="page">
 
-<h1>Privacyverklaring</h1>
-<p><strong>Laatst bijgewerkt:</strong> december 2025</p>
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <div class="brand">
+          <a href="/index.html">
+            <img src="assets/logo-full.png" alt="MyRiskScout – Powered by AI" class="brand-logo-full" />
+          </a>
+        </div>
+        <nav class="nav-links">
+          <a href="/index.html#how-it-works">Hoe het werkt</a>
+          <a href="/index.html#who">Voor wie</a>
+          <a href="/index.html#data">AI & data</a>
+          <a href="/index.html#download">Download</a>
+          <a href="/contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
 
-<p>
-MyRiskScout (“wij”, “ons”, “onze”) biedt een mobiele app die
-criminaliteitsrisico op buurtniveau visualiseert op basis van openbare en
-omgevingsdata. We vinden jouw privacy belangrijk en zijn transparant over
-welke gegevens we wel – en vooral welke we niet – gebruiken.
-</p>
+    <main>
+      <div class="container">
+        <h1>Privacybeleid MyRiskScout</h1>
+        <p class="subtitle">
+          In dit privacybeleid leggen we uit welke gegevens we verzamelen wanneer je
+          MyRiskScout gebruikt, waarom we dat doen en welke keuzes je daarbij hebt.
+        </p>
+        <p class="updated"><strong>Laatst bijgewerkt:</strong> december 2025</p>
 
-<h2>1. Welke gegevens we <strong>niet</strong> verzamelen</h2>
-<p>We verzamelen of bewaren <strong>geen</strong> van de volgende gegevens:</p>
-<ul>
-  <li>Je naam</li>
-  <li>Je contactgegevens (tenzij je ons zelf contacteert)</li>
-  <li>Je bewegingstraject of GPS-locatiegeschiedenis</li>
-  <li>Persoonlijke profielen voor marketing of advertenties</li>
-</ul>
+        <h2>1. Wie wij zijn</h2>
+        <p>
+          MyRiskScout is een product van MyRiskScout B.V., gevestigd in Amsterdam,
+          Nederland. Wij zijn de verwerkingsverantwoordelijke voor de
+          persoonsgegevens die via de app en de website worden verwerkt.
+        </p>
+        <p>
+          Bij vragen over dit privacybeleid kun je contact opnemen via
+          <a href="mailto:info@myriskscout.com">info@myriskscout.com</a>.
+        </p>
 
-<h2>2. Locatiegegevens (optioneel)</h2>
-<p>
-De app gebruikt je locatie alleen <strong>als je dit zelf inschakelt</strong>.
-Locatie wordt uitsluitend op je apparaat gebruikt om te bepalen:
-</p>
-<ul>
-  <li>In welke buurt je op dat moment bent</li>
-  <li>Of een risico-melding relevant is voor jouw locatie</li>
-</ul>
+        <h2>2. Welke gegevens we verzamelen</h2>
+        <h3>2.1 Gegevens die je zelf aanlevert</h3>
+        <p>
+          In de huidige versie van MyRiskScout vragen we zo weinig mogelijk
+          persoonsgegevens. In sommige gevallen kunnen we vragen om:
+        </p>
+        <ul>
+          <li>je e-mailadres (bijvoorbeeld als je ons via het contactformulier benadert);</li>
+          <li>inhoud van berichten die je naar ons stuurt (vragen, feedback, supportverzoeken).</li>
+        </ul>
 
-<p>
-We slaan je locatie <strong>niet op</strong>, verzenden deze
-<strong>niet naar onze servers</strong>, en koppelen deze
-<strong>niet aan jou als persoon</strong>.
-</p>
+        <h3>2.2 Locatiegegevens</h3>
+        <p>
+          Om je een kaart, buurt­risicoscores en meldingen in hoog-risicogebieden te
+          kunnen tonen, heeft MyRiskScout toegang nodig tot je locatie. Afhankelijk
+          van de instellingen op je toestel kan dat zijn:
+        </p>
+        <ul>
+          <li><strong>Locatie tijdens gebruik van de app</strong> – om te laten zien
+              in welk gebied je je bevindt en welke risicoscore daar hoort.</li>
+          <li><strong>Achtergrondlocatie</strong> – alleen als je dit zelf toestaat
+              om meldingen te kunnen sturen wanneer je een hoog-risicogebied
+              binnenkomt of daar langer blijft.</li>
+        </ul>
+        <p>
+          Locatie wordt in de app gebruikt om te bepalen welke buurt en welke
+          risicoscore voor jou relevant zijn. We streven ernaar om geen
+          gedetailleerde, herleidbare bewegingstrajecten op te slaan.
+        </p>
 
-<h2>3. Analytics</h2>
-<p>
-We gebruiken privacy-vriendelijke analytics om te begrijpen hoe de app wordt
-gebruikt (bijv. welke schermen bezocht worden). Deze analytics:
-</p>
-<ul>
-  <li>Volgen geen persoonlijke identiteit</li>
-  <li>Gebruiken geen invasieve cookies</li>
-  <li>Verzamelen geen exacte locatie</li>
-</ul>
+        <h3>2.3 Technische gegevens & gebruiksgegevens</h3>
+        <p>
+          Om de app technisch mogelijk te maken en te verbeteren, verwerken wij
+          bepaalde technische gegevens, zoals:
+        </p>
+        <ul>
+          <li>apparaatinformatie (type toestel, besturingssysteem, app-versie);</li>
+          <li>loggegevens (bijvoorbeeld tijdstip van gebruik, foutmeldingen);</li>
+          <li>anonieme of geaggregeerde gebruiksstatistieken, bijvoorbeeld welke
+              schermen het meest worden gebruikt.</li>
+        </ul>
+        <p>
+          Deze gegevens helpen ons om de app stabieler en gebruiksvriendelijker te
+          maken, en om te begrijpen hoe functies worden gebruikt.
+        </p>
 
-<h2>4. Welke data gebruikt wordt voor risicoscores</h2>
-<p>
-Risicoscores worden volledig gebaseerd op:
-</p>
-<ul>
-  <li>Officiële criminaliteitscijfers (openbare of gelicentieerde datasets)</li>
-  <li>Demografische en sociaaleconomische buurtdata</li>
-  <li>Omgevingsindicatoren zoals woningtype, dichtheid en weginfrastructuur</li>
-</ul>
+        <h3>2.4 Risicoscores op schaal 0–100</h3>
+        <p>
+          MyRiskScout berekent voor elke buurt een <strong>absolute risicoscore op
+          een schaal van 0 tot 100</strong> voor bepaalde delicttypen (zoals
+          inbraak of fietsdiefstal). Deze scores zijn gebaseerd op historische
+          misdrijfcijfers en omgevingskenmerken op buurtniveau.
+        </p>
+        <p>
+          Deze risicoscores worden altijd op <strong>gebiedsniveau</strong>
+          opgeslagen en weergegeven – niet op individueel adres. De scores zijn
+          geen persoonsgegeven over jou, maar we vermelden dit hier omdat je
+          locatie gebruikt wordt om de voor jou relevante score te tonen.
+        </p>
 
-<p>
-Deze gegevens zijn verzameld op buurtniveau en worden
-<strong>nooit gekoppeld aan individuen</strong>.
-</p>
-
-<h2>5. Contact & vragen</h2>
-<p>
-Neem je contact met ons op (bijv. via e-mail of formulier), dan gebruiken we
-jouw gegevens uitsluitend om op je bericht te reageren.
-</p>
-
-<h2>6. Bewaartermijnen</h2>
-<p>
-We bewaren geen persoonlijk identificeerbare gegevens uit appgebruik.
-Anonieme of geaggregeerde statistieken worden alleen gebruikt zolang nodig is
-om de app te verbeteren.
-</p>
-
-<h2>7. Derden</h2>
-<p>
-We verkopen of verhuren nooit persoonsgegevens aan derden.
-Indien we externe diensten gebruiken (bijv. analytics), kiezen we deze
-zorgvuldig en zorgen we – waar nodig – voor passende bescherming.
-</p>
-
-<h2>8. Wijzigingen</h2>
-<p>
-We kunnen deze privacyverklaring af en toe bijwerken. De meest recente
-versie staat altijd op deze pagina, met datum van laatste wijziging bovenaan.
-</p>
-
-<h2>9. Contact</h2>
-<p>
-Vragen over privacy of gegevensgebruik? Neem contact op via:<br/>
-<a href="mailto:info@myriskscout.com">info@myriskscout.com</a>
-</p>
-
-</body>
-</html>
+        <h2>3. Waarvoor we je gegevens gebruiken</h2>
+        <p>We gebruiken de hierboven beschreven gegevens voor de volgende doelen:</p>
+        <ul>
+          <li><strong>Om de app te laten werken:</strong> tonen van de kaart,
+              berekenen van welke buurt bij jouw locatie hoort, tonen van de
+              corresponderende risicoscore (0–100) en sturen van meldingen in
+              hoog-risicogebieden.</li>
+          <li><strong>Om de app te verbeteren:</strong> analyseren hoe functies
+              worden gebruikt, welke schermen het meest bezocht worden en waar
+              fouten optreden.</li>
+          <li><strong>Om je vragen te beantwoorden:</strong> als je ons mailt of het
+              contactformulier invult, gebruiken we je gegevens om te reageren.</li>
+          <li><strong>Om misbruik te voorkomen:</strong> monitoren of de app
+              gebruikt wordt op een manier die in strijd is met wet- en
+              regelgeving of
