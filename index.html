@@ -85,12 +85,6 @@
       gap: 1rem;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
     .brand-logo-full {
       height: 38px;
       width: auto;
@@ -138,13 +132,10 @@
       color: var(--text-muted);
     }
 
-    .lang-switch span {
-      opacity: 0.6;
-    }
-
+    .lang-switch span { opacity: 0.6; }
     .lang-switch .active {
-      font-weight: 600;
       opacity: 1;
+      font-weight: 600;
       color: #e5e7eb;
     }
 
@@ -264,11 +255,11 @@
     }
 
     .map {
-      background-image: url("assets/app-map-screenshot.jpg");
+      background-image: url("/assets/app-map-screenshot.jpg");
     }
 
     .detail {
-      background-image: url("assets/risk-detail-screenshot.jpg");
+      background-image: url("/assets/risk-detail-screenshot.jpg");
     }
 
     .hero-mockup-badge {
@@ -295,7 +286,7 @@
       background: var(--accent-gradient);
     }
 
-    /* SECTIONS GENERIC */
+    /* GENERIC SECTIONS */
 
     section {
       padding: 2.5rem 0;
@@ -436,12 +427,6 @@
       padding: 2.2rem 0 3rem;
     }
 
-    .section-cta-note {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 0.7rem;
-    }
-
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -561,13 +546,13 @@
     <!-- HEADER -->
     <header class="site-header">
       <div class="container site-header-inner">
-        <div class="brand">
+        <a href="/">
           <img
-            src="assets/logo-full.png"
+            src="/assets/logo-full.png"
             alt="MyRiskScout – Powered by AI"
             class="brand-logo-full"
           />
-        </div>
+        </a>
 
         <div class="nav-group">
           <nav class="nav-links">
@@ -607,23 +592,21 @@
             <p class="hero-subtitle">
               MyRiskScout is een app die laat zien waar het risico op inbraak en
               fietsdiefstal in Amsterdam hoger ligt. Je ziet in één oogopslag
-              welke buurten relatief risicovoller zijn en ontvangt een melding
-              als je langere tijd in een hoog-risicogebied blijft.
+              welke buurten relatief risicovoller zijn en je kunt een melding
+              krijgen als je langere tijd in een hoog-risicogebied blijft.
             </p>
 
             <div class="store-buttons">
               <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077" target="_blank" rel="noopener">
-                <img src="assets/app-store-badge.png" alt="Download on the App Store" class="store-badge" />
+                <img src="/assets/app-store-badge.png" alt="Download on the App Store" class="store-badge" />
               </a>
               <a href="https://play.google.com/store/apps/details?id=com.myriskscout" target="_blank" rel="noopener">
-                <img src="assets/google-play-badge.png" alt="Get it on Google Play" class="store-badge" />
+                <img src="/assets/google-play-badge.png" alt="Get it on Google Play" class="store-badge" />
               </a>
             </div>
 
             <p class="hero-note">
-              <strong>Gratis download.</strong> Beschikbaar voor iOS en Android.<br />
-              <strong>Ideaal voor:</strong> forenzen, fietsers, studenten, ouders,
-              expats – iedereen die onderweg iets beter wil weten waar het risico hoger ligt.
+              <strong>Gratis download.</strong> Beschikbaar voor iOS en Android.
             </p>
           </div>
 
@@ -679,8 +662,9 @@
               <h3 class="card-title">📊 Begrijp wat erachter zit</h3>
               <p class="card-text">
                 Tik een buurt aan om te zien welke factoren het verhoogde risico
-                het meest verklaren – bijvoorbeeld veel voertuigen per huishouden
-                of veel eengezinswoningen met minder sociale controle.
+                het meest verklaren – bijvoorbeeld veel voertuigen per
+                huishouden of veel eengezinswoningen met minder sociale
+                controle.
               </p>
             </article>
 
@@ -689,7 +673,7 @@
               <p class="card-text">
                 Schakel optioneel achtergrondlocatie in. Blijf je langer in een
                 buurt met hoger risico, dan krijg je een vriendelijke melding met
-                simpele tips om extra op te letten.
+                eenvoudige tips om extra op te letten.
               </p>
             </article>
           </div>
@@ -721,8 +705,8 @@
             <article class="card card-light">
               <h3 class="card-title">Bezoekers, expats &amp; studenten</h3>
               <p class="card-text card-text-dark">
-                Handig als je (nog) niet goed weet wat de ‘goede’ en minder
-                goede stukken van de stad zijn.
+                Handig als je (nog) niet goed weet wat de ‘goede’ en minder goede
+                stukken van de stad zijn.
               </p>
               <ul class="list">
                 <li>Krijg snel een gevoel bij de veiligheid in onbekende buurten.</li>
@@ -761,11 +745,11 @@
                 Hoe we de risicoscore berekenen
               </h2>
               <p class="section-subtitle">
-                Onze machine-learning modellen analyseren miljoenen historische
-                misdaadzaken en honderden omgevingskenmerken per buurt. Elke
-                buurt krijgt een score tussen <strong>1 en 100</strong>
-                (hoe hoger, hoe hoger het relatieve risico). Die score vertalen
-                we naar duidelijke kleuren op de kaart:
+                Onze machine-learning modellen analyseren historische
+                criminaliteitscijfers en verschillende omgevingskenmerken per
+                buurt. Elke buurt krijgt een score tussen
+                <strong>1 en 100</strong> (hoe hoger, hoe hoger het relatieve
+                risico). Die score vertalen we naar duidelijke kleuren:
               </p>
 
               <ul class="list">
@@ -784,11 +768,6 @@
                 <li>Veel voertuigen per huishouden → meer aantrekkelijke doelen</li>
                 <li>Veel eengezinswoningen → minder natuurlijke sociale controle</li>
               </ul>
-
-              <p class="section-subtitle">
-                Zo blijft het model geen zwarte doos: je ziet niet alleen de
-                score, maar ook <strong>waarom</strong> een gebied risicovoller is.
-              </p>
             </div>
 
             <div>
@@ -797,13 +776,13 @@
                 Transparante &amp; uitlegbare AI
               </div>
               <ul class="list">
-                <li>Getraind op officiële Nederlandse politiecijfers en buurtdata.</li>
-                <li>Modellen leggen verschillen tussen buurten bloot – geen
-                  voorspellingen op individueel niveau.</li>
+                <li>Gebaseerd op officiële Nederlandse politiecijfers en buurtdata.</li>
+                <li>Modellen benadrukken verschillen tussen buurten – geen
+                    voorspellingen op individueel niveau.</li>
                 <li>Scores worden periodiek bijgewerkt zodra nieuwe data
-                  beschikbaar komt.</li>
+                    beschikbaar komt.</li>
                 <li>Modelprestatie boven <strong>R² = 0,7</strong> voor
-                  belangrijke delictcategorieën.</li>
+                    belangrijke delictcategorieën.</li>
               </ul>
             </div>
           </div>
@@ -829,7 +808,7 @@
               <p class="card-text">
                 Locatiemeldingen werken alleen als jij daar expliciet toestemming
                 voor geeft. Je kunt achtergrondlocatie op elk moment weer
-                uitschakelen in de app.
+                uitschakelen in de app-instellingen.
               </p>
             </article>
 
@@ -872,10 +851,10 @@
 
           <div class="store-buttons" style="justify-content:center;">
             <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077" target="_blank" rel="noopener">
-              <img src="assets/app-store-badge.png" alt="Download on the App Store" class="store-badge" />
+              <img src="/assets/app-store-badge.png" alt="Download on the App Store" class="store-badge" />
             </a>
             <a href="https://play.google.com/store/apps/details?id=com.myriskscout" target="_blank" rel="noopener">
-              <img src="assets/google-play-badge.png" alt="Get it on Google Play" class="store-badge" />
+              <img src="/assets/google-play-badge.png" alt="Get it on Google Play" class="store-badge" />
             </a>
           </div>
         </div>
@@ -918,7 +897,8 @@
       </div>
 
       <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
+        document.getElementById("year").textContent =
+          new Date().getFullYear();
       </script>
     </footer>
   </div>
