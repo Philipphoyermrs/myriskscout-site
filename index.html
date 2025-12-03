@@ -2,208 +2,356 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>MyRiskScout</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>MyRiskScout – Zie je risico voordat het jou vindt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
-      --text-main: #ffffff;
-      --text-muted: #d1d5db;
+      --text-main: #0f172a;
+      --max-width: 1120px;
+      --gradient-light: radial-gradient(circle at top left, #ffffff, #f1f5f9);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #000;
-      font-family: system-ui, sans-serif;
-      height: 100svh;
-      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: #f8fafc;
       color: var(--text-main);
-      position: relative;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    .slider-wrapper {
-      width: 100%;
-      height: calc(100svh - 70px); /* Platz für Footer */
-      overflow: hidden;
-      position: relative;
+    /* ------------------------------------------------- */
+    /* BRAND BADGE (NEUE ÄNDERUNG MIT PULSIERENDEM GLOW) */
+    /* ------------------------------------------------- */
+
+    @keyframes softPulse {
+      0% {
+        box-shadow:
+          0 0 14px rgba(255,255,255,0.45),
+          0 4px 14px rgba(0,0,0,0.10);
+      }
+      50% {
+        box-shadow:
+          0 0 22px rgba(255,255,255,0.65),
+          0 6px 18px rgba(0,0,0,0.12);
+      }
+      100% {
+        box-shadow:
+          0 0 14px rgba(255,255,255,0.45),
+          0 4px 14px rgba(0,0,0,0.10);
+      }
     }
+
+    .brand-badge {
+      position: fixed;
+      top: 1.2rem;
+      left: 1.2rem;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(14px);
+      border-radius: 14px;
+
+      animation: softPulse 3s ease-in-out infinite;
+    }
+
+    .brand-badge img {
+      height: 32px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
+    }
+
+    /* --- SLIDER --- */
 
     .slider {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .slides {
       display: flex;
-      height: 100%;
-      transition: transform 0.45s ease;
+      transition: transform 0.6s ease;
     }
 
     .slide {
-      min-width: 100%;
-      height: 100%;
       position: relative;
-      padding: 100px 20px 0 20px;
-
+      width: 100%;
+      min-height: 100vh;
+      flex-shrink: 0;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-
+      justify-content: center;
       text-align: center;
+      padding: 2rem;
+      color: var(--text-main);
+    }
 
+    .slide-bg {
+      position: absolute;
+      inset: 0;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      z-index: -2;
+      opacity: 1;
+      filter: none;
     }
 
-    /* Hintergrund-Overlay */
-    .slide::before {
-      content: "";
+    .slide-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 20%, rgba(0,0,0,0.2), rgba(0,0,0,0.55));
-      z-index: 1;
+      background: var(--gradient-light);
+      opacity: 0.35;
+      z-index: -1;
     }
 
-    h1 {
-      position: relative;
-      z-index: 2;
-      font-size: clamp(1.8rem, 6vw, 2.6rem);
-      max-width: 90%;
-      line-height: 1.15;
-      margin-bottom: 14px;
-      text-align: center;
+    .slide-title {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      max-width: 900px;
     }
 
-    a.more {
-      position: relative;
-      z-index: 2;
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      text-decoration: underline;
-      text-align: center;
+    /* BACKGROUNDS */
+    .slide--overview .slide-bg {
+      background-image: url("assets/hero-bike-night.png");
+    }
+    .slide--how .slide-bg {
+      background-image: url("assets/hero-heatmap.jpg");
+    }
+    .slide--why .slide-bg {
+      background-image: url("assets/hero-why.jpg");
+    }
+    .slide--data .slide-bg {
+      background-image: url("assets/hero-ml.jpg");
+    }
+    .slide--privacy .slide-bg {
+      background-image: url("assets/hero-privacy.jpg");
     }
 
-    /* Hintergrundbilder jetzt aus /assets/ */
-    .slide--1 { background-image: url("assets/hero-bike-night.jpg"); }
-    .slide--2 { background-image: url("assets/hero-heatmap.jpg"); }
-    .slide--3 { background-image: url("assets/hero-why.jpg"); }
-    .slide--4 { background-image: url("assets/hero-ml.jpg"); }
-    .slide--5 { background-image: url("assets/hero-privacy.jpg"); }
+    /* CONTROLS */
 
-    /* Navigation arrows */
-    .arrow-btn {
+    .slider-controls {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.55);
-      border: 1px solid rgba(255,255,255,0.35);
-      color: #fff;
-      font-size: 24px;
+      bottom: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      z-index: 10;
+    }
+
+    .slider-arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      z-index: 30;
-      backdrop-filter: blur(8px);
+      font-size: 1.4rem;
+      color: #475569;
+      transition: 0.2s;
     }
 
-    #prevBtn { left: 10px; }
-    #nextBtn { right: 10px; }
+    .slider-arrow:hover {
+      background: rgba(255,255,255,0.9);
+      transform: translateY(-2px);
+    }
 
-    /* Footer */
-    footer {
-      height: 70px;
-      padding: 12px 20px;
-      background: rgba(0,0,0,0.7);
-      color: var(--text-muted);
-      font-size: 0.85rem;
+    .slider-dots {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      backdrop-filter: blur(10px);
-      position: fixed;
-      bottom: 0;
-      left: 0; right: 0;
+      gap: 0.4rem;
+    }
+
+    .slider-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #cbd5e1;
+      cursor: pointer;
+      transition: width 0.2s, background 0.2s;
+    }
+
+    .slider-dot.active {
+      width: 22px;
+      background: #0f172a;
+    }
+
+    /* CTA SECTION */
+
+    .cta-section {
+      padding: 2.8rem 1rem;
+      background: #f1f5f9;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #0f172a;
+    }
+
+    .store-buttons img {
+      height: 50px;
+      margin: 0.5rem;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid #cbd5e1;
+      background: #f8fafc;
+      padding: 1.4rem 1rem;
+      font-size: 0.82rem;
+      text-align: center;
+      color: #64748b;
     }
 
     footer a {
-      color: var(--text-muted);
-      text-decoration: none;
+      color: #475569;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
-
-    footer a:hover { text-decoration: underline; }
 
   </style>
 </head>
+
 <body>
 
-<div class="slider-wrapper">
-  <div class="slider" id="slider">
-
-    <section class="slide slide--1">
-      <h1>Zie je risico, voordat het jou vindt</h1>
-      <a href="sub-ziejerisico.html" class="more">meer →</a>
-    </section>
-
-    <section class="slide slide--2">
-      <h1>Hoe het werkt</h1>
-      <a href="sub-hoe.html" class="more">meer →</a>
-    </section>
-
-    <section class="slide slide--3">
-      <h1>Waarom mensen MyRiskScout gebruiken</h1>
-      <a href="sub-waarom.html" class="more">meer →</a>
-    </section>
-
-    <section class="slide slide--4">
-      <h1>Hoe we risicocijfers berekenen</h1>
-      <a href="sub-model.html" class="more">meer →</a>
-    </section>
-
-    <section class="slide slide--5">
-      <h1>Privacy & controle</h1>
-      <a href="sub-privacy.html" class="more">meer →</a>
-    </section>
-
+  <!-- BRAND BADGE (NEU) -->
+  <div class="brand-badge">
+    <img src="assets/myriskscout-logo.png" alt="MyRiskScout Logo">
   </div>
 
-  <button class="arrow-btn" id="prevBtn">&#x2039;</button>
-  <button class="arrow-btn" id="nextBtn">&#x203A;</button>
-</div>
+  <!-- SLIDER -->
+  <section class="slider" id="slider">
+    <div class="slides" id="slides">
 
-<footer>
-  <div>Contact: <a href="mailto:hello@myriskscout.com">hello@myriskscout.com</a></div>
-  <div>
-    <a href="#">Privacybeleid</a> ·
-    <a href="#">Gebruiksvoorwaarden</a>
-  </div>
-</footer>
+      <article class="slide slide--overview">
+        <div class="slide-bg"></div>
+        <div class="slide-overlay"></div>
+        <h1 class="slide-title">Zie je risico, voordat het jou vindt.</h1>
+      </article>
 
-<script>
-  const slider = document.getElementById("slider");
-  const total = slider.children.length;
-  let index = 0;
+      <article class="slide slide--how">
+        <div class="slide-bg"></div>
+        <div class="slide-overlay"></div>
+        <h1 class="slide-title">Hoe het werkt.</h1>
+      </article>
 
-  function go(i) {
-    if (i < 0) i = 0;
-    if (i >= total) i = total - 1;
-    index = i;
-    slider.style.transform = `translateX(-${index * 100}%)`;
-  }
+      <article class="slide slide--why">
+        <div class="slide-bg"></div>
+        <div class="slide-overlay"></div>
+        <h1 class="slide-title">Waarom mensen MyRiskScout gebruiken.</h1>
+      </article>
 
-  document.getElementById("prevBtn").onclick = () => go(index - 1);
-  document.getElementById("nextBtn").onclick = () => go(index + 1);
+      <article class="slide slide--data">
+        <div class="slide-bg"></div>
+        <div class="slide-overlay"></div>
+        <h1 class="slide-title">Hoe we risicocijfers berekenen.</h1>
+      </article>
 
-  // Touch swipe
-  let startX = 0;
-  slider.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-  slider.addEventListener("touchend", e => {
-    let delta = e.changedTouches[0].clientX - startX;
-    if (delta > 50) go(index - 1);
-    if (delta < -50) go(index + 1);
-  });
-</script>
+      <article class="slide slide--privacy">
+        <div class="slide-bg"></div>
+        <div class="slide-overlay"></div>
+        <h1 class="slide-title">Privacy & controle.</h1>
+      </article>
+
+    </div>
+
+    <div class="slider-controls">
+      <button class="slider-arrow" id="prevBtn">‹</button>
+      <div class="slider-dots" id="sliderDots"></div>
+      <button class="slider-arrow" id="nextBtn">›</button>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <h2 class="cta-title">Download MyRiskScout</h2>
+
+    <div class="store-buttons">
+      <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077">
+        <img src="assets/app_store_badge.png" />
+      </a>
+      <a href="#">
+        <img src="assets/google-play-badge.png" />
+      </a>
+    </div>
+
+    <p style="margin-top:1rem;">Of neem contact op:</p>
+    <a href="contact.html" class="btn-primary" style="
+      margin-top:0.5rem;
+      padding:0.7rem 1.4rem;
+      border-radius:999px;
+      background:#0f172a;
+      color:white;
+      display:inline-block;
+    ">Contact</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © <span id="year"></span> MyRiskScout B.V. · 
+    <a href="privacy.html">Privacybeleid</a> · 
+    <a href="terms.html">Gebruiksvoorwaarden</a>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const slides = document.querySelectorAll(".slide");
+    const slidesContainer = document.getElementById("slides");
+    const dotsContainer = document.getElementById("sliderDots");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const slider = document.getElementById("slider");
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement("div");
+      dot.className = "slider-dot" + (i === 0 ? " active" : "");
+      dot.dataset.index = i;
+      dotsContainer.appendChild(dot);
+    }
+    const dots = document.querySelectorAll(".slider-dot");
+
+    function goToSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      currentSlide = index;
+      slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d,i)=>d.classList.toggle("active", i===index));
+    }
+
+    prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener("click", () => goToSlide(currentSlide + 1));
+    dots.forEach(dot => dot.addEventListener("click", () => goToSlide(parseInt(dot.dataset.index))));
+
+    // Swipe
+    let startX = 0;
+    slider.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, { passive:true });
+    slider.addEventListener("touchend", e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff > 50) goToSlide(currentSlide - 1);
+      if (diff < -50) goToSlide(currentSlide + 1);
+    });
+  </script>
 
 </body>
 </html>
-
