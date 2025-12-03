@@ -52,7 +52,7 @@
       background-repeat: no-repeat;
     }
 
-    /* leichte, transparente Abdunkelung, damit Bild sichtbar bleibt */
+    /* Hintergrund-Overlay */
     .slide::before {
       content: "";
       position: absolute;
@@ -80,12 +80,12 @@
       text-align: center;
     }
 
-    /* HINTERGRUND-BILDER – Pfade ggf. anpassen */
-    .slide--1 { background-image: url("hero-bike.jpg"); }
-    .slide--2 { background-image: url("hero-heatmap.jpg"); }
-    .slide--3 { background-image: url("hero-why.jpg"); }
-    .slide--4 { background-image: url("hero-ml.jpg"); }
-    .slide--5 { background-image: url("hero-privacy.jpg"); }
+    /* Hintergrundbilder jetzt aus /assets/ */
+    .slide--1 { background-image: url("assets/hero-bike.jpg"); }
+    .slide--2 { background-image: url("assets/hero-heatmap.jpg"); }
+    .slide--3 { background-image: url("assets/hero-why.jpg"); }
+    .slide--4 { background-image: url("assets/hero-ml.jpg"); }
+    .slide--5 { background-image: url("assets/hero-privacy.jpg"); }
 
     /* Navigation arrows */
     .arrow-btn {
@@ -132,6 +132,7 @@
     }
 
     footer a:hover { text-decoration: underline; }
+
   </style>
 </head>
 <body>
