@@ -4,170 +4,52 @@
   <meta charset="UTF-8" />
   <title>MyRiskScout – Zie je risico voordat het jou vindt</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="MyRiskScout laat je in één oogopslag zien hoe het risiconiveau per buurt is – aangedreven door AI en echte data."
-  />
 
   <style>
     :root {
-      --bg-dark: #020617;
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
-      --accent-gradient: linear-gradient(135deg, #00c853, #ffca28, #ff5252);
+      --text-main: #0f172a;
+      --text-sub: #334155;
       --max-width: 1120px;
+      --gradient-light: radial-gradient(circle at top left, #ffffff, #f1f5f9);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
-      background: radial-gradient(circle at top left, #020617, #020314);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: #f8fafc;
       color: var(--text-main);
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .container {
-      width: 100%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* HEADER */
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      backdrop-filter: blur(18px);
-      background: rgba(3, 7, 18, 0.9);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
-    }
-
-    .site-header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.7rem 0;
-    }
-
-    .brand-logo {
-      height: 32px;
-      width: auto;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.1rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .nav-links a {
-      position: relative;
-      padding-bottom: 0.15rem;
-      cursor: pointer;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--accent-gradient);
-      transition: width 0.2s ease;
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-
-    .header-cta {
-      padding: 0.4rem 1.1rem;
-      border-radius: 999px;
-      background: var(--accent-gradient);
-      color: #020617;
-      font-size: 0.8rem;
-      font-weight: 500;
-      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.5);
-      white-space: nowrap;
-    }
-
-    /* GENERIC BUTTON */
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.65rem 1.4rem;
-      border-radius: 999px;
-      background: var(--accent-gradient);
-      color: #020617;
-      font-size: 0.85rem;
-      font-weight: 500;
-      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.5);
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.03);
-      box-shadow: 0 16px 40px rgba(34, 197, 94, 0.7);
-    }
-
-    /* SLIDER */
+    /* --- SLIDER --- */
 
     .slider {
       position: relative;
       width: 100%;
       overflow: hidden;
-      background: #020617;
     }
 
     .slides {
       display: flex;
       transition: transform 0.6s ease;
-      will-change: transform;
     }
 
     .slide {
       position: relative;
       width: 100%;
-      min-height: calc(100vh - 64px); /* ungefähr Headerhöhe */
-      color: #fff;
-      overflow: hidden;
+      min-height: 90vh;
       flex-shrink: 0;
-      isolation: isolate;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-main);
     }
 
     .slide-bg {
@@ -175,547 +57,276 @@
       inset: 0;
       background-size: cover;
       background-position: center;
-      transform: scale(1.04);
-      filter: saturate(1.1);
+      filter: brightness(1.22) saturate(1.05);
+      opacity: 0.45;
       z-index: -2;
     }
 
     .slide-overlay {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(15,23,42,0.3), transparent 55%),
-        radial-gradient(circle at 80% 90%, rgba(15,23,42,0.6), transparent 60%),
-        linear-gradient(to bottom, rgba(15,23,42,0.8), rgba(15,23,42,0.92));
+      background: var(--gradient-light);
+      opacity: 0.7;
       z-index: -1;
     }
 
-    .slide-inner {
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-
-    .slide-content {
-      padding: 2.5rem 0;
-      max-width: 480px;
-    }
-
-    .slide-label {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-      color: var(--text-muted);
-      margin-bottom: 0.6rem;
-    }
-
     .slide-title {
-      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
       font-weight: 700;
-      line-height: 1.05;
-      margin-bottom: 0.7rem;
+      line-height: 1.1;
+      max-width: 900px;
     }
 
-    .slide-subtitle {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    .slide-actions {
-      display: flex;
-      gap: 0.9rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .slide-link {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: rgba(148,163,184,0.7);
-    }
-
-    /* Hintergrund-Bilder je Topic */
-
+    /* --- BACKGROUNDS --- */
     .slide--overview .slide-bg {
       background-image: url("assets/hero-bike-night.jpg");
     }
-
     .slide--how .slide-bg {
-      /* Karte mit Heatmap per buurt */
       background-image: url("assets/hero-heatmap.jpg");
     }
-
     .slide--why .slide-bg {
-      /* Hand mit telefoon + kaart, huizen & fietsen */
       background-image: url("assets/hero-why.jpg");
     }
-
     .slide--data .slide-bg {
-      /* Millionen data + Random Forest / ML */
       background-image: url("assets/hero-ml.jpg");
     }
-
     .slide--privacy .slide-bg {
-      /* Daten-Schutz: Schild/lock etc. */
       background-image: url("assets/hero-privacy.jpg");
     }
 
-    /* SLIDER CONTROLS */
+    /* --- CONTROLS --- */
 
     .slider-controls {
       position: absolute;
-      inset-inline: 0;
-      bottom: 1.5rem;
+      bottom: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 1.2rem;
-      pointer-events: none; /* Pfeile selbst bekommen pointer-events zurück */
+      gap: 1rem;
+      z-index: 10;
     }
 
     .slider-arrow {
-      width: 34px;
-      height: 34px;
+      width: 40px;
+      height: 40px;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      background: rgba(15,23,42,0.85);
-      display: inline-flex;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      pointer-events: auto;
-      font-size: 1.1rem;
-      color: #e5e7eb;
-      backdrop-filter: blur(10px);
-      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      font-size: 1.4rem;
+      color: #475569;
+      transition: 0.2s ease;
     }
 
     .slider-arrow:hover {
-      transform: translateY(-1px);
-      background: rgba(15,23,42,0.98);
-      box-shadow: 0 10px 24px rgba(15,23,42,0.9);
+      background: rgba(255,255,255,0.9);
+      transform: translateY(-2px);
     }
 
     .slider-dots {
       display: flex;
-      gap: 0.45rem;
-      pointer-events: auto;
+      gap: 0.4rem;
     }
 
     .slider-dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 999px;
-      background: rgba(148,163,184,0.6);
+      background: #cbd5e1;
       cursor: pointer;
-      transition: width 0.2s ease, background 0.2s ease;
+      transition: width 0.2s, background 0.2s;
     }
 
     .slider-dot.active {
-      width: 18px;
-      background: var(--accent-gradient);
+      width: 22px;
+      background: #0f172a;
     }
 
-    /* DOWNLOAD + CONTACT SECTION */
+    /* --- CTA SECTION --- */
 
     .cta-section {
-      padding: 2.8rem 0 2.4rem;
-      background: radial-gradient(circle at top, #020617, #020314);
-    }
-
-    .cta-inner {
+      padding: 2.8rem 1rem;
+      background: #f1f5f9;
       text-align: center;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .cta-kicker {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 0.3rem;
     }
 
     .cta-title {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 600;
-      margin-bottom: 0.4rem;
+      margin-bottom: 1rem;
+      color: #0f172a;
     }
 
-    .cta-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1.4rem;
+    .store-buttons img {
+      height: 50px;
+      margin: 0.5rem;
     }
 
-    .store-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.9rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .store-badge {
-      height: 46px;
-      width: auto;
-      display: block;
-      transition: transform 0.2s ease, filter 0.2s ease;
-    }
-
-    .store-badge:hover {
-      transform: translateY(-2px) scale(1.02);
-      filter: brightness(1.05);
-    }
-
-    .contact-box {
-      margin-top: 0.5rem;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.7rem;
-    }
-
-    /* FOOTER */
-
+    /* --- FOOTER --- */
     footer {
-      border-top: 1px solid rgba(148, 163, 184, 0.25);
-      background: #020617;
-      padding: 1.4rem 0 1.8rem;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: auto;
+      border-top: 1px solid #cbd5e1;
+      background: #f8fafc;
+      padding: 1.4rem 1rem;
+      font-size: 0.82rem;
+      text-align: center;
+      color: #64748b;
     }
 
-    .footer-inner {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-links a {
+    footer a {
+      color: #475569;
       text-decoration: underline;
       text-underline-offset: 3px;
-      text-decoration-color: rgba(148,163,184,0.7);
     }
 
-    /* RESPONSIVE */
-
-    @media (max-width: 880px) {
-      .site-header-inner {
-        flex-wrap: wrap;
-      }
-      .nav-links {
-        font-size: 0.8rem;
-      }
-      .slide-content {
-        max-width: 420px;
-      }
-      .slide-title {
-        font-size: 2rem;
-      }
-    }
-
+    /* --- MOBILE SWIPE --- */
     @media (max-width: 640px) {
-      .site-header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .header-cta {
-        align-self: flex-start;
-      }
-
       .slide {
-        min-height: calc(100vh - 72px);
+        padding: 1.6rem;
+        min-height: 88vh;
       }
-
-      .slide-content {
-        padding: 2.2rem 0 2.8rem;
-      }
-
       .slide-title {
-        font-size: 1.8rem;
-      }
-
-      .slider-controls {
-        gap: 0.8rem;
+        font-size: 1.9rem;
       }
     }
   </style>
 </head>
+
 <body>
-  <div class="page">
-    <!-- HEADER -->
-    <header class="site-header">
-      <div class="container site-header-inner">
-        <div class="brand">
-          <img src="assets/logo-full.png" alt="MyRiskScout – Powered by AI" class="brand-logo" />
-        </div>
 
-        <nav class="nav-links" id="top-nav">
-          <a data-slide="0" class="active">Overzicht</a>
-          <a data-slide="1">Hoe het werkt</a>
-          <a data-slide="2">Waarom MyRiskScout</a>
-          <a data-slide="3">Risicocijfers</a>
-          <a data-slide="4">Privacy</a>
-        </nav>
+  <!-- SLIDER -->
+  <section class="slider" id="slider">
+    <div class="slides" id="slides">
 
-        <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077" class="header-cta">Download app</a>
-      </div>
-    </header>
+      <!-- 1 -->
+      <article class="slide slide--overview">
+        <div class="slide-bg"></div>
+        <div class="slide-overlay"></div>
+        <h1 class="slide-title">Zie je risico, voordat het jou vindt.</h1>
+      </article>
 
-    <!-- SLIDER -->
-    <section class="slider" id="slider">
-      <div class="slides" id="slides">
-        <!-- Slide 1: Zie je risico, voordat het jou vindt -->
-        <article class="slide slide--overview">
-          <div class="slide-bg"></div>
-          <div class="slide-overlay"></div>
-          <div class="container slide-inner">
-            <div class="slide-content">
-              <p class="slide-label">MyRiskScout</p>
-              <h1 class="slide-title">Zie je risico, voordat het jou vindt.</h1>
-              <p class="slide-subtitle">
-                Een visuele, data-gedreven kaart die laat zien hoe het risiconiveau per buurt is – nu eerst voor inbraak en fietsdiefstal in alle buurten van Amsterdam.
-              </p>
-              <div class="slide-actions">
-                <a href="overview.html" class="btn-primary">Meer over de app</a>
-                <a href="overview.html" class="slide-link">Screenshots &amp; uitleg</a>
-              </div>
-            </div>
-          </div>
-        </article>
+      <!-- 2 -->
+      <article class="slide slide--how">
+        <div class="slide-bg"></div>
+        <div class="slide-overlay"></div>
+        <h1 class="slide-title">Hoe het werkt.</h1>
+      </article>
 
-        <!-- Slide 2: Hoe het werkt -->
-        <article class="slide slide--how">
-          <div class="slide-bg"></div>
-          <div class="slide-overlay"></div>
-          <div class="container slide-inner">
-            <div class="slide-content">
-              <p class="slide-label">Hoe het werkt</p>
-              <h2 class="slide-title">Van kaart naar concrete inzichten.</h2>
-              <p class="slide-subtitle">
-                Een eenvoudige kaartlaag met kleuren per buurt, gekoppeld aan alerts wanneer je een gebied met hoger risico binnenkomt.
-              </p>
-              <div class="slide-actions">
-                <a href="how-it-works.html" class="btn-primary">Lees hoe het werkt</a>
-                <a href="how-it-works.html" class="slide-link">Gebruiksscenario’s</a>
-              </div>
-            </div>
-          </div>
-        </article>
+      <!-- 3 -->
+      <article class="slide slide--why">
+        <div class="slide-bg"></div>
+        <div class="slide-overlay"></div>
+        <h1 class="slide-title">Waarom mensen MyRiskScout gebruiken.</h1>
+      </article>
 
-        <!-- Slide 3: Waarom mensen MyRiskScout gebruiken -->
-        <article class="slide slide--why">
-          <div class="slide-bg"></div>
-          <div class="slide-overlay"></div>
-          <div class="container slide-inner">
-            <div class="slide-content">
-              <p class="slide-label">Waarom MyRiskScout</p>
-              <h2 class="slide-title">Ontworpen voor het dagelijks leven.</h2>
-              <p class="slide-subtitle">
-                Bewoners, pendelaars, studenten, expats en mensen die verzekeringen overwegen – allemaal willen ze beter begrijpen waar het risico hoger of lager ligt.
-              </p>
-              <div class="slide-actions">
-                <a href="why.html" class="btn-primary">Waarom mensen het gebruiken</a>
-                <a href="why.html" class="slide-link">Voorbeelden per doelgroep</a>
-              </div>
-            </div>
-          </div>
-        </article>
+      <!-- 4 -->
+      <article class="slide slide--data">
+        <div class="slide-bg"></div>
+        <div class="slide-overlay"></div>
+        <h1 class="slide-title">Hoe we risicocijfers berekenen.</h1>
+      </article>
 
-        <!-- Slide 4: Hoe we risicocijfers berekenen -->
-        <article class="slide slide--data">
-          <div class="slide-bg"></div>
-          <div class="slide-overlay"></div>
-          <div class="container slide-inner">
-            <div class="slide-content">
-              <p class="slide-label">AI &amp; data</p>
-              <h2 class="slide-title">Hoe we risicocijfers berekenen.</h2>
-              <p class="slide-subtitle">
-                Modellen die miljoenen misdrijfregistraties combineren met omgevingskenmerken – met uitlegbare risicoscores van 0–100 per buurt.
-              </p>
-              <div class="slide-actions">
-                <a href="data.html" class="btn-primary">Meer over de methode</a>
-                <a href="data.html" class="slide-link">AI, features &amp; Random Forest</a>
-              </div>
-            </div>
-          </div>
-        </article>
+      <!-- 5 -->
+      <article class="slide slide--privacy">
+        <div class="slide-bg"></div>
+        <div class="slide-overlay"></div>
+        <h1 class="slide-title">Privacy & controle.</h1>
+      </article>
 
-        <!-- Slide 5: Privacy & controle -->
-        <article class="slide slide--privacy">
-          <div class="slide-bg"></div>
-          <div class="slide-overlay"></div>
-          <div class="container slide-inner">
-            <div class="slide-content">
-              <p class="slide-label">Privacy &amp; controle</p>
-              <h2 class="slide-title">Je data blijft van jou.</h2>
-              <p class="slide-subtitle">
-                Ontworpen om bewustzijn te vergroten, niet om mensen te volgen. Jij bepaalt of en hoe locatie wordt gebruikt – helder uitgelegd in de app.
-              </p>
-              <div class="slide-actions">
-                <a href="privacy.html" class="btn-primary">Meer over privacy</a>
-                <a href="privacy.html" class="slide-link">Privacybeleid &amp; instellingen</a>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
+    </div>
 
-      <!-- Slider Controls -->
-      <div class="slider-controls">
-        <button class="slider-arrow" id="prevBtn" aria-label="Vorige">
-          ‹
-        </button>
-        <div class="slider-dots" id="sliderDots"></div>
-        <button class="slider-arrow" id="nextBtn" aria-label="Volgende">
-          ›
-        </button>
-      </div>
-    </section>
+    <!-- Controls -->
+    <div class="slider-controls">
+      <button class="slider-arrow" id="prevBtn">‹</button>
+      <div class="slider-dots" id="sliderDots"></div>
+      <button class="slider-arrow" id="nextBtn">›</button>
+    </div>
+  </section>
 
-    <!-- DOWNLOAD + CONTACT -->
-    <section class="cta-section">
-      <div class="container">
-        <div class="cta-inner">
-          <p class="cta-kicker">Download</p>
-          <h2 class="cta-title">Probeer MyRiskScout in Amsterdam.</h2>
-          <p class="cta-subtitle">
-            Beschikbaar voor iOS en Android. Start met het verkennen van het risiconiveau in alle buurten van Amsterdam – andere regio’s volgen stap voor stap.
-          </p>
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <h2 class="cta-title">Download MyRiskScout</h2>
 
-          <div class="store-buttons">
-            <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077" target="_blank" rel="noopener">
-              <img src="assets/app_store_badge.png" alt="Download in de App Store" class="store-badge" />
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.myriskscout" target="_blank" rel="noopener">
-              <img src="assets/google-play-badge.png" alt="Ontdek het op Google Play" class="store-badge" />
-            </a>
-          </div>
+    <div class="store-buttons">
+      <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077">
+        <img src="assets/app_store_badge.png" />
+      </a>
+      <a href="#">
+        <img src="assets/google-play-badge.png" />
+      </a>
+    </div>
 
-          <div class="contact-box" id="contact">
-            <p class="cta-subtitle">
-              Ideeën, feedback of interesse in een samenwerking?
-            </p>
-            <a href="contact.html" class="btn-primary">Neem contact op</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <p style="margin-top:1rem;">Of neem contact op:</p>
+    <a href="contact.html" class="btn-primary" style="
+      margin-top:0.5rem;
+      padding:0.7rem 1.4rem;
+      border-radius:999px;
+      background:#0f172a;
+      color:white;
+      display:inline-block;
+    ">Contact</a>
+  </section>
 
-    <!-- FOOTER -->
-    <footer>
-      <div class="container footer-inner">
-        <div>© <span id="year"></span> MyRiskScout B.V. · Amsterdam, Nederland</div>
-        <div class="footer-links">
-          <a href="privacy.html">Privacybeleid</a>
-          <a href="terms.html">Gebruiksvoorwaarden</a>
-        </div>
-      </div>
-      <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
+  <!-- FOOTER -->
+  <footer>
+    © <span id="year"></span> MyRiskScout B.V. · 
+    <a href="privacy.html">Privacybeleid</a> · 
+    <a href="terms.html">Gebruiksvoorwaarden</a>
+  </footer>
 
-        const slides = document.querySelectorAll(".slide");
-        const slidesContainer = document.getElementById("slides");
-        const dotsContainer = document.getElementById("sliderDots");
-        const navLinks = document.querySelectorAll(".nav-links a");
-        const prevBtn = document.getElementById("prevBtn");
-        const nextBtn = document.getElementById("nextBtn");
-        const slider = document.getElementById("slider");
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-        let currentSlide = 0;
-        const totalSlides = slides.length;
+    const slides = document.querySelectorAll(".slide");
+    const slidesContainer = document.getElementById("slides");
+    const dotsContainer = document.getElementById("sliderDots");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
 
-        // Dots erstellen
-        for (let i = 0; i < totalSlides; i++) {
-          const dot = document.createElement("div");
-          dot.className = "slider-dot" + (i === 0 ? " active" : "");
-          dot.dataset.index = i;
-          dotsContainer.appendChild(dot);
-        }
-        const dots = document.querySelectorAll(".slider-dot");
+    let currentSlide = 0;
+    const totalSlides = slides.length;
 
-        function goToSlide(index) {
-          if (index < 0) index = 0;
-          if (index > totalSlides - 1) index = totalSlides - 1;
-          currentSlide = index;
-          slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+    // Dots erzeugen
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement("div");
+      dot.className = "slider-dot" + (i === 0 ? " active" : "");
+      dot.dataset.index = i;
+      dotsContainer.appendChild(dot);
+    }
+    const dots = document.querySelectorAll(".slider-dot");
 
-          dots.forEach((d, i) => {
-            d.classList.toggle("active", i === index);
-          });
-          navLinks.forEach((link, i) => {
-            link.classList.toggle("active", i === index);
-          });
-        }
+    function goToSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      currentSlide = index;
+      slidesContainer.style.transform = `translateX(-${index * 100}%)`;
 
-        prevBtn.addEventListener("click", () => {
-          goToSlide(currentSlide - 1);
-        });
+      dots.forEach((d,i)=>d.classList.toggle("active", i===index));
+    }
 
-        nextBtn.addEventListener("click", () => {
-          goToSlide(currentSlide + 1);
-        });
+    prevBtn.addEventListener("click", ()=> goToSlide(currentSlide - 1));
+    nextBtn.addEventListener("click", ()=> goToSlide(currentSlide + 1));
 
-        dots.forEach(dot => {
-          dot.addEventListener("click", () => {
-            const idx = parseInt(dot.dataset.index, 10);
-            goToSlide(idx);
-          });
-        });
+    dots.forEach(dot => {
+      dot.addEventListener("click", () => goToSlide(parseInt(dot.dataset.index)));
+    });
 
-        navLinks.forEach(link => {
-          link.addEventListener("click", (e) => {
-            e.preventDefault();
-            const idx = parseInt(link.dataset.slide, 10);
-            if (!Number.isNaN(idx)) {
-              goToSlide(idx);
-            }
-          });
-        });
+    /* Mobile Swipe */
+    let startX = 0;
+    slider.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
 
-        // Swipe / Touch für Mobile
-        let startX = 0;
-        let isDragging = false;
+    slider.addEventListener("touchend", e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff > 50) goToSlide(currentSlide - 1);
+      if (diff < -50) goToSlide(currentSlide + 1);
+    });
+  </script>
 
-        slider.addEventListener("touchstart", (e) => {
-          if (e.touches.length !== 1) return;
-          startX = e.touches[0].clientX;
-          isDragging = true;
-        }, { passive: true });
-
-        slider.addEventListener("touchend", (e) => {
-          if (!isDragging) return;
-          const endX = e.changedTouches[0].clientX;
-          const diffX = endX - startX;
-          const threshold = 50; // Mindestweg in px
-          if (Math.abs(diffX) > threshold) {
-            if (diffX < 0) {
-              goToSlide(currentSlide + 1); // nach links wischen
-            } else {
-              goToSlide(currentSlide - 1); // nach rechts wischen
-            }
-          }
-          isDragging = false;
-        });
-
-      </script>
-    </footer>
-  </div>
 </body>
 </html>
