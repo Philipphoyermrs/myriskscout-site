@@ -8,7 +8,6 @@
     :root {
       --text-main: #ffffff;
       --text-muted: #d1d5db;
-      --overlay: rgba(0,0,0,0.45);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,7 +23,7 @@
 
     .slider-wrapper {
       width: 100%;
-      height: calc(100svh - 70px);
+      height: calc(100svh - 70px); /* Platz für Footer */
       overflow: hidden;
       position: relative;
     }
@@ -53,14 +52,17 @@
       background-repeat: no-repeat;
     }
 
-    .overlay {
+    /* leichte, transparente Abdunkelung, damit Bild sichtbar bleibt */
+    .slide::before {
+      content: "";
       position: absolute;
       inset: 0;
-      background: var(--overlay);
+      background: radial-gradient(circle at 50% 20%, rgba(0,0,0,0.2), rgba(0,0,0,0.55));
       z-index: 1;
     }
 
     h1 {
+      position: relative;
       z-index: 2;
       font-size: clamp(1.8rem, 6vw, 2.6rem);
       max-width: 90%;
@@ -70,6 +72,7 @@
     }
 
     a.more {
+      position: relative;
       z-index: 2;
       font-size: 1.1rem;
       color: var(--text-muted);
@@ -77,7 +80,7 @@
       text-align: center;
     }
 
-    /* Background images */
+    /* HINTERGRUND-BILDER – Pfade ggf. anpassen */
     .slide--1 { background-image: url("hero-bike.jpg"); }
     .slide--2 { background-image: url("hero-heatmap.jpg"); }
     .slide--3 { background-image: url("hero-why.jpg"); }
@@ -111,7 +114,7 @@
     footer {
       height: 70px;
       padding: 12px 20px;
-      background: rgba(0,0,0,0.55);
+      background: rgba(0,0,0,0.7);
       color: var(--text-muted);
       font-size: 0.85rem;
       display: flex;
@@ -129,7 +132,6 @@
     }
 
     footer a:hover { text-decoration: underline; }
-
   </style>
 </head>
 <body>
@@ -138,31 +140,26 @@
   <div class="slider" id="slider">
 
     <section class="slide slide--1">
-      <div class="overlay"></div>
       <h1>Zie je risico, voordat het jou vindt</h1>
       <a href="sub-ziejerisico.html" class="more">meer →</a>
     </section>
 
     <section class="slide slide--2">
-      <div class="overlay"></div>
       <h1>Hoe het werkt</h1>
       <a href="sub-hoe.html" class="more">meer →</a>
     </section>
 
     <section class="slide slide--3">
-      <div class="overlay"></div>
       <h1>Waarom mensen MyRiskScout gebruiken</h1>
       <a href="sub-waarom.html" class="more">meer →</a>
     </section>
 
     <section class="slide slide--4">
-      <div class="overlay"></div>
       <h1>Hoe we risicocijfers berekenen</h1>
       <a href="sub-model.html" class="more">meer →</a>
     </section>
 
     <section class="slide slide--5">
-      <div class="overlay"></div>
       <h1>Privacy & controle</h1>
       <a href="sub-privacy.html" class="more">meer →</a>
     </section>
