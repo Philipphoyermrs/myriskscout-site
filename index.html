@@ -135,6 +135,29 @@
       box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
     }
 
+    /* Reusable primary button (für Kontaktformular-Button) */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.7rem;
+      border-radius: 999px;
+      background: var(--accent-gradient);
+      color: #020617;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 16px 40px rgba(34, 197, 94, 0.55);
+    }
+
     /* HERO */
 
     .hero {
@@ -279,19 +302,25 @@
       animation-delay: 0.8s;
     }
 
+    /* Basis-Frame-Größe (kleineres Device) */
     .phone-frame {
       position: relative;
       background: #000;
       border-radius: 24px;
-      padding: 0.2rem;                 /* schlanker Rand */
+      padding: 0.2rem;
       border: 1px solid rgba(255,255,255,0.14);
       box-shadow:
         0 0 0 1px rgba(255,255,255,0.04),
         0 10px 26px rgba(0,0,0,0.55);
-      max-width: 300px;                 /* beide Devices exakt gleich */
+      max-width: 270px;
       width: 100%;
       margin-bottom: 0.45rem;
       transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    /* Heatmap-Device größer machen */
+    .phone-with-pill.primary .phone-frame {
+      max-width: 310px;
     }
 
     @media (hover:hover) and (pointer:fine) {
@@ -338,7 +367,7 @@
       box-shadow: 0 8px 20px rgba(15,23,42,0.65);
       transform: translateY(0);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
-      margin-top: 0.1rem; /* direkt unter Device-Rand */
+      margin-top: 0.1rem;
     }
 
     .phone-with-pill:hover .hero-pill {
@@ -457,6 +486,11 @@
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
       gap: 1.25rem;
       align-items: flex-start;
+    }
+
+    /* Variante für einspaltige Box (Privacy) */
+    .section-band-single {
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .chip-gradient {
@@ -644,6 +678,7 @@
           <a href="#how-it-works">Hoe het werkt</a>
           <a href="#who">Voor wie</a>
           <a href="#data">AI &amp; data</a>
+          <a href="#privacy">Privacy</a>
           <a href="#download">Download</a>
           <a href="/contact.html">Contact</a>
         </nav>
@@ -710,6 +745,7 @@
           </div>
 
           <div class="hero-mockup-wrap" aria-hidden="true">
+            <!-- Größeres Device: Heatmap -->
             <div class="phone-with-pill primary">
               <div class="phone-frame">
                 <div class="phone-screen">
@@ -722,6 +758,7 @@
               </div>
             </div>
 
+            <!-- Kleineres Device: Risicodetails -->
             <div class="phone-with-pill secondary">
               <div class="phone-frame">
                 <div class="phone-screen">
@@ -895,50 +932,52 @@
         </div>
       </section>
 
-      <!-- PRIVACY -->
+      <!-- PRIVACY (jetzt auch in Box) -->
       <section id="privacy">
         <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">Privacy &amp; controle</div>
-            <h2 class="section-title">Je data blijft van jou</h2>
-            <p class="section-subtitle">
-              MyRiskScout is ontwikkeld om bewustzijn te vergroten zonder onnodige
-              gegevens te verzamelen. De focus ligt op het <strong>risiconiveau per
-              buurt</strong> – niet op het volgen van individuele personen.
-            </p>
-          </div>
-
-          <div class="grid-3">
-            <article class="card">
-              <h3 class="card-title">Optionele locatie op de achtergrond</h3>
-              <p class="card-text">
-                Alerts werken alleen als je locatie op de achtergrond inschakelt – en je
-                kunt dit op elk moment weer uitzetten. Zonder jouw toestemming volgen we
-                je bewegingen niet.
+          <div class="section-band section-band-single">
+            <div class="section-header">
+              <div class="section-kicker">Privacy &amp; controle</div>
+              <h2 class="section-title">Je data blijft van jou</h2>
+              <p class="section-subtitle">
+                MyRiskScout is ontwikkeld om bewustzijn te vergroten zonder onnodige
+                gegevens te verzamelen. De focus ligt op het <strong>risiconiveau per
+                buurt</strong> – niet op het volgen van individuele personen.
               </p>
-            </article>
+            </div>
 
-            <article class="card">
-              <h3 class="card-title">Zo min mogelijk persoonsgegevens</h3>
-              <p class="card-text">
-                Locatiegegevens worden alleen gebruikt om te bepalen in welke buurt je je
-                bevindt en of een alert relevant is. We slaan geen gedetailleerde
-                bewegingstrails op.
-              </p>
-            </article>
+            <div class="grid-3">
+              <article class="card">
+                <h3 class="card-title">Optionele locatie op de achtergrond</h3>
+                <p class="card-text">
+                  Alerts werken alleen als je locatie op de achtergrond inschakelt – en je
+                  kunt dit op elk moment weer uitzetten. Zonder jouw toestemming volgen we
+                  je bewegingen niet.
+                </p>
+              </article>
 
-            <article class="card">
-              <h3 class="card-title">Heldere uitleg bij risicocijfers</h3>
-              <p class="card-text">
-                Een hoger risicocijfer betekent niet dat er iets met jou persoonlijk zal
-                gebeuren – het beschrijft hoe een buurt zich statistisch verhoudt tot
-                andere buurten. MyRiskScout ondersteunt je eigen oordeel in plaats van het
-                te vervangen.
-                <br /><br />
-                Lees meer in ons
-                <a href="/privacy.html">volledige privacybeleid</a>.
-              </p>
-            </article>
+              <article class="card">
+                <h3 class="card-title">Zo min mogelijk persoonsgegevens</h3>
+                <p class="card-text">
+                  Locatiegegevens worden alleen gebruikt om te bepalen in welke buurt je je
+                  bevindt en of een alert relevant is. We slaan geen gedetailleerde
+                  bewegingstrails op.
+                </p>
+              </article>
+
+              <article class="card">
+                <h3 class="card-title">Heldere uitleg bij risicocijfers</h3>
+                <p class="card-text">
+                  Een hoger risicocijfer betekent niet dat er iets met jou persoonlijk zal
+                  gebeuren – het beschrijft hoe een buurt zich statistisch verhoudt tot
+                  andere buurten. MyRiskScout ondersteunt je eigen oordeel in plaats van het
+                  te vervangen.
+                  <br /><br />
+                  Lees meer in ons
+                  <a href="/privacy.html">volledige privacybeleid</a>.
+                </p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -985,7 +1024,7 @@
       <!-- CONTACT CTA -->
       <section id="contact" class="section-cta">
         <div class="container">
-          <div class="section-header" style="text-align:center; margin-bottom:1.8rem;">
+          <div class="section-header" style="text-align:center; margin-bottom:1.4rem;">
             <div class="section-kicker">Contact</div>
             <h2 class="section-title">Stel je vraag of deel een idee</h2>
             <p class="section-subtitle" style="margin:0 auto;">
@@ -994,7 +1033,8 @@
             </p>
           </div>
 
-          <a class="nav-cta" href="/contact.html">Open contactformulier</a>
+          <!-- Button wieder eingefügt, eigene Button-Klasse -->
+          <a class="btn-primary" href="/contact.html">Open contactformulier</a>
         </div>
       </section>
     </main>
@@ -1017,4 +1057,3 @@
   </div>
 </body>
 </html>
-
