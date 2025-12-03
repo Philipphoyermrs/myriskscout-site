@@ -216,11 +216,12 @@
 .hero-mockup-wrap {
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-start;   /* linksbündig zum Text */
   align-items: flex-start;
   gap: 1.5rem;
-  flex-wrap: nowrap;  /* verhindert Umbruch */
+  flex-wrap: nowrap;             /* verhindert Umbruch auf großen Screens */
 }
+
 
     .phone-frame {
       position: relative;
@@ -473,60 +474,63 @@
 
     /* RESPONSIVE */
 
-    @media (max-width: 880px) {
-      .hero {
-        padding-top: 2.4rem;
-      }
+@media (max-width: 880px) {
+  .hero {
+    padding-top: 2.4rem;
+  }
 
-      .hero-inner {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 2rem;
-      }
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
 
-      .hero-mockup-wrap {
-        justify-content: center;
-      }
+  .hero-mockup-wrap {
+    justify-content: center;  /* mittig */
+    flex-wrap: wrap;          /* jetzt darf umgebrochen werden */
+  }
 
-      .grid-3,
-      .grid-2 {
-        grid-template-columns: minmax(0, 1fr);
-      }
+  .grid-3,
+  .grid-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
 
-      .section-band {
-        grid-template-columns: minmax(0, 1fr);
-      }
+  .section-band {
+    grid-template-columns: minmax(0, 1fr);
+  }
 
-      .nav-links {
-        display: none;
-      }
+  .nav-links {
+    display: none;
+  }
 
-      .nav-cta {
-        display: inline-flex;
-      }
-    }
+  .nav-cta {
+    display: inline-flex;
+  }
+}
 
-    @media (max-width: 640px) {
-      .hero-title {
-        font-size: 2.1rem;
-      }
 
-      .hero-subtitle {
-        font-size: 0.95rem;
-      }
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 2.1rem;
+  }
 
-      .hero-mockup-wrap {
-        flex-direction: column;
-        align-items: center;
-      }
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
 
-      .phone-frame {
-        max-width: 260px;
-      }
+  .hero-mockup-wrap {
+    flex-direction: column;
+    align-items: center;
+  }
 
-      .store-badge {
-        height: 44px;
-      }
-    }
+  .phone-frame {
+    max-width: 260px;
+  }
+
+  .store-badge {
+    height: 44px;
+  }
+}
+
   </style>
 </head>
 
@@ -919,6 +923,7 @@
   </div>
 </body>
 </html>
+
 
 
 
