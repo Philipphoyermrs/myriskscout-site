@@ -52,15 +52,17 @@
       color: var(--text-main);
     }
 
-    .slide-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      filter: brightness(1.22) saturate(1.05);
-      opacity: 0.45;
-      z-index: -2;
-    }
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+  opacity: 1;
+  filter: none;
+}
+
 
     .slide-overlay {
       position: absolute;
@@ -330,3 +332,4 @@
 
 </body>
 </html>
+
