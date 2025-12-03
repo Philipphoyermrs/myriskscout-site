@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <title>MyRiskScout</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <style>
     :root {
       --text-main: #ffffff;
       --text-muted: #d1d5db;
-      --overlay: rgba(0, 0, 0, 0.45);
+      --overlay: rgba(0,0,0,0.45);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -16,16 +16,17 @@
     body {
       background: #000;
       font-family: system-ui, sans-serif;
-      height: 100vh;
+      height: 100svh;
       overflow: hidden;
       color: var(--text-main);
+      position: relative;
     }
 
     .slider-wrapper {
-      height: 100%;
       width: 100%;
-      position: relative;
+      height: calc(100svh - 70px);
       overflow: hidden;
+      position: relative;
     }
 
     .slider {
@@ -38,29 +39,30 @@
       min-width: 100%;
       height: 100%;
       position: relative;
-      padding: 120px 32px 0 32px;
+      padding: 100px 20px 0 20px;
 
-      /* ZENTRIERUNG */
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
+
       text-align: center;
 
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
     }
 
     .overlay {
       position: absolute;
       inset: 0;
       background: var(--overlay);
+      z-index: 1;
     }
 
     h1 {
-      position: relative;
       z-index: 2;
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
       max-width: 90%;
       line-height: 1.15;
       margin-bottom: 14px;
@@ -68,9 +70,8 @@
     }
 
     a.more {
-      position: relative;
       z-index: 2;
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: var(--text-muted);
       text-decoration: underline;
       text-align: center;
@@ -83,35 +84,33 @@
     .slide--4 { background-image: url("hero-ml.jpg"); }
     .slide--5 { background-image: url("hero-privacy.jpg"); }
 
-    /* swipe buttons */
+    /* Navigation arrows */
     .arrow-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.35);
       color: #fff;
       font-size: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      z-index: 20;
+      z-index: 30;
       backdrop-filter: blur(8px);
     }
 
-    #prevBtn { left: 12px; }
-    #nextBtn { right: 12px; }
+    #prevBtn { left: 10px; }
+    #nextBtn { right: 10px; }
 
     /* Footer */
     footer {
-      position: fixed;
-      bottom: 0;
-      left: 0; right: 0;
-      padding: 12px 18px;
+      height: 70px;
+      padding: 12px 20px;
       background: rgba(0,0,0,0.55);
       color: var(--text-muted);
       font-size: 0.85rem;
@@ -119,6 +118,9 @@
       justify-content: space-between;
       align-items: center;
       backdrop-filter: blur(10px);
+      position: fixed;
+      bottom: 0;
+      left: 0; right: 0;
     }
 
     footer a {
@@ -126,9 +128,8 @@
       text-decoration: none;
     }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
+    footer a:hover { text-decoration: underline; }
+
   </style>
 </head>
 <body>
@@ -136,35 +137,30 @@
 <div class="slider-wrapper">
   <div class="slider" id="slider">
 
-    <!-- Slide 1 -->
     <section class="slide slide--1">
       <div class="overlay"></div>
       <h1>Zie je risico, voordat het jou vindt</h1>
       <a href="sub-ziejerisico.html" class="more">meer →</a>
     </section>
 
-    <!-- Slide 2 -->
     <section class="slide slide--2">
       <div class="overlay"></div>
       <h1>Hoe het werkt</h1>
       <a href="sub-hoe.html" class="more">meer →</a>
     </section>
 
-    <!-- Slide 3 -->
     <section class="slide slide--3">
       <div class="overlay"></div>
       <h1>Waarom mensen MyRiskScout gebruiken</h1>
       <a href="sub-waarom.html" class="more">meer →</a>
     </section>
 
-    <!-- Slide 4 -->
     <section class="slide slide--4">
       <div class="overlay"></div>
       <h1>Hoe we risicocijfers berekenen</h1>
       <a href="sub-model.html" class="more">meer →</a>
     </section>
 
-    <!-- Slide 5 -->
     <section class="slide slide--5">
       <div class="overlay"></div>
       <h1>Privacy & controle</h1>
@@ -180,7 +176,7 @@
 <footer>
   <div>Contact: <a href="mailto:hello@myriskscout.com">hello@myriskscout.com</a></div>
   <div>
-    <a href="#">Privacybeleid</a> &nbsp;·&nbsp;
+    <a href="#">Privacybeleid</a> ·
     <a href="#">Gebruiksvoorwaarden</a>
   </div>
 </footer>
@@ -200,7 +196,7 @@
   document.getElementById("prevBtn").onclick = () => go(index - 1);
   document.getElementById("nextBtn").onclick = () => go(index + 1);
 
-  // Touch swipe support
+  // Touch swipe
   let startX = 0;
   slider.addEventListener("touchstart", e => startX = e.touches[0].clientX);
   slider.addEventListener("touchend", e => {
