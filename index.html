@@ -221,11 +221,11 @@
     }
 
     .phone-with-pill {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* wichtig für zentrierte Inhalte */
+}
 
     .phone-with-pill.secondary {
       margin-left: -1.6rem;
@@ -233,17 +233,16 @@
     }
 
     .phone-frame {
-      position: relative;
-      background: #020617;
-      border-radius: 36px;
-      padding: 0.85rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: var(--shadow-soft);
-      max-width: 320px;
-      width: 100%;
-      margin-bottom: 0.5rem;
-    }
-
+  position: relative;
+  background: #020617;
+  border-radius: 36px;
+  padding: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: var(--shadow-soft);
+  max-width: 320px;
+  width: 100%;
+  margin-bottom: 0.4rem;  /* enger an die Pill */
+}
     .phone-screen {
       overflow: hidden;
       border-radius: 30px;
@@ -265,18 +264,13 @@
       background-image: url("assets/risk-detail-screenshot.jpg");
     }
 
-    .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.24rem 0.9rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
+    
+.hero-pill {
+  width: 100%;                 /* jetzt gleich breit wie das Phone */
+  justify-content: center;     /* Text mittig */
+  padding: 0.26rem 1.1rem;     /* etwas mehr „Chip“-Feeling */
+  border-radius: 999px;
+}
 
     .hero-pill-dot {
       width: 8px;
@@ -930,3 +924,4 @@
   </div>
 </body>
 </html>
+
