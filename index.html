@@ -2,337 +2,705 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>MyRiskScout – Zie je risico voordat het jou vindt</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <title>MyRiskScout – Zie je risico, voordat het jou vindt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --text-main: #0f172a;
-      --text-sub: #334155;
-      --max-width: 1120px;
-      --gradient-light: radial-gradient(circle at top left, #ffffff, #f1f5f9);
+      --bg-dark: #020817;
+      --bg-darker: #000814;
+      --accent: #ff4b4b;
+      --accent-soft: #fbbf24;
+      --accent-safe: #22c55e;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      overflow: hidden; /* wir sliden horizontal, Footer ist fixed */
+    }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background: #f8fafc;
-      color: var(--text-main);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; }
+    /* Top Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      height: 64px;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(2, 8, 23, 0.95), rgba(2, 8, 23, 0.3));
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
 
-    /* --- SLIDER --- */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
 
-    .slider {
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #f97316, #ef4444 40%, #22c55e 90%);
+      box-shadow: 0 0 18px rgba(248, 113, 113, 0.55);
       position: relative;
-      width: 100%;
       overflow: hidden;
     }
 
-    .slides {
-      display: flex;
-      transition: transform 0.6s ease;
-    }
-
-    .slide {
-      position: relative;
-      width: 100%;
-      min-height: 90vh;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      color: var(--text-main);
-    }
-
-.slide-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -2;
-  opacity: 1;
-  filter: none;
-}
-
-
-    .slide-overlay {
+    .logo-mark::after {
+      content: "";
       position: absolute;
-      inset: 0;
-      background: var(--gradient-light);
-      opacity: 0.7;
-      z-index: -1;
+      inset: 6px;
+      border-radius: 999px;
+      border: 2px solid rgba(15, 23, 42, 0.8);
     }
 
-    .slide-title {
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.1;
-      max-width: 900px;
-    }
-
-    /* --- BACKGROUNDS --- */
-    .slide--overview .slide-bg {
-      background-image: url("assets/ChatGPT Image 3. Dez. 2025, 19_52_31.png
-");
-    }
-    .slide--how .slide-bg {
-      background-image: url("assets/hero-heatmap.jpg");
-    }
-    .slide--why .slide-bg {
-      background-image: url("assets/hero-why.jpg");
-    }
-    .slide--data .slide-bg {
-      background-image: url("assets/hero-ml.jpg");
-    }
-    .slide--privacy .slide-bg {
-      background-image: url("assets/hero-privacy.jpg");
-    }
-
-    /* --- CONTROLS --- */
-
-    .slider-controls {
-      position: absolute;
-      bottom: 1.8rem;
-      left: 50%;
-      transform: translateX(-50%);
+    nav {
       display: flex;
       align-items: center;
       gap: 1rem;
-      z-index: 10;
+      font-size: 0.85rem;
     }
 
-    .slider-arrow {
-      width: 40px;
-      height: 40px;
+    nav button {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.35rem 0.75rem;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.5);
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(10px);
       cursor: pointer;
+      transition: all 0.18s ease-out;
+      white-space: nowrap;
+    }
+
+    nav button:hover {
+      color: var(--text-main);
+      background: rgba(148, 163, 184, 0.15);
+    }
+
+    nav button.active {
+      color: var(--text-main);
+      background: rgba(248, 113, 113, 0.18);
+      border: 1px solid rgba(248, 113, 113, 0.7);
+    }
+
+    .nav-cta {
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #22c55e, #fbbf24);
+      color: #111827 !important;
+      font-weight: 600;
+      border: none;
+      box-shadow: 0 0 22px rgba(52, 211, 153, 0.45);
+    }
+
+    .nav-cta:hover {
+      filter: brightness(1.06);
+    }
+
+    /* Slider Layout */
+    .slider-wrapper {
+      position: relative;
+      flex: 1;
+      margin-top: 64px;   /* Höhe Header */
+      margin-bottom: 96px; /* Höhe Footer */
+      overflow: hidden;
+    }
+
+    .slider {
+      height: 100%;
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+      will-change: transform;
+      touch-action: pan-y;
+    }
+
+    .slide {
+      min-width: 100vw;
+      height: 100%;
+      position: relative;
+      padding: 96px clamp(1.5rem, 5vw, 4rem) 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
-      color: #475569;
-      transition: 0.2s ease;
+      overflow: hidden;
+      color: var(--text-main);
     }
 
-    .slider-arrow:hover {
-      background: rgba(255,255,255,0.9);
-      transform: translateY(-2px);
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 0%, rgba(248, 113, 113, 0.25), transparent 55%),
+                  radial-gradient(circle at 90% 100%, rgba(34, 197, 94, 0.2), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.7;
+      pointer-events: none;
     }
 
-    .slider-dots {
+    .slide-content {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+    }
+
+    .kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--accent-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    h1, h2 {
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      line-height: 1.1;
+      margin-bottom: 0.9rem;
+    }
+
+    p.lead {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .pill-row {
       display: flex;
-      gap: 0.4rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
     }
 
-    .slider-dot {
-      width: 9px;
-      height: 9px;
+    .pill {
+      padding: 0.25rem 0.7rem;
       border-radius: 999px;
-      background: #cbd5e1;
-      cursor: pointer;
-      transition: width 0.2s, background 0.2s;
+      font-size: 0.78rem;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-muted);
     }
 
-    .slider-dot.active {
-      width: 22px;
-      background: #0f172a;
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
     }
 
-    /* --- CTA SECTION --- */
-
-    .cta-section {
-      padding: 2.8rem 1rem;
-      background: #f1f5f9;
-      text-align: center;
-    }
-
-    .cta-title {
-      font-size: 1.6rem;
+    .btn-primary {
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      color: #f9fafb;
       font-weight: 600;
-      margin-bottom: 1rem;
-      color: #0f172a;
+      cursor: pointer;
+      font-size: 0.95rem;
+      box-shadow: 0 0 24px rgba(248, 113, 113, 0.55);
     }
 
-    .store-buttons img {
-      height: 50px;
-      margin: 0.5rem;
+    .btn-primary:hover {
+      filter: brightness(1.05);
     }
 
-    /* --- FOOTER --- */
+    .btn-ghost {
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.65);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(30, 64, 175, 0.45);
+      color: var(--text-main);
+    }
+
+    .meta-note {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Background images for each slide */
+    .slide--hero {
+      background: radial-gradient(circle at 10% 0%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)),
+                  url("hero-bike.jpg") center/cover no-repeat fixed;
+    }
+
+    .slide--how {
+      background: radial-gradient(circle at 15% 15%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.97)),
+                  url("hero-heatmap.jpg") center/cover no-repeat;
+    }
+
+    .slide--why {
+      background: radial-gradient(circle at 20% 0%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.97)),
+                  url("hero-why.jpg") center/cover no-repeat;
+    }
+
+    .slide--model {
+      background: radial-gradient(circle at 0% 20%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.97)),
+                  url("hero-ml.jpg") center/cover no-repeat;
+    }
+
+    .slide--privacy {
+      background: radial-gradient(circle at 20% 0%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98)),
+                  url("hero-privacy.jpg") center/cover no-repeat;
+    }
+
+    /* Slider controls */
+    .slider-controls {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0.7rem;
+      z-index: 5;
+    }
+
+    .arrow-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: radial-gradient(circle at 30% 0%, rgba(148, 163, 184, 0.18), rgba(15, 23, 42, 0.92));
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      pointer-events: auto;
+      font-size: 1.1rem;
+      transition: all 0.18s ease-out;
+    }
+
+    .arrow-btn:hover {
+      color: var(--text-main);
+      border-color: rgba(248, 113, 113, 0.7);
+      box-shadow: 0 0 14px rgba(148, 163, 184, 0.45);
+    }
+
+    .dots {
+      position: absolute;
+      left: 50%;
+      bottom: 2.4rem;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.45rem;
+      z-index: 6;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.4);
+      border: none;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: all 0.18s ease-out;
+    }
+
+    .dot.active {
+      width: 18px;
+      background: linear-gradient(90deg, #ef4444, #fbbf24, #22c55e);
+      box-shadow: 0 0 14px rgba(248, 113, 113, 0.6);
+    }
+
+    /* Footer: contact + download + legal links */
     footer {
-      border-top: 1px solid #cbd5e1;
-      background: #f8fafc;
-      padding: 1.4rem 1rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 96px;
+      background: radial-gradient(circle at 0% 0%, #020617, #020617 45%, #000814);
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+      gap: 1rem;
       font-size: 0.82rem;
-      text-align: center;
-      color: #64748b;
+      color: var(--text-muted);
+      z-index: 50;
     }
 
-    footer a {
-      color: #475569;
+    .footer-left p {
+      margin-bottom: 0.2rem;
+    }
+
+    .footer-downloads {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .store-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .store-pill {
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-main);
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      text-decoration: none;
+    }
+
+    .store-pill span {
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.25rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-main);
       text-decoration: underline;
-      text-underline-offset: 3px;
     }
 
-    /* --- MOBILE SWIPE --- */
-    @media (max-width: 640px) {
-      .slide {
-        padding: 1.6rem;
-        min-height: 88vh;
+    /* Responsiveness */
+    @media (max-width: 768px) {
+      header {
+        padding-inline: 1rem;
+        gap: 0.75rem;
       }
-      .slide-title {
-        font-size: 1.9rem;
+
+      nav {
+        gap: 0.4rem;
+        font-size: 0.78rem;
+      }
+
+      .nav-hide-mobile {
+        display: none;
+      }
+
+      .slide {
+        padding-inline: 1.25rem;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding-bottom: 0.85rem;
+      }
+
+      .footer-downloads {
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        align-items: flex-start;
       }
     }
   </style>
 </head>
-
 <body>
+  <header>
+    <div class="logo">
+      <div class="logo-mark"></div>
+      <span>MyRiskScout</span>
+    </div>
+    <nav>
+      <button class="nav-link active" data-slide="0">Zie je risico</button>
+      <button class="nav-link nav-hide-mobile" data-slide="1">Hoe het werkt</button>
+      <button class="nav-link nav-hide-mobile" data-slide="2">Waarom mensen…</button>
+      <button class="nav-link nav-hide-mobile" data-slide="3">Risicocijfers</button>
+      <button class="nav-link nav-hide-mobile" data-slide="4">Privacy &amp; controle</button>
+      <button class="nav-cta" data-slide="0">Probeer gratis</button>
+    </nav>
+  </header>
 
-  <!-- SLIDER -->
-  <section class="slider" id="slider">
-    <div class="slides" id="slides">
+  <main class="slider-wrapper">
+    <div class="slider" id="slider">
+      <!-- Slide 1: Zie je risico -->
+      <section class="slide slide--hero">
+        <div class="slide-content">
+          <div class="kicker">Zie je risico, voordat het jou vindt</div>
+          <h1>Voel je vrij in de stad, met inzicht in risico’s per buurt.</h1>
+          <p class="lead">
+            MyRiskScout laat je in één oogopslag zien waar het risico op fiets- en inbraak­diebstal hoger
+            ligt – per buurt, per moment van de dag. Zodat jij zelf kunt kiezen: hier parkeren of toch één straat verder.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Realtime risiconiveaus per buurt</span>
+            <span class="pill">Focus op fiets- &amp; inbraak­diebstal</span>
+            <span class="pill">Amsterdam nu – heel Nederland binnenkort</span>
+          </div>
+          <div class="btn-row">
+            <button class="btn-primary">Start met jouw buurt</button>
+            <button class="btn-ghost" data-slide="1">Zie hoe het werkt</button>
+          </div>
+          <p class="meta-note">
+            Gebaseerd op politiecijfers en omgevingsdata, vertaald naar een duidelijke risicoscore.
+          </p>
+        </div>
+      </section>
 
-      <!-- 1 -->
-      <article class="slide slide--overview">
-        <div class="slide-bg"></div>
-        <div class="slide-overlay"></div>
-        <h1 class="slide-title">Zie je risico, voordat het jou vindt.</h1>
-      </article>
+      <!-- Slide 2: Hoe het werkt -->
+      <section class="slide slide--how">
+        <div class="slide-content">
+          <div class="kicker">Hoe het werkt</div>
+          <h2>Een interactieve risicokaart in je broekzak.</h2>
+          <p class="lead">
+            Open de app, zoom in op jouw buurt en zie direct het risiconiveau. Ga je ergens heen, dan
+            check je eenvoudig vooruit hoe veilig het is om je fiets daar te parkeren of hoe gevoelig de buurt is voor inbraak.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Kleurrijke heatmap per buurt</span>
+            <span class="pill">Trends door de tijd</span>
+            <span class="pill">Praktische tips per risiconiveau</span>
+          </div>
+          <div class="btn-row">
+            <button class="btn-primary" data-slide="2">Waarom mensen ons gebruiken</button>
+            <button class="btn-ghost" data-slide="3">Meer over de data</button>
+          </div>
+        </div>
+      </section>
 
-      <!-- 2 -->
-      <article class="slide slide--how">
-        <div class="slide-bg"></div>
-        <div class="slide-overlay"></div>
-        <h1 class="slide-title">Hoe het werkt.</h1>
-      </article>
+      <!-- Slide 3: Waarom mensen MyRiskScout gebruiken -->
+      <section class="slide slide--why">
+        <div class="slide-content">
+          <div class="kicker">Waarom mensen MyRiskScout gebruiken</div>
+          <h2>Omdat één gestolen fiets al genoeg is.</h2>
+          <p class="lead">
+            MyRiskScout helpt je slim te kiezen waar je parkeert, welke route je neemt en waar een extra slot
+            of verzekering echt zinvol is. Van bewoners tot forenzen en ouders; iedereen krijgt meer grip op risico’s in de dagelijkse routine.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Voorkomen in plaats van genezen</span>
+            <span class="pill">Betere keuzes voor slot &amp; verzekering</span>
+            <span class="pill">Rustiger gevoel in drukke steden</span>
+          </div>
+          <div class="btn-row">
+            <button class="btn-primary" data-slide="0">Bekijk jouw buurt</button>
+            <button class="btn-ghost" data-slide="4">Hoe we met jouw data omgaan</button>
+          </div>
+        </div>
+      </section>
 
-      <!-- 3 -->
-      <article class="slide slide--why">
-        <div class="slide-bg"></div>
-        <div class="slide-overlay"></div>
-        <h1 class="slide-title">Waarom mensen MyRiskScout gebruiken.</h1>
-      </article>
+      <!-- Slide 4: Hoe we risicocijfers berekenen -->
+      <section class="slide slide--model">
+        <div class="slide-content">
+          <div class="kicker">Hoe we risicocijfers berekenen</div>
+          <h2>Miljoenen datapunten, samengevat in één duidelijke score.</h2>
+          <p class="lead">
+            Onze modellen combineren officiële politiecijfers met omgevings- en omloopdata.  
+            Met behulp van een Random Forest–algoritme schatten we per buurt de kans op incidenten
+            zoals fiets- en inbraak­diebstal in.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Random Forest machine learning</span>
+            <span class="pill">Officiële politiecijfers als basis</span>
+            <span class="pill">Buurtkenmerken &amp; omgevingsdata</span>
+          </div>
+          <p class="meta-note">
+            We valideren onze modellen continu en leggen in de app transparant uit welke factoren een rol spelen.
+          </p>
+          <div class="btn-row">
+            <button class="btn-primary" data-slide="4">Privacy &amp; controle</button>
+            <button class="btn-ghost" data-slide="1">Nog eens: hoe het werkt</button>
+          </div>
+        </div>
+      </section>
 
-      <!-- 4 -->
-      <article class="slide slide--data">
-        <div class="slide-bg"></div>
-        <div class="slide-overlay"></div>
-        <h1 class="slide-title">Hoe we risicocijfers berekenen.</h1>
-      </article>
-
-      <!-- 5 -->
-      <article class="slide slide--privacy">
-        <div class="slide-bg"></div>
-        <div class="slide-overlay"></div>
-        <h1 class="slide-title">Privacy & controle.</h1>
-      </article>
-
+      <!-- Slide 5: Privacy & controle -->
+      <section class="slide slide--privacy">
+        <div class="slide-content">
+          <div class="kicker">Privacy &amp; controle</div>
+          <h2>Jouw data, jouw keuze.</h2>
+          <p class="lead">
+            MyRiskScout gebruikt alleen de gegevens die nodig zijn om je risicoscore en notificaties te tonen.
+            Locatiegegevens blijven zo veel mogelijk op je toestel en je kunt meldingen en datadeling op elk moment uitschakelen.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Privacy by design</span>
+            <span class="pill">Transparante uitleg in de app</span>
+            <span class="pill">Volledige controle over notificaties</span>
+          </div>
+          <div class="btn-row">
+            <button class="btn-primary">Download de app</button>
+            <button class="btn-ghost" onclick="alert('Hier kun je later een link naar het volledige privacybeleid tonen.')">
+              Lees meer over privacy
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <!-- Controls -->
+    <!-- Slider Controls -->
     <div class="slider-controls">
-      <button class="slider-arrow" id="prevBtn">‹</button>
-      <div class="slider-dots" id="sliderDots"></div>
-      <button class="slider-arrow" id="nextBtn">›</button>
-    </div>
-  </section>
-
-  <!-- CTA SECTION -->
-  <section class="cta-section">
-    <h2 class="cta-title">Download MyRiskScout</h2>
-
-    <div class="store-buttons">
-      <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077">
-        <img src="assets/app_store_badge.png" />
-      </a>
-      <a href="#">
-        <img src="assets/google-play-badge.png" />
-      </a>
+      <button class="arrow-btn" id="prevBtn" aria-label="Vorige slide">&#x2039;</button>
+      <button class="arrow-btn" id="nextBtn" aria-label="Volgende slide">&#x203A;</button>
     </div>
 
-    <p style="margin-top:1rem;">Of neem contact op:</p>
-    <a href="contact.html" class="btn-primary" style="
-      margin-top:0.5rem;
-      padding:0.7rem 1.4rem;
-      border-radius:999px;
-      background:#0f172a;
-      color:white;
-      display:inline-block;
-    ">Contact</a>
-  </section>
+    <!-- Dots -->
+    <div class="dots" id="dots"></div>
+  </main>
 
-  <!-- FOOTER -->
   <footer>
-    © <span id="year"></span> MyRiskScout B.V. · 
-    <a href="privacy.html">Privacybeleid</a> · 
-    <a href="terms.html">Gebruiksvoorwaarden</a>
+    <div class="footer-left">
+      <p><strong>Contact</strong></p>
+      <p>Vragen of interesse in een partnership? Mail ons op <a href="mailto:hello@myriskscout.com" style="color:inherit;text-decoration:underline;">hello@myriskscout.com</a>.</p>
+    </div>
+
+    <div class="footer-downloads">
+      <span>Download MyRiskScout (binnenkort):</span>
+      <div class="store-row">
+        <a href="#" class="store-pill">
+          <span></span> <span>App Store</span>
+        </a>
+        <a href="#" class="store-pill">
+          <span>▶</span> <span>Google Play</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <a href="#" title="Privacybeleid">Privacybeleid</a>
+      <a href="#" title="Gebruiksvoorwaarden">Gebruiksvoorwaarden</a>
+    </div>
   </footer>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    (function () {
+      const slider = document.getElementById("slider");
+      const slides = Array.from(slider.children);
+      const totalSlides = slides.length;
+      let current = 0;
 
-    const slides = document.querySelectorAll(".slide");
-    const slidesContainer = document.getElementById("slides");
-    const dotsContainer = document.getElementById("sliderDots");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const dotsContainer = document.getElementById("dots");
+      const navLinks = document.querySelectorAll("nav button[data-slide]");
 
-    let currentSlide = 0;
-    const totalSlides = slides.length;
+      // Build dots
+      const dots = [];
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement("button");
+        dot.className = "dot" + (i === 0 ? " active" : "");
+        dot.dataset.index = i;
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+      }
 
-    // Dots erzeugen
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement("div");
-      dot.className = "slider-dot" + (i === 0 ? " active" : "");
-      dot.dataset.index = i;
-      dotsContainer.appendChild(dot);
-    }
-    const dots = document.querySelectorAll(".slider-dot");
+      function setActiveNav(idx) {
+        navLinks.forEach((btn) => {
+          btn.classList.toggle("active", Number(btn.dataset.slide) === idx);
+        });
+      }
 
-    function goToSlide(index) {
-      if (index < 0) index = 0;
-      if (index >= totalSlides) index = totalSlides - 1;
-      currentSlide = index;
-      slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+      function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index > totalSlides - 1) index = totalSlides - 1;
+        current = index;
+        slider.style.transform = `translateX(-${index * 100}vw)`;
 
-      dots.forEach((d,i)=>d.classList.toggle("active", i===index));
-    }
+        dots.forEach((d, i) => d.classList.toggle("active", i === index));
+        setActiveNav(index);
+      }
 
-    prevBtn.addEventListener("click", ()=> goToSlide(currentSlide - 1));
-    nextBtn.addEventListener("click", ()=> goToSlide(currentSlide + 1));
+      prevBtn.addEventListener("click", () => goToSlide(current - 1));
+      nextBtn.addEventListener("click", () => goToSlide(current + 1));
 
-    dots.forEach(dot => {
-      dot.addEventListener("click", () => goToSlide(parseInt(dot.dataset.index)));
-    });
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => goToSlide(Number(dot.dataset.index)));
+      });
 
-    /* Mobile Swipe */
-    let startX = 0;
-    slider.addEventListener("touchstart", e => {
-      startX = e.touches[0].clientX;
-    });
+      navLinks.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.dataset.slide);
+          if (!Number.isNaN(idx)) goToSlide(idx);
+        });
+      });
 
-    slider.addEventListener("touchend", e => {
-      const diff = e.changedTouches[0].clientX - startX;
-      if (diff > 50) goToSlide(currentSlide - 1);
-      if (diff < -50) goToSlide(currentSlide + 1);
-    });
+      // Keyboard navigation
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") goToSlide(current + 1);
+        if (e.key === "ArrowLeft") goToSlide(current - 1);
+      });
+
+      // Touch swipe
+      let startX = 0;
+      let isTouching = false;
+
+      slider.addEventListener("touchstart", (e) => {
+        isTouching = true;
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+
+      slider.addEventListener("touchmove", (e) => {
+        if (!isTouching) return;
+      }, { passive: true });
+
+      slider.addEventListener("touchend", (e) => {
+        if (!isTouching) return;
+        const endX = e.changedTouches[0].clientX;
+        const delta = endX - startX;
+
+        const threshold = 50; // px
+        if (delta > threshold) {
+          goToSlide(current - 1);
+        } else if (delta < -threshold) {
+          goToSlide(current + 1);
+        }
+        isTouching = false;
+      });
+
+      // Initial position
+      goToSlide(0);
+    })();
   </script>
-
 </body>
 </html>
-
-
-
