@@ -213,14 +213,14 @@
 
     /* PHONE MOCKUPS */
 
-    .hero-mockup-wrap {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 1.5rem;
-      flex-wrap: wrap;  /* wichtig für Mobile */
-    }
+.hero-mockup-wrap {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: nowrap;  /* verhindert Umbruch */
+}
 
     .phone-frame {
       position: relative;
@@ -919,6 +919,7 @@
   </div>
 </body>
 </html>
+
 
 
 
