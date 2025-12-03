@@ -34,17 +34,15 @@
       transition: transform 0.45s ease;
     }
 
-    .slide {
-      min-width: 100%;
-      height: 100%;
-      position: relative;
-      padding: 120px 32px 0 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      background-size: cover;
-      background-position: center;
-    }
+h1 {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(2rem, 4vw, 3rem);
+  max-width: 90%;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
 
     .overlay {
       position: absolute;
@@ -206,3 +204,4 @@
 
 </body>
 </html>
+
