@@ -2,150 +2,365 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyRiskScout</title>
+  <title>MyRiskScout – Zie je risico voordat het jou vindt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --text-main: #0f172a;
+      --max-width: 1120px;
+      --gradient-light: radial-gradient(circle at top left, #ffffff, #f1f5f9);
     }
 
-    html, body {
-      height: 100%;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #ffffff;
-      background-color: #000000;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      scroll-behavior: smooth;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    .section {
-      min-height: 100vh;
+    /* LOGO OHNE BOX */
+    .brand-badge {
+      position: fixed;
+      top: 1.2rem;
+      left: 1.2rem;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-badge img {
+      height: 36px;
+      width: auto;
+      display: block;
+      transform: translateZ(0);
+      filter: drop-shadow(0 0 4px rgba(0,0,0,0.35));
+    }
+
+    @supports (top: env(safe-area-inset-top)) {
+      .brand-badge {
+        top: calc(env(safe-area-inset-top) + 0.75rem);
+        left: calc(env(safe-area-inset-left) + 0.75rem);
+      }
+    }
+
+    /* SLIDER */
+    .slider {
       position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.6s ease;
+    }
+
+    .slide {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       padding: 2rem;
+    }
+
+    .slide-bg {
+      position: absolute;
+      inset: 0;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      z-index: -2;
+      opacity: 1;
     }
 
-    .section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.6),
-        rgba(0, 0, 0, 0.7)
-      );
-      z-index: 0;
+    @keyframes fadeUpTitle {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
-    .content {
-      position: relative;
-      z-index: 1;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: clamp(2.2rem, 4vw, 3rem);
+    .slide-title {
+      font-size: clamp(2.5rem, 6vw, 3.6rem);
       font-weight: 700;
-      margin-bottom: 1rem;
+      line-height: 1.1;
+      max-width: 900px;
+      color: #ffffff;
+      text-shadow: 0 3px 20px rgba(0,0,0,0.55);
+      opacity: 0;
+      transform: translateY(10px);
     }
 
-    p.subtitle {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      margin-bottom: 1.5rem;
-      opacity: 0.9;
+    .slide-title.active-title {
+      animation: fadeUpTitle 0.7s ease-out forwards;
     }
 
-    .store-badges {
-      margin-top: 1.5rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+    /* Gradient nur für „risico“ */
+    .risk-gradient {
+      background-image: linear-gradient(120deg, #22c55e, #eab308, #f97316, #ef4444);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .store-badges img {
-      height: 50px;
-      width: auto;
-      display: block;
-    }
-
-    /* Background images */
-    .hero {
+    /* BACKGROUNDS */
+    .slide--overview .slide-bg {
       background-image: url("assets/hero-bike-night.jpg");
     }
-
-    .hoe-het-werkt {
-      background-image: url("assets/hoe-het-werkt-bg.jpg");
+    .slide--how .slide-bg {
+      background-image: url("assets/hero-heatmap.jpg");
+    }
+    .slide--why .slide-bg {
+      background-image: url("assets/hero-why.jpg");
+    }
+    .slide--data .slide-bg {
+      background-image: url("assets/hero-ml.jpg");
+    }
+    .slide--privacy .slide-bg {
+      background-image: url("assets/hero-privacy.jpg");
     }
 
-    .waarom {
-      background-image: url("assets/waarom-mensen-myriskscout-gebruiken-bg.jpg");
+    /* CONTROLS */
+    .slider-controls {
+      position: absolute;
+      bottom: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      z-index: 10;
     }
 
-    .risk-method {
-      background-image: url("assets/hoe-we-risicocijfers-berekenen-bg.jpg");
+    .slider-arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #475569;
     }
 
-    .privacy {
-      background-image: url("assets/privacy-en-controle-bg.jpg");
+    .slider-dots {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .slider-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #cbd5e1;
+      transition: width 0.2s, background 0.2s;
+    }
+
+    .slider-dot.active {
+      width: 22px;
+      background: #0f172a;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 2.8rem 1rem;
+      background: #f1f5f9;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #0f172a;
+    }
+
+    .store-buttons img {
+      height: 50px;
+      margin: 0.5rem;
+    }
+
+    footer {
+      border-top: 1px solid #cbd5e1;
+      background: #f8fafc;
+      padding: 1.4rem 1rem;
+      font-size: 0.82rem;
+      text-align: center;
+      color: #64748b;
+    }
+
+    footer a {
+      color: #475569;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 640px) {
+      .slide-title {
+        font-size: 2.2rem;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Hero -->
-  <section class="section hero">
-    <div class="content">
-      <h1>Zie je risico, voordat het jou vindt</h1>
-      <p class="subtitle">
-        Ontdek het diefstalrisico in jouw buurt – op tijd, voordat het jou verrast.
-      </p>
+  <!-- LOGO -->
+  <div class="brand-badge">
+    <img src="assets/myriskscout-logo.png" alt="MyRiskScout Logo">
+  </div>
 
-      <div class="store-badges">
+  <!-- SLIDER -->
+  <section class="slider" id="slider">
+    <div class="slides" id="slides">
+
+      <article class="slide slide--overview">
+        <div class="slide-bg"></div>
+        <h1 class="slide-title">
+          Zie je <span class="risk-gradient">risico</span>, voordat het jou vindt.
+        </h1>
+      </article>
+
+      <article class="slide slide--how">
+        <div class="slide-bg"></div>
+        <h1 class="slide-title">Hoe het werkt.</h1>
+      </article>
+
+      <article class="slide slide--why">
+        <div class="slide-bg"></div>
+        <h1 class="slide-title">Waarom mensen MyRiskScout gebruiken.</h1>
+      </article>
+
+      <article class="slide slide--data">
+        <div class="slide-bg"></div>
+        <h1 class="slide-title">Hoe we risicocijfers berekenen.</h1>
+      </article>
+
+      <article class="slide slide--privacy">
+        <div class="slide-bg"></div>
+        <h1 class="slide-title">Privacy & controle.</h1>
+      </article>
+
+    </div>
+
+    <div class="slider-controls">
+      <button class="slider-arrow" id="prevBtn">‹</button>
+      <div class="slider-dots" id="sliderDots"></div>
+      <button class="slider-arrow" id="nextBtn">›</button>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2 class="cta-title">Download MyRiskScout</h2>
+
+    <div class="store-buttons">
+      <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077">
         <img src="assets/app-store-badge.png" alt="Download in de App Store" />
-      </div>
+      </a>
+
+      <!-- ✅ EINZIGE ÄNDERUNG HIER -->
+      <a href="https://play.google.com/store/apps/details?id=com.myriskscout">
+        <img src="assets/google-play-badge.png" alt="Ontdek het op Google Play" />
+      </a>
+      <!-- ✅ Ende der Änderung -->
     </div>
+
+    <p style="margin-top:1rem;">Of neem contact op:</p>
+
+    <a href="contact.html" style="
+      margin-top:0.5rem;
+      padding:0.7rem 1.4rem;
+      border-radius:999px;
+      background:#0f172a;
+      color:white;
+      display:inline-block;
+      text-decoration:none;
+      font-size:0.9rem;
+      font-weight:500;
+    ">Contact</a>
   </section>
 
-  <!-- Hoe het werkt -->
-  <section class="section hoe-het-werkt">
-    <div class="content">
-      <h1>Hoe het werkt</h1>
-    </div>
-  </section>
+  <!-- FOOTER -->
+  <footer>
+    © <span id="year"></span> MyRiskScout B.V. · 
+    <a href="privacy.html">Privacybeleid</a> · 
+    <a href="terms.html">Gebruiksvoorwaarden</a>
+  </footer>
 
-  <!-- Waarom mensen MyRiskScout gebruiken -->
-  <section class="section waarom">
-    <div class="content">
-      <h1>Waarom mensen MyRiskScout gebruiken</h1>
-    </div>
-  </section>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-  <!-- Hoe we risicocijfers berekenen -->
-  <section class="section risk-method">
-    <div class="content">
-      <h1>Hoe we risicocijfers berekenen</h1>
-    </div>
-  </section>
+    const slides = document.querySelectorAll(".slide");
+    const slidesContainer = document.getElementById("slides");
+    const dotsContainer = document.getElementById("sliderDots");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const slider = document.getElementById("slider");
+    const titles = document.querySelectorAll(".slide-title");
 
-  <!-- Privacy & controle -->
-  <section class="section privacy">
-    <div class="content">
-      <h1>Privacy & controle</h1>
-    </div>
-  </section>
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement("div");
+      dot.className = "slider-dot" + (i === 0 ? " active" : "");
+      dot.dataset.index = i;
+      dotsContainer.appendChild(dot);
+    }
+    const dots = document.querySelectorAll(".slider-dot");
+
+    function activateTitle(index) {
+      titles.forEach((t, i) => {
+        t.classList.remove("active-title");
+        if (i === index) {
+          void t.offsetWidth;
+          t.classList.add("active-title");
+        }
+      });
+    }
+
+    function goToSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      currentSlide = index;
+      slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d,i)=>d.classList.toggle("active", i===index));
+      activateTitle(index);
+    }
+
+    prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener("click", () => goToSlide(currentSlide + 1));
+    dots.forEach(dot => dot.addEventListener("click", () => goToSlide(parseInt(dot.dataset.index))));
+
+    let startX = 0;
+    slider.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, { passive:true });
+    slider.addEventListener("touchend", e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff > 50) goToSlide(currentSlide - 1);
+      if (diff < -50) goToSlide(currentSlide + 1);
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const logo = document.querySelector(".brand-badge img");
+      if (logo) {
+        setTimeout(() => {
+          logo.src = "assets/myriskscout-logo.png";
+        }, 80);
+      }
+      activateTitle(0);
+    });
+  </script>
 
 </body>
 </html>
