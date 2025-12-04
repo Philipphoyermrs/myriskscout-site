@@ -1,1 +1,365 @@
-test
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Over MyRiskScout – MyRiskScout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("assets/hero-about.jpg");
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.7), transparent 60%);
+      z-index: -1;
+    }
+
+    .brand-badge {
+      position: fixed;
+      top: 1.2rem;
+      left: 1.2rem;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-badge img {
+      height: 36px;
+      width: auto;
+      filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
+    }
+
+    .lang-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.75);
+      backdrop-filter: blur(10px);
+      color: #e5e7eb;
+      font-size: 0.8rem;
+    }
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    .lang-toggle button.active {
+      font-weight: 600;
+      opacity: 1;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .lang-toggle span { opacity: 0.6; }
+
+    .page-wrapper {
+      max-width: 1120px;
+      margin: 6.5rem auto 3.5rem auto;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+      gap: 2.4rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .card-main, .card-side {
+      background: rgba(15,23,42,0.9);
+      border-radius: 20px;
+      border: 1px solid rgba(148,163,184,0.6);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 60px rgba(15,23,42,0.7);
+    }
+
+    .card-main { padding: 2.1rem 2rem; }
+    .card-side { padding: 1.8rem 1.5rem; }
+
+    h1 {
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      margin-bottom: 0.6rem;
+      color: #f9fafb;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: #cbd5f5;
+      margin-bottom: 1.2rem;
+    }
+
+    p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #d1d5db;
+      margin-bottom: 0.7rem;
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    ul { list-style: none; margin: 0.5rem 0 0; padding: 0; }
+
+    .bullet {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      margin-bottom: 0.6rem;
+    }
+
+    .bullet-icon {
+      width: 20px; height: 20px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0%, #22c55e, #0ea5e9);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: #022c22;
+      flex-shrink: 0;
+    }
+
+    .bullet-text {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .side-title {
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      color: #e5e7eb;
+    }
+
+    .side-block + .side-block {
+      margin-top: 1rem;
+    }
+
+    .side-label {
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .side-text {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="brand-badge">
+    <img src="assets/myriskscout-logo.png" alt="MyRiskScout logo">
+  </div>
+
+  <div class="lang-toggle" id="langToggle">
+    <button type="button" data-lang="nl" class="active">NL</button>
+    <span>|</span>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+
+  <main class="page-wrapper">
+    <section class="layout">
+
+      <article class="card-main">
+        <h1 id="about-title-main">Over MyRiskScout.</h1>
+        <p class="subtitle" id="about-subtitle">
+          Een start-up uit Nederland, gebouwd door mensen uit de verzekeringswereld.
+        </p>
+
+        <p id="about-p1">
+          MyRiskScout is een jong bedrijf uit Nederland, opgericht door mensen die jarenlang in de
+          verzekeringsbranche hebben gewerkt. Daar draaide het werk vooral om één vraag:
+          <span class="highlight">hoe helpen we mensen nadat er al iets is misgegaan?</span>
+        </p>
+
+        <p id="about-p2">
+          Na jaren met schades, claims en dossiers te hebben gewerkt, ontstond een nieuwe vraag:
+          waarom krijgt iemand pas inzicht in zijn risico <em>nadat</em> er iets is gebeurd –
+          en niet al daarvoor?
+        </p>
+
+        <p id="about-p3">
+          Met MyRiskScout draaien we dit om. In plaats van alleen achteraf te repareren,
+          willen we mensen helpen <span class="highlight">bewuste risico-keuzes</span> te maken
+          vóórdat er iets gebeurt – of het nu gaat om waar je woont, waar je je fiets stalt
+          of welke verzekering bij jouw situatie past.
+        </p>
+
+        <ul>
+          <li class="bullet">
+            <div class="bullet-icon">📍</div>
+            <div class="bullet-text" id="about-b1">
+              Inzicht in risiconiveaus per buurt, in begrijpelijke taal.
+            </div>
+          </li>
+          <li class="bullet">
+            <div class="bullet-icon">🧠</div>
+            <div class="bullet-text" id="about-b2">
+              Data en modellen achter de schermen, maar heldere uitleg voor de gebruiker.
+            </div>
+          </li>
+          <li class="bullet">
+            <div class="bullet-icon">🛡️</div>
+            <div class="bullet-text" id="about-b3">
+              Onafhankelijk, transparant en met privacy als uitgangspunt.
+            </div>
+          </li>
+          <li class="bullet">
+            <div class="bullet-icon">🧭</div>
+            <div class="bullet-text" id="about-b4">
+              Helpt je om je dagelijks net iets veiliger en bewuster door de stad te bewegen.
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <aside class="card-side">
+        <div class="side-title" id="about-side-title">Wat drijft ons?</div>
+
+        <div class="side-block">
+          <div class="side-label" id="about-mission-label">Missie</div>
+          <div class="side-text" id="about-mission-text">
+            Mensen helpen hun werkelijke risico beter te begrijpen, zodat ze zelfbewuste keuzes kunnen
+            maken – in plaats van pas achteraf met gevolgen en schades geconfronteerd te worden.
+          </div>
+        </div>
+
+        <div class="side-block">
+          <div class="side-label" id="about-vision-label">Visie</div>
+          <div class="side-text" id="about-vision-text">
+            Risico-inzicht hoort net zo toegankelijk te zijn als het weerbericht: altijd beschikbaar,
+            visueel duidelijk en begrijpelijk voor iedereen.
+          </div>
+        </div>
+
+        <div class="side-block">
+          <div class="side-label" id="about-values-label">Wat je mag verwachten</div>
+          <div class="side-text" id="about-values-text">
+            Eerlijke uitleg, geen bangmakerij. Heldere kaarten in plaats van lange documenten.
+            En een product dat continu wordt verbeterd op basis van data én gebruikersfeedback.
+          </div>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <script>
+    const aboutTranslations = {
+      nl: {
+        titleMain: "Over MyRiskScout.",
+        subtitle: "Een start-up uit Nederland, gebouwd door mensen uit de verzekeringswereld.",
+        p1: "MyRiskScout is een jong bedrijf uit Nederland, opgericht door mensen die jarenlang in de verzekeringsbranche hebben gewerkt. Daar draaide het werk vooral om één vraag: hoe helpen we mensen nadat er al iets is misgegaan?",
+        p2: "Na jaren met schades, claims en dossiers te hebben gewerkt, ontstond een nieuwe vraag: waarom krijgt iemand pas inzicht in zijn risico nadat er iets is gebeurd – en niet al daarvoor?",
+        p3: "Met MyRiskScout draaien we dit om. In plaats van alleen achteraf te repareren, willen we mensen helpen bewuste risico-keuzes te maken vóórdat er iets gebeurt – of het nu gaat om waar je woont, waar je je fiets stalt of welke verzekering bij jouw situatie past.",
+        b1: "Inzicht in risiconiveaus per buurt, in begrijpelijke taal.",
+        b2: "Data en modellen achter de schermen, maar heldere uitleg voor de gebruiker.",
+        b3: "Onafhankelijk, transparant en met privacy als uitgangspunt.",
+        b4: "Helpt je om je dagelijks net iets veiliger en bewuster door de stad te bewegen.",
+        sideTitle: "Wat drijft ons?",
+        missionLabel: "Missie",
+        missionText: "Mensen helpen hun werkelijke risico beter te begrijpen, zodat ze zelfbewuste keuzes kunnen maken – in plaats van pas achteraf met gevolgen en schades geconfronteerd te worden.",
+        visionLabel: "Visie",
+        visionText: "Risico-inzicht hoort net zo toegankelijk te zijn als het weerbericht: altijd beschikbaar, visueel duidelijk en begrijpelijk voor iedereen.",
+        valuesLabel: "Wat je mag verwachten",
+        valuesText: "Eerlijke uitleg, geen bangmakerij. Heldere kaarten in plaats van lange documenten. En een product dat continu wordt verbeterd op basis van data én gebruikersfeedback."
+      },
+      en: {
+        titleMain: "About MyRiskScout.",
+        subtitle: "A startup from the Netherlands, built by people from the insurance world.",
+        p1: "MyRiskScout is a young company from the Netherlands, founded by people who have worked in the insurance industry for many years. There, the work revolved around one main question: how do we help people after something has already gone wrong?",
+        p2: "After years of dealing with claims, losses and files, a new question emerged: why does someone only really understand their risk after something has happened – and not before?",
+        p3: "With MyRiskScout, we turn this around. Instead of only fixing things afterwards, we want to help people make conscious risk decisions before something happens – whether that is about where you live, where you park your bike or which insurance fits your situation.",
+        b1: "Insight into risk levels per neighbourhood, in plain language.",
+        b2: "Data and models behind the scenes, but clear explanations for the user.",
+        b3: "Independent, transparent and with privacy by design.",
+        b4: "Helps you move through your daily life a bit safer and more aware.",
+        sideTitle: "What drives us",
+        missionLabel: "Mission",
+        missionText: "To help people understand their real risk better, so they can make informed choices themselves – instead of only being confronted with consequences and claims afterwards.",
+        visionLabel: "Vision",
+        visionText: "Risk insight should be as accessible as the weather forecast: always available, visually clear and understandable for everyone.",
+        valuesLabel: "What you can expect",
+        valuesText: "Honest explanations, no fear mongering. Clear maps instead of long documents. And a product that is continuously improved based on data and user feedback."
+      }
+    };
+
+    function setAboutLanguage(lang) {
+      const t = aboutTranslations[lang] || aboutTranslations.nl;
+      document.documentElement.lang = lang;
+
+      document.getElementById("about-title-main").textContent = t.titleMain;
+      document.getElementById("about-subtitle").textContent = t.subtitle;
+
+      document.getElementById("about-p1").textContent = t.p1;
+      document.getElementById("about-p2").textContent = t.p2;
+      document.getElementById("about-p3").textContent = t.p3;
+
+      document.getElementById("about-b1").textContent = t.b1;
+      document.getElementById("about-b2").textContent = t.b2;
+      document.getElementById("about-b3").textContent = t.b3;
+      document.getElementById("about-b4").textContent = t.b4;
+
+      document.getElementById("about-side-title").textContent = t.sideTitle;
+      document.getElementById("about-mission-label").textContent = t.missionLabel;
+      document.getElementById("about-mission-text").textContent = t.missionText;
+      document.getElementById("about-vision-label").textContent = t.visionLabel;
+      document.getElementById("about-vision-text").textContent = t.visionText;
+      document.getElementById("about-values-label").textContent = t.valuesLabel;
+      document.getElementById("about-values-text").textContent = t.valuesText;
+
+      document.querySelectorAll("#langToggle button").forEach(btn =>
+        btn.classList.toggle("active", btn.dataset.lang === lang)
+      );
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      setAboutLanguage("nl");
+    });
+
+    document.querySelectorAll("#langToggle button").forEach(btn => {
+      btn.addEventListener("click", () => setAboutLanguage(btn.dataset.lang));
+    });
+  </script>
+
+</body>
+</html>
