@@ -66,10 +66,10 @@
       display: block;
       filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
       will-change: transform;
-      transform: translateZ(0); /* Safari-Render-Fix */
+      transform: translateZ(0);
     }
 
-    /* Safe-Area für iOS (Notch) berücksichtigen */
+    /* Safe-Area für iOS */
     @supports (top: env(safe-area-inset-top)) {
       .brand-badge {
         top: calc(env(safe-area-inset-top) + 0.75rem);
@@ -77,7 +77,6 @@
       }
     }
 
-    /* Zusätzlicher Safari-Tweak */
     @supports (-webkit-touch-callout: none) {
       .brand-badge {
         background: rgba(255,255,255,0.65);
@@ -86,7 +85,7 @@
       }
     }
 
-    /* --- SLIDER --- */
+    /* SLIDER */
 
     .slider {
       position: relative;
@@ -123,12 +122,10 @@
       filter: none;
     }
 
-    /* Overlay deaktiviert – Bild bleibt klar */
     .slide-overlay {
       display: none;
     }
 
-    /* Fade-up-Animation der Headlines */
     @keyframes fadeUpTitle {
       0% {
         opacity: 0;
@@ -141,17 +138,14 @@
     }
 
     .slide-title {
-      font-size: clamp(2.5rem, 6vw, 3.6rem); /* etwas größer */
+      font-size: clamp(2.5rem, 6vw, 3.6rem);
       font-weight: 700;
       line-height: 1.1;
       max-width: 900px;
-
-      /* Gradient-Text in Risiko-Farben */
       background-image: linear-gradient(120deg, #22c55e, #eab308, #f97316, #ef4444);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-
       text-shadow: 0 3px 20px rgba(0,0,0,0.55);
       opacity: 0;
       transform: translateY(10px);
@@ -161,7 +155,24 @@
       animation: fadeUpTitle 0.7s ease-out forwards;
     }
 
-    /* BACKGROUNDS */
+    /* ------------------------------- */
+    /*   🔥 NEU: GRADIENT NUR FÜR „RISICO“   */
+    /* ------------------------------- */
+
+    .risk-gradient {
+      background-image: linear-gradient(120deg, #22c55e, #eab308, #f97316, #ef4444);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .slide--overview .slide-title {
+      color: #ffffff !important;
+      background: none !important;
+      -webkit-background-clip: unset !important;
+    }
+
+    /* BACKGROUND-IMAGES */
     .slide--overview .slide-bg {
       background-image: url("assets/hero-bike-night.png");
     }
@@ -232,8 +243,7 @@
       background: #0f172a;
     }
 
-    /* CTA SECTION */
-
+    /* CTA */
     .cta-section {
       padding: 2.8rem 1rem;
       background: #f1f5f9;
@@ -251,8 +261,6 @@
       height: 50px;
       margin: 0.5rem;
     }
-
-    /* FOOTER */
 
     footer {
       border-top: 1px solid #cbd5e1;
@@ -282,7 +290,7 @@
 
 <body>
 
-  <!-- BRAND BADGE -->
+  <!-- LOGO BADGE -->
   <div class="brand-badge">
     <img src="assets/myriskscout-logo.png" alt="MyRiskScout Logo">
   </div>
@@ -291,30 +299,37 @@
   <section class="slider" id="slider">
     <div class="slides" id="slides">
 
+      <!-- SLIDE 1 -->
       <article class="slide slide--overview">
         <div class="slide-bg"></div>
         <div class="slide-overlay"></div>
-        <h1 class="slide-title">Zie je risico, voordat het jou vindt.</h1>
+        <h1 class="slide-title">
+          Zie je <span class="risk-gradient">risico</span>, voordat het jou vindt.
+        </h1>
       </article>
 
+      <!-- SLIDE 2 -->
       <article class="slide slide--how">
         <div class="slide-bg"></div>
         <div class="slide-overlay"></div>
         <h1 class="slide-title">Hoe het werkt.</h1>
       </article>
 
+      <!-- SLIDE 3 -->
       <article class="slide slide--why">
         <div class="slide-bg"></div>
         <div class="slide-overlay"></div>
         <h1 class="slide-title">Waarom mensen MyRiskScout gebruiken.</h1>
       </article>
 
+      <!-- SLIDE 4 -->
       <article class="slide slide--data">
         <div class="slide-bg"></div>
         <div class="slide-overlay"></div>
         <h1 class="slide-title">Hoe we risicocijfers berekenen.</h1>
       </article>
 
+      <!-- SLIDE 5 -->
       <article class="slide slide--privacy">
         <div class="slide-bg"></div>
         <div class="slide-overlay"></div>
@@ -378,7 +393,6 @@
     let currentSlide = 0;
     const totalSlides = slides.length;
 
-    // Dots erzeugen
     for (let i = 0; i < totalSlides; i++) {
       const dot = document.createElement("div");
       dot.className = "slider-dot" + (i === 0 ? " active" : "");
@@ -391,7 +405,6 @@
       titles.forEach((t, i) => {
         t.classList.remove("active-title");
         if (i === index) {
-          // Animation neu starten
           void t.offsetWidth;
           t.classList.add("active-title");
         }
@@ -411,7 +424,6 @@
     nextBtn.addEventListener("click", () => goToSlide(currentSlide + 1));
     dots.forEach(dot => dot.addEventListener("click", () => goToSlide(parseInt(dot.dataset.index))));
 
-    // Swipe
     let startX = 0;
     slider.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, { passive:true });
     slider.addEventListener("touchend", e => {
@@ -420,7 +432,6 @@
       if (diff < -50) goToSlide(currentSlide + 1);
     });
 
-    // Safari-Workaround: Logo-Src nach kurzer Verzögerung neu setzen
     window.addEventListener("DOMContentLoaded", () => {
       const logo = document.querySelector(".brand-badge img");
       if (logo) {
@@ -428,7 +439,6 @@
           logo.src = "assets/myriskscout-logo.png";
         }, 80);
       }
-      // erste Headline animiert starten
       activateTitle(0);
     });
   </script>
