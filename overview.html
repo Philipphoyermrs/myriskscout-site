@@ -4,189 +4,79 @@
   <meta charset="UTF-8" />
   <title>MyRiskScout in één oogopslag – Overzicht</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background: #020617;
-      color: #e5e7eb;
+      background: #020617; color: #e5e7eb;
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
+      min-height: 100vh; overflow-x: hidden; position: relative;
     }
-
-    /* Achtergrond – zelfde sfeer als hoofdpagina */
     body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
+      content: ""; position: fixed; inset: 0;
       background-image: url("assets/hero-bike-night.jpg");
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.5);
-      z-index: -2;
+      background-size: cover; background-position: center;
+      filter: brightness(0.5); z-index: -2;
     }
-
     body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
+      content: ""; position: fixed; inset: 0;
       background: radial-gradient(circle at top, rgba(15,23,42,0.7), transparent 60%);
       z-index: -1;
     }
-
-    /* Logo linksboven – geen menu */
     .brand-badge {
-      position: fixed;
-      top: 1.2rem;
-      left: 1.2rem;
-      z-index: 10;
-      display: flex;
-      align-items: center;
+      position: fixed; top: 1.2rem; left: 1.2rem;
+      z-index: 10; display: flex; align-items: center;
     }
-
     .brand-badge img {
-      height: 36px;
-      width: auto;
+      height: 36px; width: auto;
       filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
-      transform: translateZ(0);
     }
-
-    @supports (top: env(safe-area-inset-top)) {
-      .brand-badge {
-        top: calc(env(safe-area-inset-top) + 0.75rem);
-        left: calc(env(safe-area-inset-left) + 0.75rem);
-      }
-    }
-
     .page-wrapper {
       max-width: 1120px;
       margin: 6.5rem auto 3.5rem auto;
       padding: 0 1.5rem 3rem;
     }
-
     .layout {
       display: grid;
       grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
-      gap: 2.4rem;
-      align-items: stretch;
+      gap: 2.4rem; align-items: stretch;
     }
-
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .card-main {
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+    .card-main, .card-side {
       background: rgba(15,23,42,0.9);
       border-radius: 20px;
       border: 1px solid rgba(148,163,184,0.6);
-      padding: 2.1rem 2rem;
       backdrop-filter: blur(18px);
       box-shadow: 0 24px 60px rgba(15,23,42,0.7);
     }
-
-    .card-main h1 {
+    .card-main { padding: 2.1rem 2rem; }
+    .card-side { padding: 1.8rem 1.6rem; }
+    h1 {
       font-size: clamp(1.9rem, 3vw, 2.4rem);
-      line-height: 1.15;
-      margin-bottom: 0.4rem;
-      color: #f9fafb;
+      margin-bottom: 0.8rem; color: #f9fafb;
     }
-
     .subtitle {
-      font-size: 0.95rem;
-      color: #cbd5f5;
-      margin-bottom: 1.4rem;
+      font-size: 0.95rem; color: #cbd5f5;
+      margin-bottom: 1.2rem;
     }
-
-    h2 {
-      font-size: 1.05rem;
-      margin-top: 1.3rem;
-      margin-bottom: 0.4rem;
-      color: #e5e7eb;
+    ul { list-style: none; margin: 0; padding: 0; }
+    .bullet {
+      display: flex; gap: 0.6rem; align-items: flex-start;
+      margin-bottom: 0.7rem;
     }
-
-    p {
-      font-size: 0.92rem;
-      line-height: 1.6;
-      color: #d1d5db;
-      margin-bottom: 0.6rem;
+    .bullet-icon {
+      width: 20px; height: 20px; border-radius: 999px;
+      background: radial-gradient(circle at 30% 0%, #22c55e, #0ea5e9);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: #022c22; flex-shrink: 0;
     }
-
-    ul {
-      margin: 0.4rem 0 0.9rem 1.1rem;
-      padding: 0;
+    .bullet-text {
+      font-size: 0.9rem; color: #e5e7eb;
     }
-
-    li {
-      font-size: 0.9rem;
-      line-height: 1.5;
-      color: #cbd5e1;
-      margin-bottom: 0.25rem;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.8rem;
-    }
-
-    .pill {
-      font-size: 0.78rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      background: rgba(15,23,42,0.8);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #e5e7eb;
-    }
-
-    /* Side card – korte samenvatting / doelgroepen */
-    .card-side {
-      background: rgba(15,23,42,0.9);
-      border-radius: 20px;
-      border: 1px solid rgba(148,163,184,0.6);
-      padding: 1.8rem 1.6rem;
-      box-shadow: 0 20px 50px rgba(15,23,42,0.7);
-      backdrop-filter: blur(18px);
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
-    .card-side h3 {
-      font-size: 1rem;
-      margin-bottom: 0.4rem;
-      color: #e5e7eb;
-    }
-
-    .side-section-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #e5e7eb;
-      margin-bottom: 0.15rem;
-    }
-
-    .side-section-text {
-      font-size: 0.86rem;
-      color: #cbd5e1;
-      line-height: 1.5;
-      margin-bottom: 0.5rem;
-    }
-
     .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.2rem;
+      display: flex; flex-wrap: wrap;
+      gap: 0.4rem; margin-top: 0.8rem;
     }
-
     .chip {
       font-size: 0.8rem;
       padding: 0.25rem 0.55rem;
@@ -195,21 +85,15 @@
       border: 1px solid rgba(51,65,85,0.9);
       color: #e5e7eb;
     }
-
-    @media (max-width: 700px) {
-      .card-main {
-        padding: 1.8rem 1.6rem;
-      }
-      .card-side {
-        padding: 1.6rem 1.4rem;
-      }
+    .side-title {
+      font-size: 1rem; margin-bottom: 0.8rem; color: #e5e7eb;
+    }
+    .side-label {
+      font-size: 0.88rem; color: #cbd5e1; margin-bottom: 0.3rem;
     }
   </style>
 </head>
-
 <body>
-
-  <!-- Logo -->
   <div class="brand-badge">
     <img src="assets/myriskscout-logo.png" alt="MyRiskScout logo">
   </div>
@@ -217,101 +101,70 @@
   <main class="page-wrapper">
     <section class="layout">
 
-      <!-- LINKERKANT: ALGEMEEN OVERZICHT -->
       <article class="card-main">
         <h1>MyRiskScout in één oogopslag.</h1>
-        <p class="subtitle">
-          De app die je helpt beter te begrijpen hoe veilig een buurt is – op basis van actuele data, slimme technologie en duidelijke inzichten.
-        </p>
+        <p class="subtitle">Korte samenvatting van wat de app doet.</p>
 
-        <h2>Veiligheidsinzichten per buurt</h2>
-        <p>
-          MyRiskScout toont het risiconiveau van elke buurt in jouw stad. Niet alleen waar het risico hoog is,
-          maar ook waar het juist laag of gemiddeld is.  
-          Je ziet in één oogopslag hoe buurten zich tot elkaar verhouden.
-        </p>
+        <ul>
+          <li class="bullet">
+            <div class="bullet-icon">📍</div>
+            <div class="bullet-text">Risiconiveaus per buurt op een kaart (laag ↔ hoog).</div>
+          </li>
+          <li class="bullet">
+            <div class="bullet-icon">🗺️</div>
+            <div class="bullet-text">Heatmap met kleuren: groen, geel, rood.</div>
+          </li>
+          <li class="bullet">
+            <div class="bullet-icon">ℹ️</div>
+            <div class="bullet-text">Korte uitleg per buurt: belangrijkste risicodrijvers.</div>
+          </li>
+          <li class="bullet">
+            <div class="bullet-icon">🔔</div>
+            <div class="bullet-text">Alerts wanneer je een duidelijk hoger risicogebied binnenkomt.</div>
+          </li>
+          <li class="bullet">
+            <div class="bullet-icon">🛡️</div>
+            <div class="bullet-text">Privacy-first: zo min mogelijk data, jij bepaalt wat er aan staat.</div>
+          </li>
+        </ul>
 
-        <h2>Een kaart die je direct begrijpt</h2>
-        <p>
-          De app laat een kaart met een duidelijke <strong>heatmap</strong> zien. Kleuren lopen van groen (lager risico)
-          naar rood (hoger risico), zodat je meteen begrijpt wat de situatie is.  
-          Je kunt vrij door de stad bewegen of de app je huidige locatie laten volgen.
-        </p>
-
-        <h2>Begrijp waarom een buurt hoger scoort</h2>
-        <p>
-          MyRiskScout laat niet alleen een score zien, maar ook de belangrijkste <strong>risicodrijvers</strong>.
-          Zo zie je waarom het risico in een buurt hoger is – bijvoorbeeld door fietsdiefstal, woningtypes of andere kenmerken.
-        </p>
-
-        <h2>Alerts wanneer het ertoe doet</h2>
-        <p>
-          Je kunt een melding ontvangen als je een buurt binnenkomt met een duidelijk hoger risico.  
-          Dat helpt vooral bij fietsveiligheid, avondroutes of wanneer je in een onbekende buurt bent.
-        </p>
-
-        <h2>Privacy voorop</h2>
-        <p>
-          De app vraagt alleen wat echt nodig is. Er worden geen gedetailleerde routes opgeslagen en je bepaalt zelf
-          of locatie en alerts aan staan. In ons <a href="privacy.html">privacybeleid</a> lees je precies hoe we met je gegevens omgaan.
-        </p>
-
-        <div class="pill-row">
-          <span class="pill">Risiconiveaus per buurt</span>
-          <span class="pill">Heatmap & context</span>
-          <span class="pill">Alerts bij hoog risico</span>
-          <span class="pill">Privacy by design</span>
+        <div class="chip-row">
+          <span class="chip">Inbraak & fietsdiefstal</span>
+          <span class="chip">Risico per buurt</span>
+          <span class="chip">Direct inzicht</span>
         </div>
       </article>
 
-      <!-- RECHTERKANT: VOOR WIE EN WAAROM -->
       <aside class="card-side">
-        <h3>Voor wie is MyRiskScout?</h3>
+        <div class="side-title">Voor wie?</div>
+        <div class="side-label">Typische gebruikers:</div>
+        <ul>
+          <li class="bullet">
+            <div class="bullet-icon">🏠</div>
+            <div class="bullet-text">Bewoners & woningzoekers</div>
+          </li>
+          <li class="bullet">
+            <div class="bullet-icon">🚲</div>
+            <div class="bullet-text">Fietsers, e-bike- en fatbike-rijders</div>
+          </li>
+          <li class="bullet">
+            <div class="bullet-icon">🌍</div>
+            <div class="bullet-text">Expats & nieuwkomers</div>
+          </li>
+          <li class="bullet">
+            <div class="bullet-icon">📑</div>
+            <div class="bullet-text">Verzekeringsshoppers</div>
+          </li>
+        </ul>
 
-        <div>
-          <div class="side-section-title">Bewoners & woningzoekers</div>
-          <div class="side-section-text">
-            Gebruiken MyRiskScout om buurten te vergelijken en beter te begrijpen waar ze zich veilig voelen.
-          </div>
-        </div>
-
-        <div>
-          <div class="side-section-title">Fietsers & ouders</div>
-          <div class="side-section-text">
-            Krijgen inzicht in waar zij (of hun kinderen) hun fiets beter wel of niet achterlaten en welke routes slimmer zijn.
-          </div>
-        </div>
-
-        <div>
-          <div class="side-section-title">Expats & nieuwkomers</div>
-          <div class="side-section-text">
-            Kunnen snel zien hoe buurten verschillen in veiligheid, zonder jarenlange lokale kennis nodig te hebben.
-          </div>
-        </div>
-
-        <div>
-          <div class="side-section-title">Verzekeringsshoppers</div>
-          <div class="side-section-text">
-            Begrijpen eerst hun werkelijke risico en kiezen daarna gerichter een verzekering die daarbij past.
-          </div>
-        </div>
-
-        <div>
-          <div class="side-section-title">Kort samengevat</div>
-          <div class="side-section-text">
-            MyRiskScout is er voor iedereen die niet op gevoel, maar op inzicht wil vertrouwen.
-          </div>
-          <div class="chip-row">
-            <span class="chip">Wonen</span>
-            <span class="chip">Fietsen</span>
-            <span class="chip">Routes</span>
-            <span class="chip">Verzekeren</span>
-          </div>
+        <div class="chip-row">
+          <span class="chip">Beter wonen</span>
+          <span class="chip">Slimmer fietsen</span>
+          <span class="chip">Bewuster verzekeren</span>
         </div>
       </aside>
 
     </section>
   </main>
-
 </body>
 </html>
