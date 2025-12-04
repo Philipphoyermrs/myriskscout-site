@@ -104,20 +104,16 @@
       filter: none;
     }
 
-    .slide-overlay {
-      position: absolute;
-      inset: 0;
-      background: var(--gradient-light);
-      opacity: 0.35;
-      z-index: -1;
-    }
+/* Overlay deaktiviert */
+.slide-overlay {
+  display: none;
+}
 
-    .slide-title {
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.1;
-      max-width: 900px;
-    }
+
+   .slide-title {
+  color: #ffffff; /* Weiß für bessere Lesbarkeit */
+  text-shadow: 0 3px 12px rgba(0,0,0,0.45); /* Apple-Lesbarkeit auf Foto */
+}
 
     /* BACKGROUNDS */
     .slide--overview .slide-bg {
@@ -355,3 +351,4 @@
 
 </body>
 </html>
+
