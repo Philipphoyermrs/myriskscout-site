@@ -150,9 +150,10 @@
 
     /* backgrounds */
     .slide--overview .slide-bg { background-image: url("assets/hero-bike-night.jpg"); }
-    .slide--how .slide-bg { background-image: url("assets/hero-heatmap.jpg"); }
-    .slide--why .slide-bg { background-image: url("assets/hero-why.jpg"); }
-    .slide--data .slide-bg { background-image: url("assets/hero-ml.jpg"); }
+    .slide--how .slide-bg      { background-image: url("assets/hero-heatmap.jpg"); }
+    .slide--why .slide-bg      { background-image: url("assets/hero-why.jpg"); }
+    .slide--data .slide-bg     { background-image: url("assets/hero-ml.jpg"); }
+    .slide--about .slide-bg    { background-image: url("assets/hero-about.jpg"); }
 
     /* controls */
     .slider-controls {
@@ -267,6 +268,13 @@
         <a class="meer-link" id="data-meer" href="data.html">meer</a>
       </article>
 
+      <!-- SLIDE 5 – ABOUT -->
+      <article class="slide slide--about">
+        <div class="slide-bg"></div>
+        <h1 class="slide-title" id="about-title">Over MyRiskScout.</h1>
+        <a class="meer-link" id="about-meer" href="about.html">meer</a>
+      </article>
+
     </div>
 
     <div class="slider-controls">
@@ -339,7 +347,7 @@
       titles.forEach((t, i) => {
         t.classList.remove("active-title");
         if (i === index) {
-          void t.offsetWidth; // reflow
+          void t.offsetWidth;
           t.classList.add("active-title");
         }
       });
@@ -356,6 +364,7 @@
 
     prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
     nextBtn.addEventListener("click", () => goToSlide(currentSlide + 1));
+
     dots.forEach(dot =>
       dot.addEventListener("click", () => goToSlide(parseInt(dot.dataset.index)))
     );
@@ -379,6 +388,8 @@
         whyMeer: 'meer',
         dataTitle: 'Hoe we risicocijfers berekenen.',
         dataMeer: 'meer',
+        aboutTitle: 'Over MyRiskScout.',
+        aboutMeer: 'meer',
         ctaTitle: 'Download MyRiskScout',
         ctaContactText: 'Of neem contact op:',
         ctaContactBtn: 'Contact',
@@ -396,6 +407,8 @@
         whyMeer: 'more',
         dataTitle: 'How we calculate risk scores.',
         dataMeer: 'more',
+        aboutTitle: 'About MyRiskScout.',
+        aboutMeer: 'more',
         ctaTitle: 'Download MyRiskScout',
         ctaContactText: 'Or get in touch:',
         ctaContactBtn: 'Contact',
@@ -422,6 +435,9 @@
       document.getElementById("data-title").textContent = t.dataTitle;
       document.getElementById("data-meer").textContent = t.dataMeer;
 
+      document.getElementById("about-title").textContent = t.aboutTitle;
+      document.getElementById("about-meer").textContent = t.aboutMeer;
+
       document.getElementById("cta-title").textContent = t.ctaTitle;
       document.getElementById("cta-contact-text").textContent = t.ctaContactText;
       document.getElementById("cta-contact-btn").textContent = t.ctaContactBtn;
@@ -432,12 +448,10 @@
       document.getElementById("footer-privacy").textContent = t.footerPrivacy;
       document.getElementById("footer-terms").textContent = t.footerTerms;
 
-      // Toggle active state on language buttons
       document.querySelectorAll('#langToggle button').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);
       });
 
-      // Re-trigger animation for current slide title
       activateTitle(currentSlide);
     }
 
