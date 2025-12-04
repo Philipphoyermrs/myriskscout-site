@@ -22,7 +22,7 @@
       overflow-x: hidden;
     }
 
-    /* LOGO OHNE BOX */
+    /* LOGO */
     .brand-badge {
       position: fixed;
       top: 1.2rem;
@@ -40,24 +40,9 @@
       filter: drop-shadow(0 0 4px rgba(0,0,0,0.35));
     }
 
-    @supports (top: env(safe-area-inset-top)) {
-      .brand-badge {
-        top: calc(env(safe-area-inset-top) + 0.75rem);
-        left: calc(env(safe-area-inset-left) + 0.75rem);
-      }
-    }
-
     /* SLIDER */
-    .slider {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .slides {
-      display: flex;
-      transition: transform 0.6s ease;
-    }
+    .slider { position: relative; width: 100%; overflow: hidden; }
+    .slides { display: flex; transition: transform 0.6s ease; }
 
     .slide {
       position: relative;
@@ -65,6 +50,7 @@
       min-height: 100vh;
       flex-shrink: 0;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -101,7 +87,7 @@
       animation: fadeUpTitle 0.7s ease-out forwards;
     }
 
-    /* Gradient nur für „risico“ */
+    /* gradient voor 'risico' */
     .risk-gradient {
       background-image: linear-gradient(120deg, #22c55e, #eab308, #f97316, #ef4444);
       -webkit-background-clip: text;
@@ -109,24 +95,30 @@
       color: transparent;
     }
 
-    /* BACKGROUNDS */
-    .slide--overview .slide-bg {
-      background-image: url("assets/hero-bike-night.jpg");
-    }
-    .slide--how .slide-bg {
-      background-image: url("assets/hero-heatmap.jpg");
-    }
-    .slide--why .slide-bg {
-      background-image: url("assets/hero-why.jpg");
-    }
-    .slide--data .slide-bg {
-      background-image: url("assets/hero-ml.jpg");
-    }
-    .slide--privacy .slide-bg {
-      background-image: url("assets/hero-privacy.jpg");
+    /* meer-link */
+    .meer-link {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease-out forwards;
     }
 
-    /* CONTROLS */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* backgrounds */
+    .slide--overview .slide-bg { background-image: url("assets/hero-bike-night.jpg"); }
+    .slide--how .slide-bg { background-image: url("assets/hero-heatmap.jpg"); }
+    .slide--why .slide-bg { background-image: url("assets/hero-why.jpg"); }
+    .slide--data .slide-bg { background-image: url("assets/hero-ml.jpg"); }
+    .slide--privacy .slide-bg { background-image: url("assets/hero-privacy.jpg"); }
+
+    /* controls */
     .slider-controls {
       position: absolute;
       bottom: 1.8rem;
@@ -153,11 +145,7 @@
       color: #475569;
     }
 
-    .slider-dots {
-      display: flex;
-      gap: 0.4rem;
-    }
-
+    .slider-dots { display: flex; gap: 0.4rem; }
     .slider-dot {
       width: 9px;
       height: 9px;
@@ -165,30 +153,17 @@
       background: #cbd5e1;
       transition: width 0.2s, background 0.2s;
     }
+    .slider-dot.active { width: 22px; background: #0f172a; }
 
-    .slider-dot.active {
-      width: 22px;
-      background: #0f172a;
-    }
-
-    /* CTA SECTION */
+    /* CTA */
     .cta-section {
       padding: 2.8rem 1rem;
       background: #f1f5f9;
       text-align: center;
     }
 
-    .cta-title {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #0f172a;
-    }
-
-    .store-buttons img {
-      height: 50px;
-      margin: 0.5rem;
-    }
+    .cta-title { font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; }
+    .store-buttons img { height: 50px; margin: 0.5rem; }
 
     footer {
       border-top: 1px solid #cbd5e1;
@@ -198,18 +173,8 @@
       text-align: center;
       color: #64748b;
     }
+    footer a { color: #475569; text-decoration: underline; }
 
-    footer a {
-      color: #475569;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    @media (max-width: 640px) {
-      .slide-title {
-        font-size: 2.2rem;
-      }
-    }
   </style>
 </head>
 
@@ -224,31 +189,51 @@
   <section class="slider" id="slider">
     <div class="slides" id="slides">
 
+      <!-- SLIDE 1 -->
       <article class="slide slide--overview">
         <div class="slide-bg"></div>
+
         <h1 class="slide-title">
           Zie je <span class="risk-gradient">risico</span>, voordat het jou vindt.
         </h1>
+
+        <a class="meer-link" href="overview.html">meer</a>
       </article>
 
+      <!-- SLIDE 2 -->
       <article class="slide slide--how">
         <div class="slide-bg"></div>
+
         <h1 class="slide-title">Hoe het werkt.</h1>
+
+        <a class="meer-link" href="how.html">meer</a>
       </article>
 
+      <!-- SLIDE 3 -->
       <article class="slide slide--why">
         <div class="slide-bg"></div>
+
         <h1 class="slide-title">Waarom mensen MyRiskScout gebruiken.</h1>
+
+        <a class="meer-link" href="why.html">meer</a>
       </article>
 
+      <!-- SLIDE 4 -->
       <article class="slide slide--data">
         <div class="slide-bg"></div>
+
         <h1 class="slide-title">Hoe we risicocijfers berekenen.</h1>
+
+        <a class="meer-link" href="data.html">meer</a>
       </article>
 
+      <!-- SLIDE 5 -->
       <article class="slide slide--privacy">
         <div class="slide-bg"></div>
+
         <h1 class="slide-title">Privacy & controle.</h1>
+
+        <a class="meer-link" href="privacy.html">meer</a>
       </article>
 
     </div>
@@ -269,11 +254,9 @@
         <img src="assets/app-store-badge.png" alt="Download in de App Store" />
       </a>
 
-      <!-- ✅ EINZIGE ÄNDERUNG HIER -->
       <a href="https://play.google.com/store/apps/details?id=com.myriskscout">
         <img src="assets/google-play-badge.png" alt="Ontdek het op Google Play" />
       </a>
-      <!-- ✅ Ende der Änderung -->
     </div>
 
     <p style="margin-top:1rem;">Of neem contact op:</p>
