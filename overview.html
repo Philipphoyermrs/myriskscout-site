@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Overzicht – MyRiskScout</title>
+  <title>MyRiskScout in één oogopslag – Overzicht</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
@@ -18,11 +18,12 @@
       position: relative;
     }
 
+    /* Achtergrond – zelfde sfeer als hoofdpagina */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background-image: url("assets/hero-heatmap.jpg");
+      background-image: url("assets/hero-bike-night.jpg");
       background-size: cover;
       background-position: center;
       filter: brightness(0.5);
@@ -37,6 +38,7 @@
       z-index: -1;
     }
 
+    /* Logo linksboven – geen menu */
     .brand-badge {
       position: fixed;
       top: 1.2rem;
@@ -50,6 +52,14 @@
       height: 36px;
       width: auto;
       filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
+      transform: translateZ(0);
+    }
+
+    @supports (top: env(safe-area-inset-top)) {
+      .brand-badge {
+        top: calc(env(safe-area-inset-top) + 0.75rem);
+        left: calc(env(safe-area-inset-left) + 0.75rem);
+      }
     }
 
     .page-wrapper {
@@ -60,19 +70,19 @@
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.9fr);
       gap: 2.4rem;
-      align-items: center;
+      align-items: stretch;
     }
 
     @media (max-width: 900px) {
       .layout {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: 1fr;
       }
     }
 
-    .text-block {
-      background: rgba(15,23,42,0.88);
+    .card-main {
+      background: rgba(15,23,42,0.9);
       border-radius: 20px;
       border: 1px solid rgba(148,163,184,0.6);
       padding: 2.1rem 2rem;
@@ -80,119 +90,119 @@
       box-shadow: 0 24px 60px rgba(15,23,42,0.7);
     }
 
-    .text-block h1 {
-      font-size: clamp(1.9rem, 3vw, 2.3rem);
-      margin-bottom: 0.8rem;
+    .card-main h1 {
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      line-height: 1.15;
+      margin-bottom: 0.4rem;
       color: #f9fafb;
     }
 
-    .text-block p.lead {
-      font-size: 0.98rem;
+    .subtitle {
+      font-size: 0.95rem;
       color: #cbd5f5;
       margin-bottom: 1.4rem;
     }
 
-    .feature-list {
-      list-style: none;
-      display: grid;
-      gap: 1rem;
-    }
-
-    .feature-item {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 0.75rem;
-    }
-
-    .feature-icon {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 0%, #22c55e, #16a34a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #052e16;
-    }
-
-    .feature-text-title {
-      font-size: 0.95rem;
-      font-weight: 600;
+    h2 {
+      font-size: 1.05rem;
+      margin-top: 1.3rem;
+      margin-bottom: 0.4rem;
       color: #e5e7eb;
     }
 
-    .feature-text-body {
-      font-size: 0.9rem;
-      color: #9ca3af;
-      line-height: 1.55;
+    p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #d1d5db;
+      margin-bottom: 0.6rem;
     }
 
-    .badge-row {
+    ul {
+      margin: 0.4rem 0 0.9rem 1.1rem;
+      padding: 0;
+    }
+
+    li {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      margin-bottom: 0.25rem;
+    }
+
+    .pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
     }
 
-    .badge {
-      font-size: 0.75rem;
+    .pill {
+      font-size: 0.78rem;
       padding: 0.25rem 0.6rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
+      border: 1px solid rgba(148,163,184,0.7);
       background: rgba(15,23,42,0.8);
-      color: #e5e7eb;
       text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #e5e7eb;
     }
 
-    .phone-column {
+    /* Side card – korte samenvatting / doelgroepen */
+    .card-side {
+      background: rgba(15,23,42,0.9);
+      border-radius: 20px;
+      border: 1px solid rgba(148,163,184,0.6);
+      padding: 1.8rem 1.6rem;
+      box-shadow: 0 20px 50px rgba(15,23,42,0.7);
+      backdrop-filter: blur(18px);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 1.4rem;
+      gap: 1.2rem;
     }
 
-    .phones {
+    .card-side h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: #e5e7eb;
+    }
+
+    .side-section-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 0.15rem;
+    }
+
+    .side-section-text {
+      font-size: 0.86rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+
+    .chip-row {
       display: flex;
-      gap: 1rem;
-      justify-content: center;
       flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.2rem;
     }
 
-    .phone {
-      width: 230px;
-      border-radius: 34px;
-      padding: 0.7rem;
-      background: #020617;
-      border: 1px solid rgba(148,163,184,0.7);
-      box-shadow:
-        0 24px 60px rgba(15,23,42,0.9),
-        0 0 0 1px rgba(15,23,42,0.5);
-    }
-
-    .phone--primary {
-      transform: translateY(-6px);
-    }
-
-    .phone-inner {
-      border-radius: 28px;
-      overflow: hidden;
-      background: #020617;
-    }
-
-    .phone-screen {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .phone-caption {
-      margin-top: 0.5rem;
+    .chip {
       font-size: 0.8rem;
-      text-align: center;
-      color: #cbd5f5;
-      max-width: 210px;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(51,65,85,0.9);
+      color: #e5e7eb;
+    }
+
+    @media (max-width: 700px) {
+      .card-main {
+        padding: 1.8rem 1.6rem;
+      }
+      .card-side {
+        padding: 1.6rem 1.4rem;
+      }
     }
   </style>
 </head>
@@ -207,80 +217,98 @@
   <main class="page-wrapper">
     <section class="layout">
 
-      <!-- TEXT -->
-      <div class="text-block">
-        <h1>Zie je risiconiveau per buurt – in één oogopslag.</h1>
-        <p class="lead">
-          MyRiskScout laat je zien hoe hoog het inbraak- en fietsdiefstalrisico is per buurt, 
-          helpt je de achterliggende risicofactoren te begrijpen en waarschuwt je wanneer je 
-          een hoog-risicogebied binnenkomt.
+      <!-- LINKERKANT: ALGEMEEN OVERZICHT -->
+      <article class="card-main">
+        <h1>MyRiskScout in één oogopslag.</h1>
+        <p class="subtitle">
+          De app die je helpt beter te begrijpen hoe veilig een buurt is – op basis van actuele data, slimme technologie en duidelijke inzichten.
         </p>
 
-        <ul class="feature-list">
-          <li class="feature-item">
-            <div class="feature-icon">1</div>
-            <div>
-              <div class="feature-text-title">Heatmap met risiconiveaus per buurt</div>
-              <div class="feature-text-body">
-                Verken de kaart met een duidelijke kleurcodering van lage naar hoge risico’s.
-              </div>
-            </div>
-          </li>
+        <h2>Veiligheidsinzichten per buurt</h2>
+        <p>
+          MyRiskScout toont het risiconiveau van elke buurt in jouw stad. Niet alleen waar het risico hoog is,
+          maar ook waar het juist laag of gemiddeld is.  
+          Je ziet in één oogopslag hoe buurten zich tot elkaar verhouden.
+        </p>
 
-          <li class="feature-item">
-            <div class="feature-icon">2</div>
-            <div>
-              <div class="feature-text-title">Risikodetails en tips</div>
-              <div class="feature-text-body">
-                Tik op een buurt om risicocijfers, drijvers en tips te zien.
-              </div>
-            </div>
-          </li>
+        <h2>Een kaart die je direct begrijpt</h2>
+        <p>
+          De app laat een kaart met een duidelijke <strong>heatmap</strong> zien. Kleuren lopen van groen (lager risico)
+          naar rood (hoger risico), zodat je meteen begrijpt wat de situatie is.  
+          Je kunt vrij door de stad bewegen of de app je huidige locatie laten volgen.
+        </p>
 
-          <li class="feature-item">
-            <div class="feature-icon">3</div>
-            <div>
-              <div class="feature-text-title">Alerts bij hoog risico</div>
-              <div class="feature-text-body">
-                Bij binnenkomst in een hoog-risicogebied ontvang je een alert.
-              </div>
-            </div>
-          </li>
-        </ul>
+        <h2>Begrijp waarom een buurt hoger scoort</h2>
+        <p>
+          MyRiskScout laat niet alleen een score zien, maar ook de belangrijkste <strong>risicodrijvers</strong>.
+          Zo zie je waarom het risico in een buurt hoger is – bijvoorbeeld door fietsdiefstal, woningtypes of andere kenmerken.
+        </p>
 
-        <div class="badge-row">
-          <span class="badge">Heatmap</span>
-          <span class="badge">Buurtinzichten</span>
-          <span class="badge">Alerts</span>
+        <h2>Alerts wanneer het ertoe doet</h2>
+        <p>
+          Je kunt een melding ontvangen als je een buurt binnenkomt met een duidelijk hoger risico.  
+          Dat helpt vooral bij fietsveiligheid, avondroutes of wanneer je in een onbekende buurt bent.
+        </p>
+
+        <h2>Privacy voorop</h2>
+        <p>
+          De app vraagt alleen wat echt nodig is. Er worden geen gedetailleerde routes opgeslagen en je bepaalt zelf
+          of locatie en alerts aan staan. In ons <a href="privacy.html">privacybeleid</a> lees je precies hoe we met je gegevens omgaan.
+        </p>
+
+        <div class="pill-row">
+          <span class="pill">Risiconiveaus per buurt</span>
+          <span class="pill">Heatmap & context</span>
+          <span class="pill">Alerts bij hoog risico</span>
+          <span class="pill">Privacy by design</span>
         </div>
-      </div>
+      </article>
 
-      <!-- PHONES -->
-      <div class="phone-column">
-        <div class="phones">
+      <!-- RECHTERKANT: VOOR WIE EN WAAROM -->
+      <aside class="card-side">
+        <h3>Voor wie is MyRiskScout?</h3>
 
-          <!-- Primary: Heatmap -->
-          <div class="phone phone--primary">
-            <div class="phone-inner">
-              <img src="assets/app-map-screenshot.jpg" 
-                   alt="MyRiskScout kaart screenshot" 
-                   class="phone-screen">
-            </div>
-            <p class="phone-caption">Heatmap met risiconiveaus per buurt.</p>
+        <div>
+          <div class="side-section-title">Bewoners & woningzoekers</div>
+          <div class="side-section-text">
+            Gebruiken MyRiskScout om buurten te vergelijken en beter te begrijpen waar ze zich veilig voelen.
           </div>
-
-          <!-- Secondary: Risk Detail -->
-          <div class="phone">
-            <div class="phone-inner">
-              <img src="assets/risk-detail-screenshot.jpg" 
-                   alt="MyRiskScout risicodetails screenshot" 
-                   class="phone-screen">
-            </div>
-            <p class="phone-caption">Risikodetails en tips per buurt.</p>
-          </div>
-
         </div>
-      </div>
+
+        <div>
+          <div class="side-section-title">Fietsers & ouders</div>
+          <div class="side-section-text">
+            Krijgen inzicht in waar zij (of hun kinderen) hun fiets beter wel of niet achterlaten en welke routes slimmer zijn.
+          </div>
+        </div>
+
+        <div>
+          <div class="side-section-title">Expats & nieuwkomers</div>
+          <div class="side-section-text">
+            Kunnen snel zien hoe buurten verschillen in veiligheid, zonder jarenlange lokale kennis nodig te hebben.
+          </div>
+        </div>
+
+        <div>
+          <div class="side-section-title">Verzekeringsshoppers</div>
+          <div class="side-section-text">
+            Begrijpen eerst hun werkelijke risico en kiezen daarna gerichter een verzekering die daarbij past.
+          </div>
+        </div>
+
+        <div>
+          <div class="side-section-title">Kort samengevat</div>
+          <div class="side-section-text">
+            MyRiskScout is er voor iedereen die niet op gevoel, maar op inzicht wil vertrouwen.
+          </div>
+          <div class="chip-row">
+            <span class="chip">Wonen</span>
+            <span class="chip">Fietsen</span>
+            <span class="chip">Routes</span>
+            <span class="chip">Verzekeren</span>
+          </div>
+        </div>
+      </aside>
 
     </section>
   </main>
