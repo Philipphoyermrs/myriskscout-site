@@ -2,282 +2,188 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Algemene voorwaarden – MyRiskScout</title>
+  <title>Gebruiksvoorwaarden – MyRiskScout</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Algemene voorwaarden voor het gebruik van de MyRiskScout-app."
-  />
+
   <style>
-    :root {
-      --bg-dark: #040b2a;
-      --bg-darker: #020618;
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
-      --max-width: 900px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #0e1630, #050a19);
-      color: var(--text-main);
-      line-height: 1.6;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    .container {
-      width: 100%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 1.5rem;
+    /* Achtergrond (zelfde stijl als privacy) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("assets/hero-privacy.jpg") center/cover no-repeat;
+      filter: brightness(0.55);
+      z-index: -2;
     }
 
-    /* HEADER */
-    .site-header {
-      position: sticky;
-      top: 0;
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.6), transparent 50%);
+      z-index: -1;
+    }
+
+    /* Logo linksboven – geen menu */
+    .brand-badge {
+      position: fixed;
+      top: 1.2rem;
+      left: 1.2rem;
       z-index: 20;
+    }
+
+    .brand-badge img {
+      height: 36px;
+      filter: drop-shadow(0 0 4px rgba(0,0,0,0.6));
+    }
+
+    /* Layout kaart */
+    .wrapper {
+      max-width: 780px;
+      margin: 6rem auto 3rem auto;
+      background: rgba(255,255,255,0.88);
       backdrop-filter: blur(14px);
-      background: rgba(5,10,25,0.85);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 2.5rem;
-    }
-
-    .site-header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 0;
-    }
-
-    .brand-logo-full { height: 38px; }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .nav-links a:hover { color: #e5e7eb; }
-
-    main { padding-bottom: 3rem; }
-
-    .page-header {
-      margin-bottom: 1.5rem;
-    }
-
-    .page-kicker {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.3rem;
+      padding: 2.4rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.28);
     }
 
     h1 {
-      font-size: 1.9rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .meta {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: #0f172a;
+      text-align: left;
     }
 
     h2 {
-      font-size: 1.25rem;
-      margin-top: 1.8rem;
-      margin-bottom: 0.4rem;
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 0.6rem;
+      color: #0f172a;
     }
 
-    p { margin-bottom: 0.8rem; }
+    p, li {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: #1e293b;
+    }
 
-    ul { margin: 0.3rem 0 1rem 1.2rem; }
+    ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
 
-    li { margin-bottom: 0.3rem; }
-
-    strong { font-weight: 600; }
-
-    .link {
-      color: #bfdbfe;
+    a {
+      color: #0f172a;
       text-decoration: underline;
-      text-underline-offset: 3px;
     }
 
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 1.5rem 0 2rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 1rem;
+    .back {
+      margin-top: 2.4rem;
+      text-align: center;
+      font-size: 0.9rem;
     }
 
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-links a {
-      margin-left: 1rem;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+    .back a {
+      color: #0f172a;
+      text-decoration: none;
+      border-bottom: 1px dashed #0f172a;
+      padding-bottom: 1px;
     }
   </style>
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container site-header-inner">
-      <a href="/"><img src="assets/logo-full.png" alt="MyRiskScout" class="brand-logo-full" /></a>
-      <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="/#how">Hoe het werkt</a>
-        <a href="/#who">Voor wie</a>
-        <a href="/#data">AI & data</a>
-        <a href="/contact.html">Contact</a>
-      </nav>
+
+  <!-- Logo (geen menu) -->
+  <div class="brand-badge">
+    <img src="assets/myriskscout-logo.png" alt="MyRiskScout Logo">
+  </div>
+
+  <div class="wrapper">
+
+    <h1>Gebruiksvoorwaarden</h1>
+
+    <p>
+      Deze Gebruiksvoorwaarden zijn van toepassing op het gebruik van de MyRiskScout-app en de bijbehorende diensten.
+      Door de app te installeren of te gebruiken, ga je akkoord met deze voorwaarden.
+    </p>
+
+    <h2>1. Doel van de app</h2>
+    <p>
+      MyRiskScout helpt je om risiconiveaus per buurt in te zien en beter geïnformeerde keuzes te maken rondom bijvoorbeeld
+      fietsenstalling, routekeuze of woonomgeving. De getoonde risiconiveaus zijn gebaseerd op historische data en
+      modellen en vormen geen individueel advies of garantie.
+    </p>
+
+    <h2>2. Geen garantie</h2>
+    <p>
+      Hoewel we ons best doen om de informatie zo actueel en nauwkeurig mogelijk te houden, kunnen wij niet garanderen
+      dat alle data volledig, juist of up-to-date is. Gebruik van de app is op eigen risico.
+    </p>
+
+    <h2>3. Verantwoord gebruik</h2>
+    <ul>
+      <li>Je gebruikt de app niet op een manier die in strijd is met de wet.</li>
+      <li>Je misbruikt de app niet (bijv. hacken, scrapen, reverse-engineering).</li>
+      <li>Je mag de app niet gebruiken om anderen te stalken, controleren of anderszins te schaden.</li>
+    </ul>
+
+    <h2>4. Intellectuele eigendom</h2>
+    <p>
+      Alle inhoud in de app (zoals kaarten, risicoscores, teksten, logo's en ontwerpen) is eigendom van MyRiskScout of
+      haar licentiegevers en wordt beschermd door auteursrecht en andere intellectuele eigendomsrechten.
+      Je mag deze inhoud niet kopiëren, verspreiden of commercieel gebruiken zonder voorafgaande schriftelijke toestemming.
+    </p>
+
+    <h2>5. Aansprakelijkheid</h2>
+    <p>
+      MyRiskScout is niet aansprakelijk voor:
+    </p>
+    <ul>
+      <li>Indirecte schade, gevolgschade of gederfde winst.</li>
+      <li>Schade als gevolg van beslissingen die je neemt op basis van de informatie in de app.</li>
+      <li>Storingen, onderbrekingen of fouten in de werking van de app.</li>
+    </ul>
+
+    <h2>6. Wijzigingen in de app en voorwaarden</h2>
+    <p>
+      We kunnen de app en deze Gebruiksvoorwaarden op elk moment wijzigen of bijwerken. Wanneer er belangrijke wijzigingen zijn,
+      communiceren we dit via de app of via onze website. Door de app te blijven gebruiken, ga je akkoord met de bijgewerkte voorwaarden.
+    </p>
+
+    <h2>7. Beëindiging van gebruik</h2>
+    <p>
+      Je kunt het gebruik van de app op elk moment beëindigen door de app van je toestel te verwijderen.
+      Wij behouden ons het recht voor om (delen van) de dienst tijdelijk of permanent stop te zetten.
+    </p>
+
+    <h2>8. Toepasselijk recht</h2>
+    <p>
+      Op deze Gebruiksvoorwaarden is Nederlands recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechter in Nederland.
+    </p>
+
+    <h2>9. Contact</h2>
+    <p>
+      Heb je vragen over deze Gebruiksvoorwaarden? Neem dan contact met ons op via:<br>
+      <a href="mailto:info@myriskscout.com">info@myriskscout.com</a>
+    </p>
+
+    <div class="back">
+      <a href="index.html">← Terug naar homepage</a>
     </div>
-  </header>
 
-  <main>
-    <div class="container">
-      <header class="page-header">
-        <div class="page-kicker">Algemene voorwaarden</div>
-        <h1>Voorwaarden voor het gebruik van MyRiskScout</h1>
-        <p class="meta">Laatst bijgewerkt: december 2025</p>
-      </header>
+  </div>
 
-      <p>
-        Deze algemene voorwaarden zijn van toepassing op het gebruik van de MyRiskScout-app
-        (“de app”), aangeboden door MyRiskScout B.V. Door de app te installeren of te gebruiken,
-        ga je akkoord met deze voorwaarden.
-      </p>
-
-      <h2>1. Doel van de app</h2>
-      <p>
-        MyRiskScout toont misdaadrisico’s op buurtniveau, met name voor inbraak en
-        fietsdiefstal in Amsterdam (en later mogelijk andere gebieden). Elke buurt krijgt
-        een <strong>risicoscore op een schaal van 0–100</strong>, waarbij een hogere
-        score wijst op een hoger geschat risiconiveau.
-      </p>
-      <p>
-        De app is bedoeld om je <strong>bewustzijn</strong> te vergroten en je te helpen
-        beter geïnformeerde keuzes te maken over routes, timing en gedrag. De app vervangt
-        nooit je eigen oordeel of basisveiligheidsmaatregelen.
-      </p>
-
-      <h2>2. Geen garantie en geen voorspellingen op individueel niveau</h2>
-      <p>
-        De risicoscores zijn gebaseerd op statistische modellen en historische gegevens.
-        Ze beschrijven het geschatte risiconiveau van een gebied, maar zijn
-        <strong>geen voorspelling</strong> van individuele incidenten of een garantie dat
-        iets wel of niet gebeurt.
-      </p>
-      <p>
-        Er kunnen altijd incidenten plaatsvinden in buurten met een lagere score,
-        net zoals er mogelijk niets gebeurt in een buurt met een hogere score.
-        MyRiskScout kan daarom geen garantie geven op veiligheid.
-      </p>
-
-      <h2>3. Gebruik van locatiegegevens</h2>
-      <p>
-        De app kan locatiegegevens gebruiken om te bepalen in welke buurt je je
-        bevindt en of een alert relevant is. Je kunt zelf bepalen of je locatie deelt
-        en je kunt dit op elk moment uitschakelen via de instellingen van je apparaat.
-      </p>
-      <p>
-        Zonder locatiegegevens kan de app minder functies aanbieden, zoals het automatisch
-        tonen van alerts wanneer je een hoog-risicogebied binnenkomt.
-      </p>
-
-      <h2>4. Verantwoord gebruik</h2>
-      <p>Je bent zelf verantwoordelijk voor hoe je de informatie in de app gebruikt. Dat betekent onder andere dat je:</p>
-      <ul>
-        <li>altijd je eigen veiligheid en gezond verstand voorop zet;</li>
-        <li>de app niet gebruikt om anderen te intimideren, discrimineren of te profileren;</li>
-        <li>de app niet misbruikt of probeert te manipuleren (bijvoorbeeld door hacking of reverse engineering);</li>
-        <li>
-          rekening houdt met het feit dat de kaart en scores nooit 100% volledig of actueel
-          kunnen zijn.
-        </li>
-      </ul>
-
-      <h2>5. Intellectueel eigendom</h2>
-      <p>
-        Alle rechten op de app, de risicomodellen, kaarten, vormgeving en naam “MyRiskScout”
-        liggen bij MyRiskScout B.V. of haar licentiegevers. Je krijgt een persoonlijk,
-        niet-exclusief en niet-overdraagbaar gebruiksrecht voor de app, uitsluitend voor
-        eigen, niet-commercieel gebruik.
-      </p>
-
-      <h2>6. Aansprakelijkheid</h2>
-      <p>
-        MyRiskScout spant zich in om de app zo zorgvuldig en actueel mogelijk aan te bieden,
-        maar kan niet garanderen dat de app foutloos of altijd beschikbaar is.
-      </p>
-      <p>
-        Voor zover wettelijk is toegestaan, is MyRiskScout niet aansprakelijk voor:
-      </p>
-      <ul>
-        <li>indirecte schade, gevolgschade of gederfde winst;</li>
-        <li>schade die voortvloeit uit het gebruik van de app of het vertrouwen op de getoonde informatie;</li>
-        <li>incidenten of misdrijven die zich voordoen, ook niet in gebieden met een lage score.</li>
-      </ul>
-      <p>
-        Mocht MyRiskScout toch aansprakelijk zijn, dan is die aansprakelijkheid beperkt
-        tot het bedrag dat in het betreffende geval door de aansprakelijkheidsverzekering
-        wordt uitgekeerd, of – als er geen dekking is – tot maximaal € 1.000.
-      </p>
-
-      <h2>7. Wijzigingen aan de app</h2>
-      <p>
-        We kunnen de app en haar functionaliteiten op elk moment wijzigen, uitbreiden,
-        beperken of beëindigen. We proberen belangrijke wijzigingen duidelijk te
-        communiceren, bijvoorbeeld via een updatebericht in de app of op de website.
-      </p>
-
-      <h2>8. Wijzigingen van deze voorwaarden</h2>
-      <p>
-        We kunnen deze voorwaarden aanpassen. De meest recente versie is altijd te vinden
-        op deze pagina. Als wijzigingen substantieel zijn, zullen we dit waar mogelijk
-        melden in de app. Door de app te blijven gebruiken na een wijziging, ga je akkoord
-        met de aangepaste voorwaarden.
-      </p>
-
-      <h2>9. Toepasselijk recht en bevoegde rechter</h2>
-      <p>
-        Op deze voorwaarden en op het gebruik van de app is Nederlands recht van toepassing.
-        Geschillen die hieruit voortvloeien worden voorgelegd aan de bevoegde rechter in
-        Nederland.
-      </p>
-
-      <h2>10. Contact</h2>
-      <p>
-        Heb je vragen over deze voorwaarden of over MyRiskScout in het algemeen?
-        Neem dan contact met ons op via
-        <a href="mailto:info@myriskscout.com" class="link">info@myriskscout.com</a>.
-      </p>
-    </div>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> MyRiskScout B.V. – Amsterdam</div>
-      <div class="footer-links">
-        <a href="/">Home</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-    </div>
-    <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
-  </footer>
 </body>
 </html>
