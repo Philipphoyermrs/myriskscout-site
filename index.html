@@ -69,7 +69,6 @@
       transform: translateZ(0);
     }
 
-    /* Safe-Area für iOS */
     @supports (top: env(safe-area-inset-top)) {
       .brand-badge {
         top: calc(env(safe-area-inset-top) + 0.75rem);
@@ -137,15 +136,16 @@
       }
     }
 
+    /* -------------------------------------------- */
+    /* TITEL STANDARD → WEISS (für alle außer Slide 1) */
+    /* -------------------------------------------- */
+
     .slide-title {
       font-size: clamp(2.5rem, 6vw, 3.6rem);
       font-weight: 700;
       line-height: 1.1;
       max-width: 900px;
-      background-image: linear-gradient(120deg, #22c55e, #eab308, #f97316, #ef4444);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: #ffffff;                  /* ← neu: Weiß für alle andere Slides */
       text-shadow: 0 3px 20px rgba(0,0,0,0.55);
       opacity: 0;
       transform: translateY(10px);
@@ -155,9 +155,9 @@
       animation: fadeUpTitle 0.7s ease-out forwards;
     }
 
-    /* ------------------------------- */
-    /*   🔥 NEU: GRADIENT NUR FÜR „RISICO“   */
-    /* ------------------------------- */
+    /* -------------------------------------------- */
+    /* SLIDE 1: Nur das Wort „risico“ im Gradient  */
+    /* -------------------------------------------- */
 
     .risk-gradient {
       background-image: linear-gradient(120deg, #22c55e, #eab308, #f97316, #ef4444);
@@ -173,8 +173,9 @@
     }
 
     /* BACKGROUND-IMAGES */
+
     .slide--overview .slide-bg {
-      background-image: url("assets/hero-bike-night.png");
+      background-image: url("assets/hero-bike-night.jpg");
     }
     .slide--how .slide-bg {
       background-image: url("assets/hero-heatmap.jpg");
@@ -302,37 +303,32 @@
       <!-- SLIDE 1 -->
       <article class="slide slide--overview">
         <div class="slide-bg"></div>
-        <div class="slide-overlay"></div>
         <h1 class="slide-title">
           Zie je <span class="risk-gradient">risico</span>, voordat het jou vindt.
         </h1>
       </article>
 
-      <!-- SLIDE 2 -->
+      <!-- SLIDE 2 (weiß) -->
       <article class="slide slide--how">
         <div class="slide-bg"></div>
-        <div class="slide-overlay"></div>
         <h1 class="slide-title">Hoe het werkt.</h1>
       </article>
 
-      <!-- SLIDE 3 -->
+      <!-- SLIDE 3 (weiß) -->
       <article class="slide slide--why">
         <div class="slide-bg"></div>
-        <div class="slide-overlay"></div>
         <h1 class="slide-title">Waarom mensen MyRiskScout gebruiken.</h1>
       </article>
 
-      <!-- SLIDE 4 -->
+      <!-- SLIDE 4 (weiß) -->
       <article class="slide slide--data">
         <div class="slide-bg"></div>
-        <div class="slide-overlay"></div>
         <h1 class="slide-title">Hoe we risicocijfers berekenen.</h1>
       </article>
 
-      <!-- SLIDE 5 -->
+      <!-- SLIDE 5 (weiß) -->
       <article class="slide slide--privacy">
         <div class="slide-bg"></div>
-        <div class="slide-overlay"></div>
         <h1 class="slide-title">Privacy & controle.</h1>
       </article>
 
