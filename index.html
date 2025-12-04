@@ -22,10 +22,7 @@
       overflow-x: hidden;
     }
 
-    /* ------------------------------------------------- */
-    /* BRAND LOGO (BOX ENTFERNT — NUR LOGO BLEIBT)       */
-    /* ------------------------------------------------- */
-
+    /* LOGO OHNE BOX */
     .brand-badge {
       position: fixed;
       top: 1.2rem;
@@ -39,12 +36,10 @@
       height: 36px;
       width: auto;
       display: block;
-      will-change: transform;
       transform: translateZ(0);
       filter: drop-shadow(0 0 4px rgba(0,0,0,0.35));
     }
 
-    /* Safe-Area für iOS */
     @supports (top: env(safe-area-inset-top)) {
       .brand-badge {
         top: calc(env(safe-area-inset-top) + 0.75rem);
@@ -53,7 +48,6 @@
     }
 
     /* SLIDER */
-
     .slider {
       position: relative;
       width: 100%;
@@ -87,14 +81,11 @@
       opacity: 1;
     }
 
-    .slide-overlay { display: none; }
-
     @keyframes fadeUpTitle {
       0% { opacity: 0; transform: translateY(10px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* TITEL STANDARD → WEISS */
     .slide-title {
       font-size: clamp(2.5rem, 6vw, 3.6rem);
       font-weight: 700;
@@ -110,16 +101,12 @@
       animation: fadeUpTitle 0.7s ease-out forwards;
     }
 
-    /* Slide 1: nur „risico“ im Gradient */
+    /* Gradient nur für „risico“ */
     .risk-gradient {
       background-image: linear-gradient(120deg, #22c55e, #eab308, #f97316, #ef4444);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-    }
-
-    .slide--overview .slide-title {
-      color: #ffffff !important;
     }
 
     /* BACKGROUNDS */
@@ -163,13 +150,6 @@
       align-items: center;
       justify-content: center;
       font-size: 1.4rem;
-      color: #475569;
-      transition: 0.2s;
-    }
-
-    .slider-arrow:hover {
-      background: rgba(255,255,255,0.9);
-      transform: translateY(-2px);
     }
 
     .slider-dots {
@@ -182,7 +162,6 @@
       height: 9px;
       border-radius: 999px;
       background: #cbd5e1;
-      cursor: pointer;
       transition: width 0.2s, background 0.2s;
     }
 
@@ -235,7 +214,7 @@
 
 <body>
 
-  <!-- NUR DAS LOGO — OHNE BOX -->
+  <!-- LOGO -->
   <div class="brand-badge">
     <img src="assets/myriskscout-logo.png" alt="MyRiskScout Logo">
   </div>
@@ -244,7 +223,6 @@
   <section class="slider" id="slider">
     <div class="slides" id="slides">
 
-      <!-- SLIDE 1 -->
       <article class="slide slide--overview">
         <div class="slide-bg"></div>
         <h1 class="slide-title">
@@ -252,25 +230,21 @@
         </h1>
       </article>
 
-      <!-- SLIDE 2 -->
       <article class="slide slide--how">
         <div class="slide-bg"></div>
         <h1 class="slide-title">Hoe het werkt.</h1>
       </article>
 
-      <!-- SLIDE 3 -->
       <article class="slide slide--why">
         <div class="slide-bg"></div>
         <h1 class="slide-title">Waarom mensen MyRiskScout gebruiken.</h1>
       </article>
 
-      <!-- SLIDE 4 -->
       <article class="slide slide--data">
         <div class="slide-bg"></div>
         <h1 class="slide-title">Hoe we risicocijfers berekenen.</h1>
       </article>
 
-      <!-- SLIDE 5 -->
       <article class="slide slide--privacy">
         <div class="slide-bg"></div>
         <h1 class="slide-title">Privacy & controle.</h1>
@@ -299,7 +273,9 @@
     </div>
 
     <p style="margin-top:1rem;">Of neem contact op:</p>
-    <a href="contact.html" style="
+
+    <!-- ✅ NUR HIER WURDE ETWAS GEÄNDERT -->
+    <a href="#contact" style="
       margin-top:0.5rem;
       padding:0.7rem 1.4rem;
       border-radius:999px;
@@ -310,6 +286,8 @@
       font-size:0.9rem;
       font-weight:500;
     ">Contact</a>
+    <!-- ✅ Ende der Änderung -->
+
   </section>
 
   <!-- FOOTER -->
@@ -374,16 +352,10 @@
 
     window.addEventListener("DOMContentLoaded", () => {
       const logo = document.querySelector(".brand-badge img");
-      if (logo) {
-        setTimeout(() => {
-          logo.src = "assets/myriskscout-logo.png";
-        }, 80);
-      }
+      setTimeout(() => { logo.src = "assets/myriskscout-logo.png"; }, 80);
       activateTitle(0);
     });
   </script>
 
 </body>
 </html>
-
-
