@@ -17,13 +17,13 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
       background: #f8fafc;
-      color: var(--text-main);
+      color: #0f172a;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
     /* ------------------------------------------------- */
-    /* BRAND BADGE (NEUE ÄNDERUNG MIT PULSIERENDEM GLOW) */
+    /* BRAND BADGE MIT PULS-GLOW + MOBILE / SAFARI FIX  */
     /* ------------------------------------------------- */
 
     @keyframes softPulse {
@@ -55,8 +55,8 @@
       padding: 0.45rem 0.85rem;
       background: rgba(255, 255, 255, 0.55);
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-radius: 14px;
-
       animation: softPulse 3s ease-in-out infinite;
     }
 
@@ -65,6 +65,25 @@
       width: auto;
       display: block;
       filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
+      will-change: transform;
+      transform: translateZ(0); /* Safari-Render-Fix */
+    }
+
+    /* Safe-Area für iOS (Notch) berücksichtigen */
+    @supports (top: env(safe-area-inset-top)) {
+      .brand-badge {
+        top: calc(env(safe-area-inset-top) + 0.75rem);
+        left: calc(env(safe-area-inset-left) + 0.75rem);
+      }
+    }
+
+    /* Zusätzlicher Safari-Tweak */
+    @supports (-webkit-touch-callout: none) {
+      .brand-badge {
+        background: rgba(255,255,255,0.65);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
     }
 
     /* --- SLIDER --- */
@@ -104,20 +123,47 @@
       filter: none;
     }
 
-/* Overlay deaktiviert */
-.slide-overlay {
-  display: none;
-}
+    /* Overlay deaktiviert – Bild bleibt klar */
+    .slide-overlay {
+      display: none;
+    }
 
+    /* Fade-up-Animation der Headlines */
+    @keyframes fadeUpTitle {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-   .slide-title {
-  color: #ffffff; /* Weiß für bessere Lesbarkeit */
-  text-shadow: 0 3px 12px rgba(0,0,0,0.45); /* Apple-Lesbarkeit auf Foto */
-}
+    .slide-title {
+      font-size: clamp(2.5rem, 6vw, 3.6rem); /* etwas größer */
+      font-weight: 700;
+      line-height: 1.1;
+      max-width: 900px;
+
+      /* Gradient-Text in Risiko-Farben */
+      background-image: linear-gradient(120deg, #22c55e, #eab308, #f97316, #ef4444);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+
+      text-shadow: 0 3px 20px rgba(0,0,0,0.55);
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .slide-title.active-title {
+      animation: fadeUpTitle 0.7s ease-out forwards;
+    }
 
     /* BACKGROUNDS */
     .slide--overview .slide-bg {
-      background-image: url("assets/hero-bike-night.jpg");
+      background-image: url("assets/hero-bike-night.png");
     }
     .slide--how .slide-bg {
       background-image: url("assets/hero-heatmap.jpg");
@@ -152,6 +198,7 @@
       border: 1px solid rgba(148,163,184,0.5);
       background: rgba(255,255,255,0.7);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -222,12 +269,20 @@
       text-underline-offset: 3px;
     }
 
+    @media (max-width: 640px) {
+      .slide {
+        padding: 1.6rem;
+      }
+      .slide-title {
+        font-size: 2.2rem;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- BRAND BADGE (NEU) -->
+  <!-- BRAND BADGE -->
   <div class="brand-badge">
     <img src="assets/myriskscout-logo.png" alt="MyRiskScout Logo">
   </div>
@@ -281,21 +336,24 @@
 
     <div class="store-buttons">
       <a href="https://apps.apple.com/nl/app/myriskscout/id6745505077">
-        <img src="assets/app_store_badge.png" />
+        <img src="assets/app_store_badge.png" alt="Download in de App Store" />
       </a>
       <a href="#">
-        <img src="assets/google-play-badge.png" />
+        <img src="assets/google-play-badge.png" alt="Ontdek het op Google Play" />
       </a>
     </div>
 
     <p style="margin-top:1rem;">Of neem contact op:</p>
-    <a href="contact.html" class="btn-primary" style="
+    <a href="contact.html" style="
       margin-top:0.5rem;
       padding:0.7rem 1.4rem;
       border-radius:999px;
       background:#0f172a;
       color:white;
       display:inline-block;
+      text-decoration:none;
+      font-size:0.9rem;
+      font-weight:500;
     ">Contact</a>
   </section>
 
@@ -315,10 +373,12 @@
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const slider = document.getElementById("slider");
+    const titles = document.querySelectorAll(".slide-title");
 
     let currentSlide = 0;
     const totalSlides = slides.length;
 
+    // Dots erzeugen
     for (let i = 0; i < totalSlides; i++) {
       const dot = document.createElement("div");
       dot.className = "slider-dot" + (i === 0 ? " active" : "");
@@ -327,12 +387,24 @@
     }
     const dots = document.querySelectorAll(".slider-dot");
 
+    function activateTitle(index) {
+      titles.forEach((t, i) => {
+        t.classList.remove("active-title");
+        if (i === index) {
+          // Animation neu starten
+          void t.offsetWidth;
+          t.classList.add("active-title");
+        }
+      });
+    }
+
     function goToSlide(index) {
       if (index < 0) index = 0;
       if (index >= totalSlides) index = totalSlides - 1;
       currentSlide = index;
       slidesContainer.style.transform = `translateX(-${index * 100}%)`;
       dots.forEach((d,i)=>d.classList.toggle("active", i===index));
+      activateTitle(index);
     }
 
     prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
@@ -347,8 +419,19 @@
       if (diff > 50) goToSlide(currentSlide - 1);
       if (diff < -50) goToSlide(currentSlide + 1);
     });
+
+    // Safari-Workaround: Logo-Src nach kurzer Verzögerung neu setzen
+    window.addEventListener("DOMContentLoaded", () => {
+      const logo = document.querySelector(".brand-badge img");
+      if (logo) {
+        setTimeout(() => {
+          logo.src = "assets/myriskscout-logo.png";
+        }, 80);
+      }
+      // erste Headline animiert starten
+      activateTitle(0);
+    });
   </script>
 
 </body>
 </html>
-
