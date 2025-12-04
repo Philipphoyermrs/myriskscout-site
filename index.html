@@ -23,26 +23,8 @@
     }
 
     /* ------------------------------------------------- */
-    /* BRAND BADGE MIT PULS-GLOW + MOBILE / SAFARI FIX  */
+    /* BRAND LOGO (BOX ENTFERNT — NUR LOGO BLEIBT)       */
     /* ------------------------------------------------- */
-
-    @keyframes softPulse {
-      0% {
-        box-shadow:
-          0 0 14px rgba(255,255,255,0.45),
-          0 4px 14px rgba(0,0,0,0.10);
-      }
-      50% {
-        box-shadow:
-          0 0 22px rgba(255,255,255,0.65),
-          0 6px 18px rgba(0,0,0,0.12);
-      }
-      100% {
-        box-shadow:
-          0 0 14px rgba(255,255,255,0.45),
-          0 4px 14px rgba(0,0,0,0.10);
-      }
-    }
 
     .brand-badge {
       position: fixed;
@@ -51,36 +33,22 @@
       z-index: 9999;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.45rem 0.85rem;
-      background: rgba(255, 255, 255, 0.55);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-radius: 14px;
-      animation: softPulse 3s ease-in-out infinite;
     }
 
     .brand-badge img {
-      height: 32px;
+      height: 36px;
       width: auto;
       display: block;
-      filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
       will-change: transform;
       transform: translateZ(0);
+      filter: drop-shadow(0 0 4px rgba(0,0,0,0.35));
     }
 
+    /* Safe-Area für iOS */
     @supports (top: env(safe-area-inset-top)) {
       .brand-badge {
         top: calc(env(safe-area-inset-top) + 0.75rem);
         left: calc(env(safe-area-inset-left) + 0.75rem);
-      }
-    }
-
-    @supports (-webkit-touch-callout: none) {
-      .brand-badge {
-        background: rgba(255,255,255,0.65);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
       }
     }
 
@@ -107,7 +75,6 @@
       justify-content: center;
       text-align: center;
       padding: 2rem;
-      color: var(--text-main);
     }
 
     .slide-bg {
@@ -118,34 +85,22 @@
       background-repeat: no-repeat;
       z-index: -2;
       opacity: 1;
-      filter: none;
     }
 
-    .slide-overlay {
-      display: none;
-    }
+    .slide-overlay { display: none; }
 
     @keyframes fadeUpTitle {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* -------------------------------------------- */
-    /* TITEL STANDARD → WEISS (für alle außer Slide 1) */
-    /* -------------------------------------------- */
-
+    /* TITEL STANDARD → WEISS */
     .slide-title {
       font-size: clamp(2.5rem, 6vw, 3.6rem);
       font-weight: 700;
       line-height: 1.1;
       max-width: 900px;
-      color: #ffffff;                  /* ← neu: Weiß für alle andere Slides */
+      color: #ffffff;
       text-shadow: 0 3px 20px rgba(0,0,0,0.55);
       opacity: 0;
       transform: translateY(10px);
@@ -155,10 +110,7 @@
       animation: fadeUpTitle 0.7s ease-out forwards;
     }
 
-    /* -------------------------------------------- */
-    /* SLIDE 1: Nur das Wort „risico“ im Gradient  */
-    /* -------------------------------------------- */
-
+    /* Slide 1: nur „risico“ im Gradient */
     .risk-gradient {
       background-image: linear-gradient(120deg, #22c55e, #eab308, #f97316, #ef4444);
       -webkit-background-clip: text;
@@ -168,14 +120,11 @@
 
     .slide--overview .slide-title {
       color: #ffffff !important;
-      background: none !important;
-      -webkit-background-clip: unset !important;
     }
 
-    /* BACKGROUND-IMAGES */
-
+    /* BACKGROUNDS */
     .slide--overview .slide-bg {
-      background-image: url("assets/hero-bike-night.jpg");
+      background-image: url("assets/hero-bike-night.png");
     }
     .slide--how .slide-bg {
       background-image: url("assets/hero-heatmap.jpg");
@@ -191,7 +140,6 @@
     }
 
     /* CONTROLS */
-
     .slider-controls {
       position: absolute;
       bottom: 1.8rem;
@@ -210,7 +158,6 @@
       border: 1px solid rgba(148,163,184,0.5);
       background: rgba(255,255,255,0.7);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -279,9 +226,6 @@
     }
 
     @media (max-width: 640px) {
-      .slide {
-        padding: 1.6rem;
-      }
       .slide-title {
         font-size: 2.2rem;
       }
@@ -291,7 +235,7 @@
 
 <body>
 
-  <!-- LOGO BADGE -->
+  <!-- NUR DAS LOGO — OHNE BOX -->
   <div class="brand-badge">
     <img src="assets/myriskscout-logo.png" alt="MyRiskScout Logo">
   </div>
@@ -308,25 +252,25 @@
         </h1>
       </article>
 
-      <!-- SLIDE 2 (weiß) -->
+      <!-- SLIDE 2 -->
       <article class="slide slide--how">
         <div class="slide-bg"></div>
         <h1 class="slide-title">Hoe het werkt.</h1>
       </article>
 
-      <!-- SLIDE 3 (weiß) -->
+      <!-- SLIDE 3 -->
       <article class="slide slide--why">
         <div class="slide-bg"></div>
         <h1 class="slide-title">Waarom mensen MyRiskScout gebruiken.</h1>
       </article>
 
-      <!-- SLIDE 4 (weiß) -->
+      <!-- SLIDE 4 -->
       <article class="slide slide--data">
         <div class="slide-bg"></div>
         <h1 class="slide-title">Hoe we risicocijfers berekenen.</h1>
       </article>
 
-      <!-- SLIDE 5 (weiß) -->
+      <!-- SLIDE 5 -->
       <article class="slide slide--privacy">
         <div class="slide-bg"></div>
         <h1 class="slide-title">Privacy & controle.</h1>
@@ -341,7 +285,7 @@
     </div>
   </section>
 
-  <!-- CTA SECTION -->
+  <!-- CTA -->
   <section class="cta-section">
     <h2 class="cta-title">Download MyRiskScout</h2>
 
@@ -441,4 +385,3 @@
 
 </body>
 </html>
-
