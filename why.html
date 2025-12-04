@@ -6,31 +6,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background: #020617; color: #e5e7eb;
+      background: #020617;
+      color: #e5e7eb;
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh; overflow-x: hidden; position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
     }
+
     body::before {
-      content: ""; position: fixed; inset: 0;
+      content: "";
+      position: fixed;
+      inset: 0;
       background-image: url("assets/hero-why.jpg");
-      background-size: cover; background-position: center;
-      filter: brightness(0.5); z-index: -2;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5);
+      z-index: -2;
     }
+
     body::after {
-      content: ""; position: fixed; inset: 0;
+      content: "";
+      position: fixed;
+      inset: 0;
       background: radial-gradient(circle at top, rgba(15,23,42,0.7), transparent 60%);
       z-index: -1;
     }
+
     .brand-badge {
-      position: fixed; top: 1.2rem; left: 1.2rem;
-      z-index: 10;
+      position: fixed;
+      top: 1.2rem;
+      left: 1.2rem;
+      z-index: 9999;
     }
+
     .brand-badge img {
       height: 36px;
       filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
     }
+
+    .lang-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.75);
+      backdrop-filter: blur(10px);
+      color: #e5e7eb;
+      font-size: 0.8rem;
+    }
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    .lang-toggle button.active {
+      font-weight: 600;
+      opacity: 1;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .lang-toggle span { opacity: 0.6; }
+
     .page-wrapper { max-width: 1120px; margin: 6.5rem auto 3.5rem auto; padding: 0 1.5rem 3rem; }
     .layout {
       display: grid;
@@ -38,6 +87,7 @@
       gap: 2.4rem; align-items: stretch;
     }
     @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
     .card-main, .card-side {
       background: rgba(15,23,42,0.9);
       border-radius: 20px;
@@ -47,12 +97,16 @@
     }
     .card-main { padding: 2.1rem 2rem; }
     .card-side { padding: 1.8rem 1.5rem; }
+
     h1 {
       font-size: clamp(1.9rem, 3vw, 2.4rem);
-      margin-bottom: 0.8rem; color: #f9fafb;
+      margin-bottom: 0.8rem;
+      color: #f9fafb;
     }
     .subtitle { font-size: 0.95rem; color: #cbd5f5; margin-bottom: 1.2rem; }
+
     ul { list-style: none; margin: 0; padding: 0; }
+
     .usecase {
       background: rgba(15,23,42,0.95);
       border-radius: 14px;
@@ -69,7 +123,9 @@
       flex-shrink: 0;
     }
     .usecase-text { font-size: 0.9rem; color: #e5e7eb; }
+
     .side-title { font-size: 1rem; margin-bottom: 0.8rem; color: #e5e7eb; }
+
     .benefit {
       display: flex; gap: 0.6rem; margin-bottom: 0.8rem;
     }
@@ -82,61 +138,133 @@
     .benefit-text { font-size: 0.9rem; color: #cbd5e1; }
   </style>
 </head>
+
 <body>
+
   <div class="brand-badge">
     <img src="assets/myriskscout-logo.png" alt="MyRiskScout logo">
+  </div>
+
+  <div class="lang-toggle" id="langToggle">
+    <button type="button" data-lang="nl" class="active">NL</button>
+    <span>|</span>
+    <button type="button" data-lang="en">EN</button>
   </div>
 
   <main class="page-wrapper">
     <section class="layout">
 
       <article class="card-main">
-        <h1>Waarom mensen MyRiskScout gebruiken.</h1>
-        <p class="subtitle">Typische situaties in één oogopslag.</p>
+        <h1 id="why-title-main">Waarom mensen MyRiskScout gebruiken.</h1>
+        <p class="subtitle" id="why-subtitle">Typische situaties in één oogopslag.</p>
 
         <ul>
           <li class="usecase">
             <div class="usecase-icon">🏠</div>
-            <div class="usecase-text">Buurtkeuze en woonbeslissingen beter onderbouwen.</div>
+            <div class="usecase-text" id="why-u1">Buurtkeuze en woonbeslissingen beter onderbouwen.</div>
           </li>
           <li class="usecase">
             <div class="usecase-icon">🚲</div>
-            <div class="usecase-text">Slimmer bepalen waar je je fiets neerzet.</div>
+            <div class="usecase-text" id="why-u2">Slimmer bepalen waar je je fiets neerzet.</div>
           </li>
           <li class="usecase">
             <div class="usecase-icon">🗺️</div>
-            <div class="usecase-text">Dagelijkse routes plannen met risiconiveaus in het achterhoofd.</div>
+            <div class="usecase-text" id="why-u3">Dagelijkse routes plannen met risiconiveaus in het achterhoofd.</div>
           </li>
           <li class="usecase">
             <div class="usecase-icon">🌍</div>
-            <div class="usecase-text">Als expat of nieuwkomer snel gevoel krijgen bij verschillende buurten.</div>
+            <div class="usecase-text" id="why-u4">Als expat of nieuwkomer snel gevoel krijgen bij verschillende buurten.</div>
           </li>
           <li class="usecase">
             <div class="usecase-icon">📑</div>
-            <div class="usecase-text">Als verzekeringsshopper eerst je risico begrijpen, dan een polis kiezen.</div>
+            <div class="usecase-text" id="why-u5">Als verzekeringsshopper eerst je risico begrijpen, dan een polis kiezen.</div>
           </li>
         </ul>
       </article>
 
       <aside class="card-side">
-        <div class="side-title">Wat gebruikers vooral noemen:</div>
+        <div class="side-title" id="why-side-title">Wat gebruikers vooral noemen:</div>
+
         <ul>
           <li class="benefit">
             <div class="benefit-icon">✓</div>
-            <div class="benefit-text">Sneller inzicht in onbekende buurten.</div>
+            <div class="benefit-text" id="why-b1">Sneller inzicht in onbekende buurten.</div>
           </li>
           <li class="benefit">
             <div class="benefit-icon">✓</div>
-            <div class="benefit-text">Bewuster keuzes maken over wonen, fietsen en verzekeren.</div>
+            <div class="benefit-text" id="why-b2">Bewuster keuzes maken over wonen, fietsen en verzekeren.</div>
           </li>
           <li class="benefit">
             <div class="benefit-icon">✓</div>
-            <div class="benefit-text">Voelen dat ze “meer weten dan alleen hun onderbuikgevoel”.</div>
+            <div class="benefit-text" id="why-b3">Voelen dat ze “meer weten dan alleen hun onderbuikgevoel”.</div>
           </li>
         </ul>
       </aside>
 
     </section>
   </main>
+
+  <script>
+    const whyTranslations = {
+      nl: {
+        titleMain: "Waarom mensen MyRiskScout gebruiken.",
+        subtitle: "Typische situaties in één oogopslag.",
+        u1: "Buurtkeuze en woonbeslissingen beter onderbouwen.",
+        u2: "Slimmer bepalen waar je je fiets neerzet.",
+        u3: "Dagelijkse routes plannen met risiconiveaus in het achterhoofd.",
+        u4: "Als expat of nieuwkomer snel gevoel krijgen bij verschillende buurten.",
+        u5: "Als verzekeringsshopper eerst je risico begrijpen, dan een polis kiezen.",
+        sideTitle: "Wat gebruikers vooral noemen:",
+        b1: "Sneller inzicht in onbekende buurten.",
+        b2: "Bewuster keuzes maken over wonen, fietsen en verzekeren.",
+        b3: "Voelen dat ze “meer weten dan alleen hun onderbuikgevoel”."
+      },
+      en: {
+        titleMain: "Why people use MyRiskScout.",
+        subtitle: "Typical situations at a glance.",
+        u1: "To back up neighbourhood and housing decisions.",
+        u2: "To decide more smartly where to park their bike.",
+        u3: "To plan daily routes with risk levels in mind.",
+        u4: "As an expat or newcomer, to quickly get a feel for different neighbourhoods.",
+        u5: "As an insurance shopper, to understand their risk first and then choose a policy.",
+        sideTitle: "What users mention most:",
+        b1: "Faster insight into unfamiliar neighbourhoods.",
+        b2: "More informed choices about living, cycling and insurance.",
+        b3: "Feeling that they ‘know more than just their gut feeling’."
+      }
+    };
+
+    function setWhyLanguage(lang) {
+      const t = whyTranslations[lang] || whyTranslations.nl;
+      document.documentElement.lang = lang;
+
+      document.getElementById("why-title-main").textContent = t.titleMain;
+      document.getElementById("why-subtitle").textContent = t.subtitle;
+
+      document.getElementById("why-u1").textContent = t.u1;
+      document.getElementById("why-u2").textContent = t.u2;
+      document.getElementById("why-u3").textContent = t.u3;
+      document.getElementById("why-u4").textContent = t.u4;
+      document.getElementById("why-u5").textContent = t.u5;
+
+      document.getElementById("why-side-title").textContent = t.sideTitle;
+      document.getElementById("why-b1").textContent = t.b1;
+      document.getElementById("why-b2").textContent = t.b2;
+      document.getElementById("why-b3").textContent = t.b3;
+
+      document.querySelectorAll("#langToggle button").forEach(btn =>
+        btn.classList.toggle("active", btn.dataset.lang === lang)
+      );
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      setWhyLanguage("nl");
+    });
+
+    document.querySelectorAll("#langToggle button").forEach(btn => {
+      btn.addEventListener("click", () => setWhyLanguage(btn.dataset.lang));
+    });
+  </script>
+
 </body>
 </html>
