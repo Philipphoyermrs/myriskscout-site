@@ -6,30 +6,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background: #020617; color: #e5e7eb;
+      background: #020617;
+      color: #e5e7eb;
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh; overflow-x: hidden; position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
     }
+
     body::before {
-      content: ""; position: fixed; inset: 0;
+      content: "";
+      position: fixed;
+      inset: 0;
       background-image: url("assets/hero-ml.jpg");
-      background-size: cover; background-position: center;
-      filter: brightness(0.5); z-index: -2;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5);
+      z-index: -2;
     }
+
     body::after {
-      content: ""; position: fixed; inset: 0;
+      content: "";
+      position: fixed;
+      inset: 0;
       background: radial-gradient(circle at top, rgba(15,23,42,0.7), transparent 60%);
       z-index: -1;
     }
+
     .brand-badge {
-      position: fixed; top: 1.2rem; left: 1.2rem; z-index: 10;
+      position: fixed;
+      top: 1.2rem;
+      left: 1.2rem;
+      z-index: 9999;
     }
+
     .brand-badge img {
       height: 36px;
       filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
     }
+
+    .lang-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.75);
+      backdrop-filter: blur(10px);
+      color: #e5e7eb;
+      font-size: 0.8rem;
+    }
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    .lang-toggle button.active {
+      font-weight: 600;
+      opacity: 1;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .lang-toggle span { opacity: 0.6; }
+
     .page-wrapper { max-width: 1120px; margin: 6.5rem auto 3.5rem auto; padding: 0 1.5rem 3rem; }
     .layout {
       display: grid;
@@ -37,6 +87,7 @@
       gap: 2.4rem; align-items: stretch;
     }
     @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
     .card-main, .card-side {
       background: rgba(15,23,42,0.9);
       border-radius: 20px;
@@ -46,14 +97,20 @@
     }
     .card-main { padding: 2.1rem 2rem; }
     .card-side { padding: 1.8rem 1.5rem; }
+
     h1 {
       font-size: clamp(1.9rem, 3vw, 2.4rem);
-      margin-bottom: 0.8rem; color: #f9fafb;
+      margin-bottom: 0.8rem;
+      color: #f9fafb;
     }
     .subtitle { font-size: 0.95rem; color: #cbd5f5; margin-bottom: 1.2rem; }
+
     ul { list-style: none; margin: 0; padding: 0; }
+
     .bullet {
-      display: flex; gap: 0.6rem; align-items: flex-start;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
       margin-bottom: 0.7rem;
     }
     .bullet-icon {
@@ -63,6 +120,7 @@
       font-size: 0.8rem; color: #022c22; flex-shrink: 0;
     }
     .bullet-text { font-size: 0.9rem; color: #e5e7eb; }
+
     .pill-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
     .pill {
       font-size: 0.78rem; padding: 0.25rem 0.6rem;
@@ -71,7 +129,9 @@
       background: rgba(15,23,42,0.8);
       text-transform: uppercase; letter-spacing: 0.06em;
     }
+
     .side-title { font-size: 1rem; margin-bottom: 0.8rem; color: #e5e7eb; }
+
     .legend-row {
       display: flex; align-items: center;
       gap: 0.4rem; margin-bottom: 0.4rem;
@@ -85,77 +145,169 @@
     .dot--red { background: #ef4444; }
   </style>
 </head>
+
 <body>
+
   <div class="brand-badge">
     <img src="assets/myriskscout-logo.png" alt="MyRiskScout logo">
+  </div>
+
+  <div class="lang-toggle" id="langToggle">
+    <button type="button" data-lang="nl" class="active">NL</button>
+    <span>|</span>
+    <button type="button" data-lang="en">EN</button>
   </div>
 
   <main class="page-wrapper">
     <section class="layout">
 
       <article class="card-main">
-        <h1>Hoe we risicocijfers berekenen.</h1>
-        <p class="subtitle">Het model in bullets.</p>
+        <h1 id="data-title-main">Hoe we risicocijfers berekenen.</h1>
+        <p class="subtitle" id="data-subtitle">Het model in bullets.</p>
 
         <ul>
           <li class="bullet">
             <div class="bullet-icon">📊</div>
-            <div class="bullet-text">> 10 miljoen misdaadzaken in de analyse.</div>
+            <div class="bullet-text" id="data-b1">&gt; 10 miljoen misdaadzaken in de analyse.</div>
           </li>
           <li class="bullet">
             <div class="bullet-icon">🏙️</div>
-            <div class="bullet-text">> 200 buurtfactoren: o.a. bebouwing, omgeving, sociaaleconomie.</div>
+            <div class="bullet-text" id="data-b2">&gt; 200 buurtfactoren: o.a. bebouwing, omgeving, sociaaleconomie.</div>
           </li>
           <li class="bullet">
             <div class="bullet-icon">🧠</div>
-            <div class="bullet-text">Machine learning (o.a. Random Forest) om patronen te herkennen.</div>
+            <div class="bullet-text" id="data-b3">Machine learning (o.a. Random Forest) om patronen te herkennen.</div>
           </li>
           <li class="bullet">
             <div class="bullet-icon">🎯</div>
-            <div class="bullet-text">Score van 1–100 per buurt: hoe hoger, hoe hoger het relatieve risico.</div>
+            <div class="bullet-text" id="data-b4">Score van 1–100 per buurt: hoe hoger, hoe hoger het relatieve risico.</div>
           </li>
           <li class="bullet">
             <div class="bullet-icon">📌</div>
-            <div class="bullet-text">We tonen de 2 belangrijkste risicodrijvers bij verhoogd risico.</div>
+            <div class="bullet-text" id="data-b5">We tonen de 2 belangrijkste risicodrijvers bij verhoogd risico.</div>
           </li>
           <li class="bullet">
             <div class="bullet-icon">🔁</div>
-            <div class="bullet-text">Regelmatige updates van data en model (R² &gt; 0.7).</div>
+            <div class="bullet-text" id="data-b6">Regelmatige updates van data en model (R² &gt; 0.7).</div>
           </li>
         </ul>
 
         <div class="pill-row">
-          <span class="pill">Data-driven</span>
-          <span class="pill">Model-gebaseerd</span>
-          <span class="pill">Verklaarbare scores</span>
+          <span class="pill" id="data-pill1">Data-driven</span>
+          <span class="pill" id="data-pill2">Model-gebaseerd</span>
+          <span class="pill" id="data-pill3">Verklaarbare scores</span>
         </div>
       </article>
 
       <aside class="card-side">
-        <div class="side-title">Zo lees je de kaart:</div>
+        <div class="side-title" id="data-side-title">Zo lees je de kaart:</div>
+
         <div class="legend-row">
-          <span class="dot dot--green"></span><span>Groen: lager risico</span>
+          <span class="dot dot--green"></span><span id="data-legend1">Groen: lager risico</span>
         </div>
         <div class="legend-row">
-          <span class="dot dot--yellow"></span><span>Geel: gemiddeld risico</span>
+          <span class="dot dot--yellow"></span><span id="data-legend2">Geel: gemiddeld risico</span>
         </div>
         <div class="legend-row">
-          <span class="dot dot--red"></span><span>Rood: hoger risico</span>
+          <span class="dot dot--red"></span><span id="data-legend3">Rood: hoger risico</span>
         </div>
 
         <ul style="margin-top:1rem;">
           <li class="bullet">
             <div class="bullet-icon">📍</div>
-            <div class="bullet-text">Elke buurt heeft één gecombineerde risicoscore.</div>
+            <div class="bullet-text" id="data-extra1">Elke buurt heeft één gecombineerde risicoscore.</div>
           </li>
           <li class="bullet">
             <div class="bullet-icon">🔍</div>
-            <div class="bullet-text">Detailscherm laat risicodrijvers en korte toelichting zien.</div>
+            <div class="bullet-text" id="data-extra2">Detailscherm laat risicodrijvers en korte toelichting zien.</div>
           </li>
         </ul>
       </aside>
 
     </section>
   </main>
+
+  <script>
+    const dataTranslations = {
+      nl: {
+        titleMain: "Hoe we risicocijfers berekenen.",
+        subtitle: "Het model in bullets.",
+        b1: "> 10 miljoen misdaadzaken in de analyse.",
+        b2: "> 200 buurtfactoren: o.a. bebouwing, omgeving, sociaaleconomie.",
+        b3: "Machine learning (o.a. Random Forest) om patronen te herkennen.",
+        b4: "Score van 1–100 per buurt: hoe hoger, hoe hoger het relatieve risico.",
+        b5: "We tonen de 2 belangrijkste risicodrijvers bij verhoogd risico.",
+        b6: "Regelmatige updates van data en model (R² > 0.7).",
+        pill1: "Data-driven",
+        pill2: "Model-gebaseerd",
+        pill3: "Verklaarbare scores",
+        sideTitle: "Zo lees je de kaart:",
+        legend1: "Groen: lager risico",
+        legend2: "Geel: gemiddeld risico",
+        legend3: "Rood: hoger risico",
+        extra1: "Elke buurt heeft één gecombineerde risicoscore.",
+        extra2: "Detailscherm laat risicodrijvers en korte toelichting zien."
+      },
+      en: {
+        titleMain: "How we calculate risk scores.",
+        subtitle: "The model in bullets.",
+        b1: "> 10 million crime cases in the analysis.",
+        b2: "> 200 neighbourhood features: e.g. buildings, surroundings, socio-economics.",
+        b3: "Machine learning (including Random Forest) to detect patterns.",
+        b4: "Score from 1–100 per neighbourhood: the higher, the higher the relative risk.",
+        b5: "We show the 2 most important risk drivers for elevated risk.",
+        b6: "Regular updates of data and model (R² > 0.7).",
+        pill1: "Data-driven",
+        pill2: "Model-based",
+        pill3: "Explainable scores",
+        sideTitle: "How to read the map:",
+        legend1: "Green: lower risk",
+        legend2: "Yellow: medium risk",
+        legend3: "Red: higher risk",
+        extra1: "Each neighbourhood has one combined risk score.",
+        extra2: "The detail view shows risk drivers and a short explanation."
+      }
+    };
+
+    function setDataLanguage(lang) {
+      const t = dataTranslations[lang] || dataTranslations.nl;
+      document.documentElement.lang = lang;
+
+      document.getElementById("data-title-main").textContent = t.titleMain;
+      document.getElementById("data-subtitle").textContent = t.subtitle;
+
+      document.getElementById("data-b1").textContent = t.b1;
+      document.getElementById("data-b2").textContent = t.b2;
+      document.getElementById("data-b3").textContent = t.b3;
+      document.getElementById("data-b4").textContent = t.b4;
+      document.getElementById("data-b5").textContent = t.b5;
+      document.getElementById("data-b6").textContent = t.b6;
+
+      document.getElementById("data-pill1").textContent = t.pill1;
+      document.getElementById("data-pill2").textContent = t.pill2;
+      document.getElementById("data-pill3").textContent = t.pill3;
+
+      document.getElementById("data-side-title").textContent = t.sideTitle;
+      document.getElementById("data-legend1").textContent = t.legend1;
+      document.getElementById("data-legend2").textContent = t.legend2;
+      document.getElementById("data-legend3").textContent = t.legend3;
+
+      document.getElementById("data-extra1").textContent = t.extra1;
+      document.getElementById("data-extra2").textContent = t.extra2;
+
+      document.querySelectorAll("#langToggle button").forEach(btn =>
+        btn.classList.toggle("active", btn.dataset.lang === lang)
+      );
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      setDataLanguage("nl");
+    });
+
+    document.querySelectorAll("#langToggle button").forEach(btn => {
+      btn.addEventListener("click", () => setDataLanguage(btn.dataset.lang));
+    });
+  </script>
+
 </body>
 </html>
