@@ -6,31 +6,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background: #020617; color: #e5e7eb;
+      background: #020617;
+      color: #e5e7eb;
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh; overflow-x: hidden; position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
     }
+
     body::before {
-      content: ""; position: fixed; inset: 0;
+      content: "";
+      position: fixed;
+      inset: 0;
       background-image: url("assets/hero-heatmap.jpg");
-      background-size: cover; background-position: center;
-      filter: brightness(0.5); z-index: -2;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.5);
+      z-index: -2;
     }
+
     body::after {
-      content: ""; position: fixed; inset: 0;
+      content: "";
+      position: fixed;
+      inset: 0;
       background: radial-gradient(circle at top, rgba(15,23,42,0.7), transparent 60%);
       z-index: -1;
     }
+
     .brand-badge {
-      position: fixed; top: 1.2rem; left: 1.2rem;
-      z-index: 10; display: flex; align-items: center;
+      position: fixed;
+      top: 1.2rem;
+      left: 1.2rem;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
     }
+
     .brand-badge img {
-      height: 36px; width: auto;
+      height: 36px;
+      width: auto;
       filter: drop-shadow(0 0 4px rgba(0,0,0,0.5));
     }
+
+    .lang-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.75);
+      backdrop-filter: blur(10px);
+      color: #e5e7eb;
+      font-size: 0.8rem;
+    }
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    .lang-toggle button.active {
+      font-weight: 600;
+      opacity: 1;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .lang-toggle span { opacity: 0.6; }
+
     .page-wrapper { max-width: 1120px; margin: 6.5rem auto 3.5rem auto; padding: 0 1.5rem 3rem; }
     .layout {
       display: grid;
@@ -38,6 +90,7 @@
       gap: 2.4rem; align-items: stretch;
     }
     @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
     .card-main, .card-side {
       background: rgba(15,23,42,0.9);
       border-radius: 20px;
@@ -47,14 +100,20 @@
     }
     .card-main { padding: 2.1rem 2rem; }
     .card-side { padding: 1.8rem 1.5rem; }
+
     h1 {
       font-size: clamp(1.9rem, 3vw, 2.4rem);
-      margin-bottom: 0.8rem; color: #f9fafb;
+      margin-bottom: 0.8rem;
+      color: #f9fafb;
     }
     .subtitle { font-size: 0.95rem; color: #cbd5f5; margin-bottom: 1.2rem; }
+
     ul { list-style: none; margin: 0; padding: 0; }
+
     .step {
-      display: flex; gap: 0.6rem; align-items: flex-start;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
       margin-bottom: 0.8rem;
     }
     .step-badge {
@@ -65,9 +124,12 @@
       flex-shrink: 0;
     }
     .step-text { font-size: 0.9rem; color: #e5e7eb; }
+
     .pill-row {
-      display: flex; flex-wrap: wrap;
-      gap: 0.4rem; margin-top: 0.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
     }
     .pill {
       font-size: 0.78rem; padding: 0.25rem 0.6rem;
@@ -76,67 +138,146 @@
       background: rgba(15,23,42,0.8);
       text-transform: uppercase; letter-spacing: 0.06em;
     }
+
     .side-title { font-size: 1rem; margin-bottom: 0.8rem; color: #e5e7eb; }
     .hint { font-size: 0.82rem; color: #9ca3af; margin-top: 0.6rem; }
   </style>
 </head>
+
 <body>
+
   <div class="brand-badge">
     <img src="assets/myriskscout-logo.png" alt="MyRiskScout logo">
+  </div>
+
+  <div class="lang-toggle" id="langToggle">
+    <button type="button" data-lang="nl" class="active">NL</button>
+    <span>|</span>
+    <button type="button" data-lang="en">EN</button>
   </div>
 
   <main class="page-wrapper">
     <section class="layout">
 
       <article class="card-main">
-        <h1>Hoe het werkt.</h1>
-        <p class="subtitle">De app in drie stappen.</p>
+        <h1 id="how-title-main">Hoe het werkt.</h1>
+        <p class="subtitle" id="how-subtitle">De app in drie stappen.</p>
 
         <ul>
           <li class="step">
             <div class="step-badge">1</div>
-            <div class="step-text">Open de kaart: zie direct de risiconiveaus per buurt als heatmap.</div>
+            <div class="step-text" id="how-s1">Open de kaart: zie direct de risiconiveaus per buurt als heatmap.</div>
           </li>
           <li class="step">
             <div class="step-badge">2</div>
-            <div class="step-text">Tik op een buurt: bekijk score, belangrijkste risicodrijvers en korte toelichting.</div>
+            <div class="step-text" id="how-s2">Tik op een buurt: bekijk score, belangrijkste risicodrijvers en korte toelichting.</div>
           </li>
           <li class="step">
             <div class="step-badge">3</div>
-            <div class="step-text">Schakel alerts in: krijg meldingen als je een duidelijk hoger risicogebied binnenkomt.</div>
+            <div class="step-text" id="how-s3">Schakel alerts in: krijg meldingen als je een duidelijk hoger risicogebied binnenkomt.</div>
           </li>
         </ul>
 
         <div class="pill-row">
-          <span class="pill">Kaart</span>
-          <span class="pill">Buurt-details</span>
-          <span class="pill">Alerts</span>
+          <span class="pill" id="how-pill1">Kaart</span>
+          <span class="pill" id="how-pill2">Buurt-details</span>
+          <span class="pill" id="how-pill3">Alerts</span>
         </div>
       </article>
 
       <aside class="card-side">
-        <div class="side-title">Gebruik in de praktijk:</div>
+        <div class="side-title" id="how-side-title">Gebruik in de praktijk:</div>
+
         <ul>
           <li class="step">
             <div class="step-badge">🏠</div>
-            <div class="step-text">Check je eigen buurt of een buurt waar je wilt wonen.</div>
+            <div class="step-text" id="how-pr1">Check je eigen buurt of een buurt waar je wilt wonen.</div>
           </li>
           <li class="step">
             <div class="step-badge">🚲</div>
-            <div class="step-text">Bekijk waar je je fiets veiliger kunt stallen.</div>
+            <div class="step-text" id="how-pr2">Bekijk waar je je fiets veiliger kunt stallen.</div>
           </li>
           <li class="step">
             <div class="step-badge">🌃</div>
-            <div class="step-text">Plan avondroutes door bewust met risiconiveaus om te gaan.</div>
+            <div class="step-text" id="how-pr3">Plan avondroutes door bewust met risiconiveaus om te gaan.</div>
           </li>
         </ul>
 
-        <p class="hint">
+        <p class="hint" id="how-hint">
           Locatie en notificaties zijn optioneel. Alles werkt ook als je alleen de kaart en buurten wilt verkennen.
         </p>
       </aside>
 
     </section>
   </main>
+
+  <script>
+    const howTranslations = {
+      nl: {
+        titleMain: "Hoe het werkt.",
+        subtitle: "De app in drie stappen.",
+        s1: "Open de kaart: zie direct de risiconiveaus per buurt als heatmap.",
+        s2: "Tik op een buurt: bekijk score, belangrijkste risicodrijvers en korte toelichting.",
+        s3: "Schakel alerts in: krijg meldingen als je een duidelijk hoger risicogebied binnenkomt.",
+        pill1: "Kaart",
+        pill2: "Buurt-details",
+        pill3: "Alerts",
+        sideTitle: "Gebruik in de praktijk:",
+        pr1: "Check je eigen buurt of een buurt waar je wilt wonen.",
+        pr2: "Bekijk waar je je fiets veiliger kunt stallen.",
+        pr3: "Plan avondroutes door bewust met risiconiveaus om te gaan.",
+        hint: "Locatie en notificaties zijn optioneel. Alles werkt ook als je alleen de kaart en buurten wilt verkennen."
+      },
+      en: {
+        titleMain: "How it works.",
+        subtitle: "The app in three steps.",
+        s1: "Open the map: instantly see risk levels per neighbourhood as a heatmap.",
+        s2: "Tap a neighbourhood: see score, main risk drivers and a short explanation.",
+        s3: "Turn on alerts: get notified when you enter a clearly higher-risk area.",
+        pill1: "Map",
+        pill2: "Neighbourhood details",
+        pill3: "Alerts",
+        sideTitle: "How people use it in practice:",
+        pr1: "Check your own neighbourhood or an area you are considering moving to.",
+        pr2: "See where it’s safer to park your bike.",
+        pr3: "Plan evening routes with risk levels in mind.",
+        hint: "Location and notifications are optional. Everything works even if you only want to explore the map and neighbourhoods."
+      }
+    };
+
+    function setHowLanguage(lang) {
+      const t = howTranslations[lang] || howTranslations.nl;
+      document.documentElement.lang = lang;
+
+      document.getElementById("how-title-main").textContent = t.titleMain;
+      document.getElementById("how-subtitle").textContent = t.subtitle;
+      document.getElementById("how-s1").textContent = t.s1;
+      document.getElementById("how-s2").textContent = t.s2;
+      document.getElementById("how-s3").textContent = t.s3;
+
+      document.getElementById("how-pill1").textContent = t.pill1;
+      document.getElementById("how-pill2").textContent = t.pill2;
+      document.getElementById("how-pill3").textContent = t.pill3;
+
+      document.getElementById("how-side-title").textContent = t.sideTitle;
+      document.getElementById("how-pr1").textContent = t.pr1;
+      document.getElementById("how-pr2").textContent = t.pr2;
+      document.getElementById("how-pr3").textContent = t.pr3;
+      document.getElementById("how-hint").textContent = t.hint;
+
+      document.querySelectorAll("#langToggle button").forEach(btn =>
+        btn.classList.toggle("active", btn.dataset.lang === lang)
+      );
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      setHowLanguage("nl");
+    });
+
+    document.querySelectorAll("#langToggle button").forEach(btn => {
+      btn.addEventListener("click", () => setHowLanguage(btn.dataset.lang));
+    });
+  </script>
+
 </body>
 </html>
