@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Hoe we risicocijfers berekenen – MyRiskScout</title>
+  <title>Waarom mensen MyRiskScout gebruiken – MyRiskScout</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
@@ -18,12 +18,11 @@
       position: relative;
     }
 
-    /* Achtergrond */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background-image: url("assets/hero-ml.jpg");
+      background-image: url("assets/hero-why.jpg");
       background-size: cover;
       background-position: center;
       filter: brightness(0.5);
@@ -38,7 +37,6 @@
       z-index: -1;
     }
 
-    /* Logo linksboven */
     .brand-badge {
       position: fixed;
       top: 1.2rem;
@@ -59,8 +57,9 @@
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
       gap: 2.4rem;
+      align-items: stretch;
     }
 
     @media (max-width: 900px) {
@@ -72,233 +71,9 @@
       border-radius: 20px;
       border: 1px solid rgba(148,163,184,0.6);
       padding: 2.1rem 2rem;
-      box-shadow: 0 24px 60px rgba(15,23,42,0.7);
       backdrop-filter: blur(18px);
+      box-shadow: 0 24px 60px rgba(15,23,42,0.7);
     }
 
     .card-main h1 {
-      font-size: clamp(1.9rem, 3vw, 2.4rem);
-      margin-bottom: 0.4rem;
-      color: #f9fafb;
-    }
-
-    .subtitle {
-      font-size: 0.95rem;
-      color: #cbd5f5;
-      margin-bottom: 1.4rem;
-    }
-
-    h2 {
-      font-size: 1.05rem;
-      margin-top: 1.4rem;
-      margin-bottom: 0.45rem;
-      color: #e5e7eb;
-    }
-
-    p {
-      font-size: 0.92rem;
-      line-height: 1.6;
-      color: #d1d5db;
-      margin-bottom: 0.7rem;
-    }
-
-    ul {
-      margin: 0.4rem 0 0.9rem 1.1rem;
-    }
-
-    li {
-      font-size: 0.9rem;
-      line-height: 1.5;
-      color: #cbd5e1;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.8rem;
-    }
-
-    .pill {
-      font-size: 0.78rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      background: rgba(15,23,42,0.8);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    /* Side card */
-    .card-side {
-      background: rgba(15,23,42,0.9);
-      border-radius: 20px;
-      border: 1px solid rgba(148,163,184,0.6);
-      padding: 1.6rem 1.5rem;
-      box-shadow: 0 20px 50px rgba(15,23,42,0.7);
-      backdrop-filter: blur(18px);
-    }
-
-    .card-side-title {
-      font-size: 0.98rem;
-      font-weight: 600;
-      color: #e5e7eb;
-      margin-bottom: 0.2rem;
-    }
-
-    .flow {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .flow-step {
-      padding: 0.55rem 0.65rem;
-      border-radius: 0.9rem;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(51,65,85,0.9);
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-    }
-
-    .flow-badge {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 0%, #22c55e, #0ea5e9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #022c22;
-    }
-
-    .legend {
-      font-size: 0.85rem;
-      color: #cbd5f5;
-      border-radius: 0.9rem;
-      padding: 0.7rem 0.8rem;
-      background: rgba(15,23,42,0.95);
-      border: 1px solid rgba(55,65,81,0.9);
-      margin-top: 1rem;
-    }
-
-    .legend-row {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.25rem;
-    }
-
-    .dot { width: 12px; height: 12px; border-radius: 999px; }
-    .dot--green { background: #22c55e; }
-    .dot--yellow { background: #eab308; }
-    .dot--red { background: #ef4444; }
-
-  </style>
-</head>
-
-<body>
-
-  <div class="brand-badge">
-    <img src="assets/myriskscout-logo.png" alt="MyRiskScout logo">
-  </div>
-
-  <main class="page-wrapper">
-    <section class="layout">
-
-      <!-- LINKSBLOK: MODEL-UITLEG -->
-      <article class="card-main">
-        <h1>Hoe we risicocijfers berekenen.</h1>
-        <p class="subtitle">
-          Misdaadcijfers, buurtkenmerken en slimme modellen komen samen om betrouwbare risiconiveaus per buurt te voorspellen.
-        </p>
-
-        <h2>🔍 Slimme technologie achter de schermen</h2>
-        <p>
-          We gebruiken machine learning om te bepalen hoe risicovol een gebied is. De modellen analyseren tegelijk
-          tientallen factoren — van misdaadstatistieken tot omgevingskenmerken.
-        </p>
-
-        <h2>📊 Een berg aan data</h2>
-        <p>
-          Ons systeem analyseert meer dan 10 miljoen misdaadzaken en ruim 200 buurtfactoren, zoals:
-        </p>
-        <ul>
-          <li>officiële politiecijfers (inbraak, fietsdiefstal)</li>
-          <li>afstand tot hoofdroutes en drukke wegen</li>
-          <li>soort woningen & bebouwingsdichtheid</li>
-          <li>inkomen en andere sociaaleconomische factoren</li>
-        </ul>
-
-        <h2>📍 Inzicht op locatie</h2>
-        <p>
-          De app past risicoscores automatisch aan op jouw exacte locatie — of je nu thuis bent, fietst of een nieuwe buurt verkent.
-        </p>
-
-        <h2>🎯 Scores van 1 tot 100</h2>
-        <p>
-          Hoe hoger het getal (en hoe roder de kleur), hoe hoger het risico vergeleken met andere buurten.
-        </p>
-
-        <h2>🧠 We laten ook zien waarom</h2>
-        <p>
-          Bij verhoogde risico’s tonen we de twee belangrijkste risicodrijvers — zodat je begrijpt wat er speelt.
-        </p>
-
-        <h2>🔁 Altijd actueel</h2>
-        <p>
-          Data en modellen worden regelmatig geüpdatet om de nauwkeurigheid van de voorspellingen te blijven verbeteren.
-        </p>
-
-        <div class="pill-row">
-          <span class="pill">Machine learning</span>
-          <span class="pill">10M+ zaken</span>
-          <span class="pill">200+ factoren</span>
-          <span class="pill">R² &gt; 0.7</span>
-        </div>
-      </article>
-
-      <!-- RECHTS: compact overzicht -->
-      <aside class="card-side">
-        <div class="card-side-title">Van data naar risicoscore</div>
-
-        <div class="flow">
-          <div class="flow-step">
-            <div class="flow-badge">1</div>
-            Officiële misdaadstatistieken
-          </div>
-          <div class="flow-step">
-            <div class="flow-badge">2</div>
-            Buurtkenmerken (200+ factoren)
-          </div>
-          <div class="flow-step">
-            <div class="flow-badge">3</div>
-            Machine learning model
-          </div>
-          <div class="flow-step">
-            <div class="flow-badge">4</div>
-            Score 1–100 + risicodrijvers
-          </div>
-        </div>
-
-        <div class="legend">
-          <strong>Kaartkleuren</strong>
-          <div class="legend-row">
-            <span class="dot dot--green"></span> Laag risico
-          </div>
-          <div class="legend-row">
-            <span class="dot dot--yellow"></span> Gemiddeld risico
-          </div>
-          <div class="legend-row">
-            <span class="dot dot--red"></span> Hoog risico
-          </div>
-        </div>
-      </aside>
-
-    </section>
-  </main>
-
-</body>
-</html>
+      font-s
