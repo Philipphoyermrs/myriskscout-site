@@ -5,7 +5,6 @@
   <title>MyRiskScout</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Basis-Styles für Layout & Sektionen -->
   <style>
     * {
       box-sizing: border-box;
@@ -32,6 +31,7 @@
       justify-content: center;
       text-align: center;
       padding: 2rem;
+      background-color: #050505; /* Fallback, falls Bild nicht lädt */
     }
 
     .section-inner {
@@ -44,6 +44,7 @@
       font-size: 2.4rem;
       margin-bottom: 0.75rem;
       text-transform: none;
+      color: #ffffff !important;   /* erzwungen weiß */
     }
 
     .section a.meer-link {
@@ -51,7 +52,7 @@
       font-size: 1rem;
       text-decoration: underline;
       margin-top: 0.35rem;
-      color: #ffffff;
+      color: #ffffff !important;   /* erzwungen weiß */
       opacity: 0.9;
     }
 
@@ -59,19 +60,18 @@
       opacity: 1;
     }
 
-    /* Dunkler Overlay, damit Text gut lesbar ist */
     .overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.45),
         rgba(0, 0, 0, 0.75)
       );
       z-index: 1;
     }
 
-    /* Hintergrundbilder – ggf. Bildnamen anpassen */
+    /* Hintergrundbilder – Bildnamen ggf. auf deine Assets anpassen */
     .hero-main {
       background-image: url("assets/hero-bike-night.jpg");
       background-size: cover;
@@ -79,8 +79,6 @@
       background-repeat: no-repeat;
     }
 
-    /* Platzhalter-Bilder für weitere Sektionen.
-       Bitte ggf. an deine tatsächlichen Dateinamen im assets-Ordner anpassen. */
     .hero-how-it-works {
       background-image: url("assets/hoe-het-werkt.jpg");
       background-size: cover;
@@ -173,7 +171,6 @@
       if (window.gaLoaded) return;
       window.gaLoaded = true;
 
-      // GA4 Script dynamisch laden
       var gtagScript = document.createElement('script');
       gtagScript.async = true;
       gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-506PJDDQME";
@@ -188,7 +185,6 @@
     }
 
     function handleConsentDecision(decision) {
-      // decision = 'granted' oder 'denied'
       localStorage.setItem('ga_consent', decision);
       var banner = document.getElementById('cookie-banner');
       if (banner) banner.classList.add('hidden');
@@ -203,18 +199,14 @@
       var banner = document.getElementById('cookie-banner');
 
       if (consent === 'granted') {
-        // User hat bereits zugestimmt
         loadGA();
         if (banner) banner.classList.add('hidden');
       } else if (consent === 'denied') {
-        // User hat bereits abgelehnt
         if (banner) banner.classList.add('hidden');
       } else {
-        // Noch keine Entscheidung
         if (banner) banner.classList.remove('hidden');
       }
 
-      // Buttons verdrahten
       var acceptBtn = document.getElementById('cookie-accept');
       var declineBtn = document.getElementById('cookie-decline');
 
@@ -225,4 +217,74 @@
       }
       if (declineBtn) {
         declineBtn.addEventListener('click', function () {
-          handleConsentDec
+          handleConsentDecision('denied');
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+
+  <!-- HERO: Zie je risico, voordat het jou vindt -->
+  <section class="section hero-main" id="home">
+    <div class="overlay"></div>
+    <div class="section-inner">
+      <h1>Zie je risico, voordat het jou vindt</h1>
+      <a href="subpages/zie-je-risico.html" class="meer-link">meer</a>
+    </div>
+  </section>
+
+  <!-- Hoe het werkt -->
+  <section class="section hero-how-it-works" id="hoe-het-werkt">
+    <div class="overlay"></div>
+    <div class="section-inner">
+      <h2>Hoe het werkt</h2>
+      <a href="subpages/hoe-het-werkt.html" class="meer-link">meer</a>
+    </div>
+  </section>
+
+  <!-- Waarom mensen MyRiskScout gebruiken -->
+  <section class="section hero-why-people" id="waarom-mensen-gebruiken">
+    <div class="overlay"></div>
+    <div class="section-inner">
+      <h2>Waarom mensen MyRiskScout gebruiken</h2>
+      <a href="subpages/waarom-mensen-myriskscout-gebruiken.html" class="meer-link">meer</a>
+    </div>
+  </section>
+
+  <!-- Hoe we risicocijfers berekenen -->
+  <section class="section hero-risk-model" id="hoe-we-risicocijfers-berekenen">
+    <div class="overlay"></div>
+    <div class="section-inner">
+      <h2>Hoe we risicocijfers berekenen</h2>
+      <a href="subpages/hoe-we-risicocijfers-berekenen.html" class="meer-link">meer</a>
+    </div>
+  </section>
+
+  <!-- Privacy & controle -->
+  <section class="section hero-privacy" id="privacy-en-controle">
+    <div class="overlay"></div>
+    <div class="section-inner">
+      <h2>Privacy &amp; controle</h2>
+      <a href="subpages/privacy-en-controle.html" class="meer-link">meer</a>
+    </div>
+  </section>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" class="cookie-banner hidden">
+    <div class="cookie-banner-text">
+      We gebruiken cookies voor anonieme gebruiksstatistieken (Google Analytics) om MyRiskScout te verbeteren.
+      Je kunt instemmen of weigeren. Je keuze kun je later wijzigen door je browsergegevens te wissen.
+    </div>
+    <div class="cookie-banner-buttons">
+      <button id="cookie-accept" class="cookie-btn cookie-btn-accept">
+        Akkoord
+      </button>
+      <button id="cookie-decline" class="cookie-btn cookie-btn-decline">
+        Weigeren
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>
