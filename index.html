@@ -95,7 +95,6 @@
       color: transparent;
     }
 
-    /* meer-link */
     .meer-link {
       margin-top: 1rem;
       font-size: 1rem;
@@ -116,7 +115,6 @@
     .slide--how .slide-bg { background-image: url("assets/hero-heatmap.jpg"); }
     .slide--why .slide-bg { background-image: url("assets/hero-why.jpg"); }
     .slide--data .slide-bg { background-image: url("assets/hero-ml.jpg"); }
-    .slide--privacy .slide-bg { background-image: url("assets/hero-privacy.jpg"); }
 
     /* controls */
     .slider-controls {
@@ -146,6 +144,7 @@
     }
 
     .slider-dots { display: flex; gap: 0.4rem; }
+
     .slider-dot {
       width: 9px;
       height: 9px;
@@ -153,7 +152,11 @@
       background: #cbd5e1;
       transition: width 0.2s, background 0.2s;
     }
-    .slider-dot.active { width: 22px; background: #0f172a; }
+
+    .slider-dot.active {
+      width: 22px;
+      background: #0f172a;
+    }
 
     /* CTA */
     .cta-section {
@@ -192,48 +195,31 @@
       <!-- SLIDE 1 -->
       <article class="slide slide--overview">
         <div class="slide-bg"></div>
-
         <h1 class="slide-title">
           Zie je <span class="risk-gradient">risico</span>, voordat het jou vindt.
         </h1>
-
         <a class="meer-link" href="overview.html">meer</a>
       </article>
 
       <!-- SLIDE 2 -->
       <article class="slide slide--how">
         <div class="slide-bg"></div>
-
         <h1 class="slide-title">Hoe het werkt.</h1>
-
         <a class="meer-link" href="how.html">meer</a>
       </article>
 
       <!-- SLIDE 3 -->
       <article class="slide slide--why">
         <div class="slide-bg"></div>
-
         <h1 class="slide-title">Waarom mensen MyRiskScout gebruiken.</h1>
-
         <a class="meer-link" href="why.html">meer</a>
       </article>
 
       <!-- SLIDE 4 -->
       <article class="slide slide--data">
         <div class="slide-bg"></div>
-
         <h1 class="slide-title">Hoe we risicocijfers berekenen.</h1>
-
         <a class="meer-link" href="data.html">meer</a>
-      </article>
-
-      <!-- SLIDE 5 -->
-      <article class="slide slide--privacy">
-        <div class="slide-bg"></div>
-
-        <h1 class="slide-title">Privacy & controle.</h1>
-
-        <a class="meer-link" href="privacy.html">meer</a>
       </article>
 
     </div>
@@ -324,7 +310,10 @@
 
     prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
     nextBtn.addEventListener("click", () => goToSlide(currentSlide + 1));
-    dots.forEach(dot => dot.addEventListener("click", () => goToSlide(parseInt(dot.dataset.index))));
+
+    dots.forEach(dot => 
+      dot.addEventListener("click", () => goToSlide(parseInt(dot.dataset.index)))
+    );
 
     let startX = 0;
     slider.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, { passive:true });
@@ -337,9 +326,7 @@
     window.addEventListener("DOMContentLoaded", () => {
       const logo = document.querySelector(".brand-badge img");
       if (logo) {
-        setTimeout(() => {
-          logo.src = "assets/myriskscout-logo.png";
-        }, 80);
+        setTimeout(() => { logo.src = "assets/myriskscout-logo.png"; }, 80);
       }
       activateTitle(0);
     });
