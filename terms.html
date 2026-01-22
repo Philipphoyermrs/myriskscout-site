@@ -15,7 +15,6 @@
       overflow-x: hidden;
     }
 
-    /* Achtergrond (zelfde stijl als privacy) */
     body::before {
       content: "";
       position: fixed;
@@ -33,7 +32,6 @@
       z-index: -1;
     }
 
-    /* Logo linksboven – geen menu */
     .brand-badge {
       position: fixed;
       top: 1.2rem;
@@ -46,7 +44,6 @@
       filter: drop-shadow(0 0 4px rgba(0,0,0,0.6));
     }
 
-    /* Layout kaart */
     .wrapper {
       max-width: 780px;
       margin: 6rem auto 3rem auto;
@@ -60,9 +57,15 @@
     h1 {
       font-size: 2rem;
       font-weight: 700;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.4rem;
       color: #0f172a;
       text-align: left;
+    }
+
+    .meta {
+      font-size: 0.9rem;
+      color: #334155;
+      margin-bottom: 1.6rem;
     }
 
     h2 {
@@ -100,12 +103,19 @@
       border-bottom: 1px dashed #0f172a;
       padding-bottom: 1px;
     }
+
+    .callout {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      background: rgba(15,23,42,0.06);
+      border: 1px solid rgba(15,23,42,0.10);
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Logo (geen menu) -->
   <div class="brand-badge">
     <img src="assets/myriskscout-logo.png" alt="MyRiskScout Logo">
   </div>
@@ -113,6 +123,7 @@
   <div class="wrapper">
 
     <h1>Gebruiksvoorwaarden</h1>
+    <div class="meta">Laatst bijgewerkt: <strong>22 januari 2026</strong></div>
 
     <p>
       Deze Gebruiksvoorwaarden zijn van toepassing op het gebruik van de MyRiskScout-app en de bijbehorende diensten.
@@ -122,58 +133,75 @@
     <h2>1. Doel van de app</h2>
     <p>
       MyRiskScout helpt je om risiconiveaus per buurt in te zien en beter geïnformeerde keuzes te maken rondom bijvoorbeeld
-      fietsenstalling, routekeuze of woonomgeving. De getoonde risiconiveaus zijn gebaseerd op historische data en
-      modellen en vormen geen individueel advies of garantie.
+      fietsenstalling, routekeuze of woonomgeving. De getoonde risiconiveaus zijn gebaseerd op historische data en modellen.
+      Ze vormen geen individueel advies en geen garantie op een bepaalde uitkomst.
     </p>
 
-    <h2>2. Geen garantie</h2>
+    <h2>2. Abonnementen, proefperiode en betalingen</h2>
+    <p>
+      MyRiskScout kan betaalde functionaliteiten aanbieden via een abonnement (bijv. maandabonnement) met eventueel een
+      proefperiode (“proefperiode”). De beschikbare opties, prijzen en looptijden worden in de app getoond.
+    </p>
+    <ul>
+      <li><strong>Proefperiode:</strong> als je een proefperiode start, wordt deze omgezet in een betaald abonnement tenzij je tijdig opzegt.</li>
+      <li><strong>Automatische verlenging:</strong> abonnementen verlengen automatisch, tenzij je ze annuleert via je App Store- of Google Play-account.</li>
+      <li><strong>Beheer & opzegging:</strong> je beheert en annuleert abonnementen via de instellingen van je Apple ID of Google Play-account (niet in MyRiskScout).</li>
+      <li><strong>Prijzen:</strong> prijzen kunnen wijzigen; eventuele wijzigingen worden getoond in de store of in de app.</li>
+    </ul>
+
+    <div class="callout">
+      <p style="margin:0;">
+        <strong>Herstel aankopen (Restore purchases):</strong> als je al een abonnement hebt gekocht, kun je dit in de app herstellen via “Herstel aankopen”.
+      </p>
+    </div>
+
+    <h2>3. Geen garantie</h2>
     <p>
       Hoewel we ons best doen om de informatie zo actueel en nauwkeurig mogelijk te houden, kunnen wij niet garanderen
       dat alle data volledig, juist of up-to-date is. Gebruik van de app is op eigen risico.
     </p>
 
-    <h2>3. Verantwoord gebruik</h2>
+    <h2>4. Verantwoord gebruik</h2>
     <ul>
       <li>Je gebruikt de app niet op een manier die in strijd is met de wet.</li>
       <li>Je misbruikt de app niet (bijv. hacken, scrapen, reverse-engineering).</li>
-      <li>Je mag de app niet gebruiken om anderen te stalken, controleren of anderszins te schaden.</li>
+      <li>Je gebruikt de app niet om anderen te stalken, te controleren of anderszins te schaden.</li>
     </ul>
 
-    <h2>4. Intellectuele eigendom</h2>
+    <h2>5. Intellectuele eigendom</h2>
     <p>
-      Alle inhoud in de app (zoals kaarten, risicoscores, teksten, logo's en ontwerpen) is eigendom van MyRiskScout of
+      Alle inhoud in de app (zoals kaarten, risicoscores, teksten, logo’s en ontwerpen) is eigendom van MyRiskScout of
       haar licentiegevers en wordt beschermd door auteursrecht en andere intellectuele eigendomsrechten.
       Je mag deze inhoud niet kopiëren, verspreiden of commercieel gebruiken zonder voorafgaande schriftelijke toestemming.
     </p>
 
-    <h2>5. Aansprakelijkheid</h2>
-    <p>
-      MyRiskScout is niet aansprakelijk voor:
-    </p>
+    <h2>6. Aansprakelijkheid</h2>
+    <p>MyRiskScout is niet aansprakelijk voor:</p>
     <ul>
       <li>Indirecte schade, gevolgschade of gederfde winst.</li>
-      <li>Schade als gevolg van beslissingen die je neemt op basis van de informatie in de app.</li>
+      <li>Schade als gevolg van beslissingen die je neemt op basis van informatie in de app.</li>
       <li>Storingen, onderbrekingen of fouten in de werking van de app.</li>
     </ul>
 
-    <h2>6. Wijzigingen in de app en voorwaarden</h2>
+    <h2>7. Wijzigingen in de app en voorwaarden</h2>
     <p>
       We kunnen de app en deze Gebruiksvoorwaarden op elk moment wijzigen of bijwerken. Wanneer er belangrijke wijzigingen zijn,
       communiceren we dit via de app of via onze website. Door de app te blijven gebruiken, ga je akkoord met de bijgewerkte voorwaarden.
     </p>
 
-    <h2>7. Beëindiging van gebruik</h2>
+    <h2>8. Beëindiging van gebruik</h2>
     <p>
       Je kunt het gebruik van de app op elk moment beëindigen door de app van je toestel te verwijderen.
+      Abonnementen stop je via je App Store- of Google Play-account.
       Wij behouden ons het recht voor om (delen van) de dienst tijdelijk of permanent stop te zetten.
     </p>
 
-    <h2>8. Toepasselijk recht</h2>
+    <h2>9. Toepasselijk recht</h2>
     <p>
       Op deze Gebruiksvoorwaarden is Nederlands recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechter in Nederland.
     </p>
 
-    <h2>9. Contact</h2>
+    <h2>10. Contact</h2>
     <p>
       Heb je vragen over deze Gebruiksvoorwaarden? Neem dan contact met ons op via:<br>
       <a href="mailto:info@myriskscout.com">info@myriskscout.com</a>
