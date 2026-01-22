@@ -60,8 +60,14 @@
     h1 {
       font-size: 2rem;
       font-weight: 700;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.6rem;
       color: #0f172a;
+    }
+
+    .meta {
+      font-size: 0.9rem;
+      color: #334155;
+      margin-bottom: 1.6rem;
     }
 
     h2 {
@@ -84,6 +90,14 @@
     a {
       color: #0f172a;
       text-decoration: underline;
+    }
+
+    .callout {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      background: rgba(15,23,42,0.06);
+      border: 1px solid rgba(15,23,42,0.10);
     }
 
     .back {
@@ -110,12 +124,12 @@
 
   <div class="wrapper">
 
-    <h1>Hoe MyRiskScout met jouw gegevens omgaat</h1>
-    <p>Laatst bijgewerkt: december 2025</p>
+    <h1>Privacybeleid</h1>
+    <div class="meta">Laatst bijgewerkt: <strong>22 januari 2026</strong></div>
 
     <p>
       MyRiskScout B.V. (“MyRiskScout”, “wij” of “ons”) hecht veel waarde aan jouw privacy.
-      In deze privacyverklaring leggen we uit welke gegevens we verzamelen wanneer je onze app gebruikt,
+      In deze privacyverklaring leggen we uit welke gegevens we verwerken wanneer je onze app gebruikt,
       waarom we dat doen en welke keuzes je daarbij hebt.
     </p>
 
@@ -131,12 +145,21 @@
     <ul>
       <li>
         <strong>Locatiegegevens (alleen met toestemming):</strong>
-        ruwe GPS- of netwerklocatie om te bepalen in welke buurt je je bevindt en of een alert relevant is.
-        We streven ernaar geen gedetailleerde bewegingen op te slaan.
+        GPS- of netwerklocatie om te bepalen in welke buurt je je bevindt en om risicoinformatie en alerts relevant te maken.
+        We streven ernaar geen gedetailleerde bewegingsgeschiedenis op te slaan.
+      </li>
+      <li>
+        <strong>Meldingen / notificaties (alleen met toestemming):</strong>
+        wanneer je toestemming geeft voor push-notificaties, gebruiken we een technische token om meldingen te kunnen versturen.
       </li>
       <li>
         <strong>App-gebruik & technische gegevens:</strong>
-        bekeken schermen, apparaatmodel, OS-versie, appversie en anonieme identifiers voor analyse.
+        bekeken schermen, apparaatmodel, OS-versie, appversie en (pseudo-)anonieme identifiers voor analyse en foutopsporing.
+      </li>
+      <li>
+        <strong>Abonnement- en aankoopstatus:</strong>
+        status of je Premium gebruikt (bijv. proefperiode, actief abonnement), uitsluitend om toegang tot functies te beheren.
+        Betalingsgegevens (zoals kaartnummer) ontvangen of verwerken wij niet.
       </li>
       <li>
         <strong>Contactgegevens:</strong>
@@ -144,30 +167,111 @@
       </li>
     </ul>
 
-    <h2>3. Voor welke doeleinden gebruiken we je gegevens?</h2>
+    <div class="callout">
+      <p style="margin:0;">
+        <strong>Let op:</strong> betalingen en abonnementen lopen via de App Store (Apple) of Google Play. Wij ontvangen geen betaalgegevens.
+      </p>
+    </div>
+
+    <h2>3. Toestemmingen in de app (locatie & notificaties)</h2>
+    <p>
+      We vragen alleen om permissies wanneer dat nodig is voor de functionaliteit:
+    </p>
     <ul>
-      <li><strong>Risicoscores en alerts tonen:</strong> locatiegegevens bepalen of een risicomelding relevant is.</li>
-      <li><strong>App verbeteren:</strong> geanonimiseerde statistieken en crashmeldingen verhogen stabiliteit en gebruiksgemak.</li>
+      <li>
+        <strong>Locatie tijdens gebruik (foreground):</strong>
+        bij het eerste gebruik kan de app vragen om je locatie te gebruiken terwijl de app geopend is. Dit helpt om je buurt te bepalen.
+      </li>
+      <li>
+        <strong>Locatie op de achtergrond (background) & push-notificaties:</strong>
+        deze vragen we pas wanneer je Premium activeert en de bijbehorende functies wilt gebruiken (bijv. alerts in risicogebieden).
+      </li>
+    </ul>
+    <p>
+      Je kunt permissies altijd aanpassen via de instellingen van je toestel. Als je een permissie weigert, blijven basisfuncties beschikbaar,
+      maar kunnen bepaalde Premium-functies (zoals alerts) beperkt zijn.
+    </p>
+
+    <h2>4. Voor welke doeleinden gebruiken we je gegevens?</h2>
+    <ul>
+      <li><strong>Risicoscores tonen:</strong> locatie (indien toegestaan) helpt om de juiste buurtinformatie te tonen.</li>
+      <li><strong>Alerts en meldingen versturen:</strong> alleen als je Premium gebruikt en toestemming geeft voor achtergrondlocatie/push-notificaties.</li>
+      <li><strong>App verbeteren:</strong> (geaggregeerde) statistieken en crashmeldingen verhogen stabiliteit en gebruiksgemak.</li>
       <li><strong>Vragen beantwoorden:</strong> bij contact gebruiken we je gegevens om je bericht af te handelen.</li>
-      <li><strong>Misbruik voorkomen:</strong> technische gegevens helpen beveiligingsincidenten te detecteren.</li>
+      <li><strong>Misbruik voorkomen:</strong> technische gegevens helpen beveiligingsincidenten te detecteren en te beperken.</li>
     </ul>
 
-    <h2>4. Op welke grondslagen baseren we de verwerking?</h2>
+    <h2>5. Op welke grondslagen baseren we de verwerking?</h2>
     <ul>
-      <li><strong>Toestemming:</strong> voor locatiegebruik en alerts.</li>
-      <li><strong>Gerechtvaardigd belang:</strong> voor analyse en verbetering van de app.</li>
-      <li><strong>Noodzakelijk voor uitvoering van de dienst:</strong> minimale technische gegevens zijn nodig voor correcte werking.</li>
+      <li><strong>Toestemming:</strong> voor locatiegegevens en push-notificaties (waar van toepassing).</li>
+      <li><strong>Uitvoering van de overeenkomst:</strong> om de app te laten werken en Premium-toegang te verlenen.</li>
+      <li><strong>Gerechtvaardigd belang:</strong> voor analyse, beveiliging en verbetering van de app (met minimale impact op je privacy).</li>
     </ul>
 
-    <h2>5. Met wie delen we je gegevens?</h2>
-    <p>We verkopen je gegevens niet. We maken wel gebruik van verwerkers zoals:</p>
+    <h2>6. Met wie delen we je gegevens?</h2>
+    <p>We verkopen je gegevens niet. We maken wel gebruik van verwerkers, zoals:</p>
     <ul>
       <li>Hosting- en cloudproviders</li>
       <li>Analyse- en crashrapportagetools</li>
       <li>Push-notificatiediensten</li>
+      <li>Abonnement-/aankoopbeheer (via Apple App Store / Google Play en eventueel een subscription-provider)</li>
     </ul>
-    <p>Met deze partijen sluiten wij verwerkersovereenkomsten. Gegevens worden bij voorkeur binnen de EER verwerkt; anders zorgen we voor passende waarborgen.</p>
-
-    <h2>6. Hoe lang bewaren we je gegevens?</h2>
     <p>
-      We bewaren gegevens niet langer dan nodig voor de beschreven doeleinden of zo
+      Met deze partijen sluiten wij verwerkersovereenkomsten. Gegevens worden bij voorkeur binnen de EER verwerkt; als verwerking
+      buiten de EER plaatsvindt, zorgen we voor passende waarborgen (zoals standaardcontractbepalingen).
+    </p>
+
+    <h2>7. Hoe lang bewaren we je gegevens?</h2>
+    <p>
+      We bewaren persoonsgegevens niet langer dan nodig is voor de doeleinden waarvoor ze zijn verzameld:
+    </p>
+    <ul>
+      <li><strong>Locatiegegevens:</strong> we streven ernaar geen gedetailleerde locatiehistorie op te slaan; waar tijdelijke verwerking nodig is, houden we dit zo kort mogelijk.</li>
+      <li><strong>Technische logs & analyse:</strong> bewaartermijnen hangen af van de tool en het doel (stabiliteit/verbetering) en worden beperkt tot wat nodig is.</li>
+      <li><strong>Contactverzoeken:</strong> zolang als nodig is om je vraag te beantwoorden en eventuele opvolging af te handelen.</li>
+      <li><strong>Abonnementsstatus:</strong> zolang als nodig is om Premium-toegang te beheren en wettelijke verplichtingen na te komen.</li>
+    </ul>
+
+    <h2>8. Beveiliging</h2>
+    <p>
+      We nemen passende technische en organisatorische maatregelen om je gegevens te beschermen tegen verlies, misbruik en ongeautoriseerde toegang.
+      Geen enkel systeem is 100% veilig, maar we doen er alles aan om risico’s te minimaliseren.
+    </p>
+
+    <h2>9. Jouw rechten</h2>
+    <p>
+      Je hebt (onder voorwaarden) recht op inzage, correctie, verwijdering, beperking van verwerking, bezwaar en dataportabiliteit.
+      Daarnaast kun je je toestemming altijd intrekken (bijv. via de instellingen van je toestel).
+    </p>
+    <p>
+      Wil je een van deze rechten uitoefenen? Neem contact op via
+      <a href="mailto:info@myriskscout.com">info@myriskscout.com</a>.
+      Je hebt ook het recht om een klacht in te dienen bij de Autoriteit Persoonsgegevens.
+    </p>
+
+    <h2>10. Kinderen</h2>
+    <p>
+      MyRiskScout is niet gericht op kinderen onder de 16 jaar. Wij verzamelen niet bewust gegevens van kinderen.
+      Denk je dat we toch gegevens van een kind hebben ontvangen? Neem dan contact met ons op zodat we dit kunnen verwijderen.
+    </p>
+
+    <h2>11. Wijzigingen in dit privacybeleid</h2>
+    <p>
+      We kunnen dit privacybeleid van tijd tot tijd aanpassen. De meest recente versie staat altijd op onze website.
+      Bij belangrijke wijzigingen informeren we je via de app of via de website.
+    </p>
+
+    <h2>12. Contact</h2>
+    <p>
+      Vragen over dit privacybeleid? Neem contact op via:<br>
+      <a href="mailto:info@myriskscout.com">info@myriskscout.com</a>
+    </p>
+
+    <div class="back">
+      <a href="index.html">← Terug naar homepage</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
