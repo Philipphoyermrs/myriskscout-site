@@ -448,6 +448,11 @@
       document.getElementById("footer-privacy").textContent = t.footerPrivacy;
       document.getElementById("footer-terms").textContent = t.footerTerms;
 
+      // ✅ ONLY CHANGE: language-aware legal links
+      const legalPrefix = lang === "en" ? "en/" : "";
+      document.getElementById("footer-privacy").setAttribute("href", legalPrefix + "privacy.html");
+      document.getElementById("footer-terms").setAttribute("href", legalPrefix + "terms.html");
+
       document.querySelectorAll('#langToggle button').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);
       });
@@ -474,4 +479,3 @@
 
 </body>
 </html>
-
