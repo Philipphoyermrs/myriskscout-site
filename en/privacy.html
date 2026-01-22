@@ -4,121 +4,158 @@
   <meta charset="UTF-8" />
   <title>Privacy Policy – MyRiskScout</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background: #020617;
-      color: #f9fafb;
-      padding: 2rem;
-      line-height: 1.6;
-      max-width: 900px;
-      margin: 0 auto;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
+
+    /* Background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("../assets/hero-privacy.jpg") center/cover no-repeat;
+      filter: brightness(0.55);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.6), transparent 50%);
+      z-index: -1;
+    }
+
+    /* Logo */
+    .brand-badge {
+      position: fixed;
+      top: 1.2rem;
+      left: 1.2rem;
+      z-index: 20;
+    }
+
+    .brand-badge img {
+      height: 36px;
+      filter: drop-shadow(0 0 4px rgba(0,0,0,0.6));
+    }
+
+    /* Layout container */
+    .wrapper {
+      max-width: 780px;
+      margin: 6rem auto 3rem auto;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(14px);
+      padding: 2.4rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: #0f172a;
+    }
+
+    .meta {
+      font-size: 0.9rem;
+      color: #334155;
+      margin-bottom: 1.6rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 0.6rem;
+      color: #0f172a;
+    }
+
+    p, li {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: #1e293b;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
     a {
-      color: #38bdf8;
+      color: #0f172a;
       text-decoration: underline;
-      text-underline-offset: 3px;
     }
-    h1, h2, h3 { color: #f1f5f9; }
-    ul { margin-left: 1.2rem; margin-bottom: 1rem; }
-    p { margin-bottom: 0.9rem; }
+
+    .callout {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      background: rgba(15,23,42,0.06);
+      border: 1px solid rgba(15,23,42,0.10);
+    }
+
+    .back {
+      margin-top: 2.4rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .back a {
+      color: #0f172a;
+      text-decoration: none;
+      border-bottom: 1px dashed #0f172a;
+      padding-bottom: 1px;
+    }
   </style>
 </head>
+
 <body>
 
-<h1>Privacy Policy</h1>
-<p><strong>Last updated:</strong> December 2025</p>
+  <!-- Logo -->
+  <div class="brand-badge">
+    <img src="../assets/myriskscout-logo.png" alt="MyRiskScout Logo">
+  </div>
 
-<p>
-MyRiskScout (“we”, “us”, “our”) provides a mobile application that visualises 
-neighbourhood-level crime risk based on public and environmental data. 
-We are committed to protecting your privacy and ensuring transparency in how 
-we use data.
-</p>
+  <div class="wrapper">
 
-<h2>1. What data we do <strong>not</strong> collect</h2>
-<p>We do <strong>not</strong> collect, store, or share:</p>
-<ul>
-  <li>Your name</li>
-  <li>Your contact details (unless you contact us yourself)</li>
-  <li>Your movement history or GPS trails</li>
-  <li>Personal profiles for marketing or advertising</li>
-</ul>
+    <h1>Privacy Policy</h1>
+    <div class="meta">Last updated: <strong>22 January 2026</strong></div>
 
-<h2>2. Location data (optional)</h2>
-<p>
-The app uses your device’s location <strong>only if you enable it</strong>. 
-Location is used temporarily on your device to determine:
-</p>
-<ul>
-  <li>Which neighbourhood you are currently in</li>
-  <li>Whether a risk alert should be triggered</li>
-</ul>
+    <p>
+      MyRiskScout B.V. (“MyRiskScout”, “we”, “us” or “our”) takes your privacy seriously.
+      This Privacy Policy explains what information we process when you use our app, why we do it,
+      and what choices you have.
+    </p>
 
-<p>
-Your location is <strong>not stored</strong>, <strong>not transmitted</strong>, 
-and <strong>not used to identify you</strong>.
-</p>
+    <h2>1. Who is responsible for processing?</h2>
+    <p>The controller for processing your personal data is:</p>
+    <p>
+      <strong>MyRiskScout B.V.<br>
+      Amsterdam, the Netherlands<br>
+      Email: <a href="mailto:info@myriskscout.com">info@myriskscout.com</a></strong>
+    </p>
 
-<h2>3. Analytics</h2>
-<p>
-We may use privacy-friendly analytics to understand app usage 
-(e.g., which screens are visited, how often the app is opened). These analytics:
-</p>
-<ul>
-  <li>Do not track personal identity</li>
-  <li>Do not use invasive cookies</li>
-  <li>Do not collect precise location</li>
-</ul>
-
-<h2>4. What data we use to generate risk scores</h2>
-<p>
-Risk scores are based entirely on:
-</p>
-<ul>
-  <li>Official crime statistics (public or licensed datasets)</li>
-  <li>Neighbourhood-level demographic and socio-economic data</li>
-  <li>Environmental and structural indicators (e.g. housing type, density)</li>
-</ul>
-
-<p>
-This data is aggregated at neighbourhood level and 
-<strong>never tied to individuals</strong>.
-</p>
-
-<h2>5. Contact and enquiries</h2>
-<p>
-If you contact us (for example via email or contact form), we will use the 
-information you provide (such as your email address and your message) only 
-to respond to your enquiry.
-</p>
-
-<h2>6. Data retention</h2>
-<p>
-We store no personal identifiable information from app usage. 
-Anonymous or aggregated analytics are kept only as long as needed to 
-monitor and improve app performance.
-</p>
-
-<h2>7. Third parties</h2>
-<p>
-We do not sell or rent any personal data to third parties. 
-If we use third-party services (e.g. analytics providers), we select them 
-with care and, where applicable, ensure appropriate data protection safeguards.
-</p>
-
-<h2>8. Changes to this Privacy Policy</h2>
-<p>
-We may update this Privacy Policy from time to time. The most recent version 
-will always be available on this page, with the date of the latest update 
-indicated at the top.
-</p>
-
-<h2>9. Contact</h2>
-<p>
-If you have questions about privacy or data usage, contact us at:<br />
-<a href="mailto:info@myriskscout.com">info@myriskscout.com</a>
-</p>
-
-</body>
-</html>
+    <h2>2. What data do we process?</h2>
+    <ul>
+      <li>
+        <strong>Location data (only with permission):</strong>
+        GPS or network-based location to determine your neighborhood and to make risk information and alerts relevant.
+        We aim not to store detailed movement histories.
+      </li>
+      <li>
+        <strong>Notifications (only with permission):</strong>
+        if you allow push notifications, we use a technical token to send notifications to your device.
+      </li>
+      <li>
+        <strong>App usage & technical data:</strong>
+        screens viewed, device model, OS version, app version and (pseudo-)anonymous identifiers for analytics and troubleshooting.
+      </li>
+      <li>
+        <strong>Subscription and purchase status:</strong>
+        whether Premium is active (e.g.,
